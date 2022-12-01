@@ -19,3 +19,4 @@ Console.WriteLine((a > b) ? a : b);
 //((index < 5) ? ref smallArray[index] : ref largeArray[index - 5]) = 100;
 //Делать ДТП - достижения, трудности, предложения.
 //https://github.com/AlexBulavin/CSharpStudy.git
+//git push https://ghp_bA2Jdo5tWsC5u7JSZjdkрH58ULs5vceK3vtX0M@github.com/AlexBulavin/git_lesson_3.git 

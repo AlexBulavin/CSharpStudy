@@ -1,4 +1,5 @@
-﻿//git push https://ghp_bA2****************3vtX0M@github.com/AlexBulavin/git_lesson_3.git 
+﻿//git push https://ghp_bA2****************3vtX0M@github.com/AlexBulavin/git_lesson_3.git  CSharpStudy
+
 //По двум заданным числам проверять является ли первое квадратом второго
 
 Console.Write("\nВведите первое целое число: "); //Запрашиваем у пользователя 1 число. Проверку не производим (пока)
