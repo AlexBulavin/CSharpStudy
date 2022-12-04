@@ -1,4 +1,5 @@
 ﻿// See https://aka.ms/new-console-template for more information
+//https://learn.microsoft.com/ru-ru/dotnet/csharp/language-reference/xmldoc/
 /*Задача 1: Напишите программу, которая принимает на вход три числа и выдаёт максимальное из этих чисел.
 
 2, 3, 7 -> 7
