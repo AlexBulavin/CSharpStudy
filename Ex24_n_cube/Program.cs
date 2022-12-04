@@ -18,5 +18,4 @@ for (int i = 1; i <= N; i++)
 {
     Console.Write("|   " + i*i*i + "\t");
 }
-Console.WriteLine("");
-Console.WriteLine("");
+Console.WriteLine("\n");
