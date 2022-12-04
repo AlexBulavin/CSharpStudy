@@ -5,9 +5,9 @@ Console.Write("\nВведите натуральное число : "); //Зап
 int N = Convert.ToInt32(Console.ReadLine()); //Читаем и преобразуем строку в Int 32
 
 if (N >= 100) {
-    Console.WriteLine("Третья цифра числа " + N + " = " + N /100);
+    Console.WriteLine($"Третья цифра числа {N} = {N /100}");
 }
 else 
 {
-    Console.WriteLine("Третьей цифры в числе" + N + "нет");
+    Console.WriteLine($"Третьей цифры в числе {N} нет\n");
 }
