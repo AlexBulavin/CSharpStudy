@@ -85,7 +85,7 @@ public static class MyLibrary123
     int size1 = array.GetLength(1);
     for (int i = 0; i < size0; i++)
     {
-      for (int j = 0; i < size1; i++)
+      for (int j = 0; j < size1; j++)
       {
         array[i, j] = Random.Shared.Next(minInclude ? min : min + 1, maxInclude ? max : max - 1);
         //array[i] = new Random().Next(min, max);
@@ -154,7 +154,7 @@ public static class MyLibrary123
     WriteLine();
   }
 
-  // Метод печати массив !ПЛОХОЙ
+  // Метод печати одномерного массива !ПЛОХОЙ
   /// <summary>
   /// Метод подготовки переменной типа string для печати. Элементы имеют размерность interval пунктов.
   /// </summary>
@@ -168,7 +168,29 @@ public static class MyLibrary123
     
     for (int i = 0; i < size; i++)
     {
-      output += $"{array[i],3}";//$"{array[i], interval*""}"; //WriteLine($"{array[i],3}")
+      output += $"{array[i], 3}";//$"{array[i], interval*""}"; //WriteLine($"{array[i],3}")
+    }
+    return output;
+  }
+
+  // Метод печати двумерного массива !ПЛОХОЙ
+  /// <summary>
+  /// Метод подготовки переменной типа string для печати. Элементы имеют размерность interval пунктов.
+  /// </summary>
+  /// <param name="array">Массив, элементы которого нужно вывести на печать</param>
+  /// <returns>Строка, заполненная элементами массива с интервалом interval пунктов</returns>
+  /// Пример вызова метода: PrintGood(arrName, 4)
+  public static string PrintGoodTwo(int[,] array, int interval)
+  {
+    string output = String.Empty; //Создали пустую строку
+    int size0 = array.GetLength(0);
+    int size1 = array.GetLength(1);
+    
+    for (int i = 0; i < size0; i++)
+    {
+      for (int j = 0; j <size1; j++)
+        output += $"{array[i, j], 3}";
+      WriteLine();
     }
     return output;
   }

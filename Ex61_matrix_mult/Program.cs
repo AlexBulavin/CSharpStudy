@@ -16,18 +16,18 @@ using static System.Console;
 
 public static class Seminar61
 {
-    public static void Ex61()
+    public static void Main()
     {
     // 0. Метод считывания размерности матриц от пользователя
         int size1_0 = Input("Введите количество строк первой матрицы:");
         int size1_1 = Input("Введите количество столбцов первой матрицы:");
         //int size2_0 = Input("Введите количество строк второй матрицы:");
-        int size2_1 = Input("Введите количество столбцов первой матрицы:");
+        int size2_1 = Input("Введите количество столбцов второй матрицы:");
 
     // 1. Метод создания двух исходных и результирующей матриц
         int[,] array1 = CreateArrayIntTwo(size1_0, size1_1); //Создали первый массив
         int[,] array2 = CreateArrayIntTwo(size1_1, size2_1); //Создали второй массив
-        int[,] resArray = CreateArrayIntTwo(size1_1, size1_1); //Создали второй массив
+        int[,] resArray = CreateArrayIntTwo(size1_1, size2_1); //Создали второй массив
 
     // 2. Метод заполняет исходные матрицы 
         //Задаём границы для рандомайзера и параметр включения граничного значения
@@ -39,20 +39,19 @@ public static class Seminar61
         FillRandIntTwo(array1, min, minInclude, max, maxInclude);
         FillRandIntTwo(array2, min, minInclude, max, maxInclude);
 
+
     // 4. Метод заполняет результирующую матрицу
         for (int i = 0; i < size1_1; i++)
         {
-            for (int j = 0; j < size1_1; j++)
+            for (int j = 0; j < size2_1; j++)
             {
-                for (int m = 0; m < size1_1; m++)
+                for (int m = 0; m < Math.Min(size1_1, size2_1); m++)
                     resArray[i, j] += array1[i, m] * array2[m, j];
                 Write(resArray[i, j] + "\t");
             }
             WriteLine();
         }
-
     }
-
 }
 
 
