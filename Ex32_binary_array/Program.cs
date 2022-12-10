@@ -14,7 +14,7 @@ string osBase = Console.ReadLine();
 char[] os = new char[osBase.Length];
 for (int i = 0; i < os.Length; i++)
 {
-    os[i] = CharSelector((int)Char.GetNumericValue(osBase[i]));
+    os[i] = CharSelector((int)Char.GetNumericValue(osBase[i]));//Конвертировали основние системы счисления в int и вызвали метод из библиотеки для преобразования через Unicode в подстрочный индекс
 }
 WriteLine();
 int N = Convert.ToInt32(osBase);
@@ -32,6 +32,6 @@ for (int i = 0; i < M; i++)
     res += temp;
 }
 
-WriteLine($"{String.Join("", arr)}{String.Join("", os)} = {res}\u2081\u2080\n");//в {CountSystem(N)} 
+WriteLine($"{String.Join("", arr)}{String.Join("", os)} = {res}\u2081\u2080\n");//Код \u2081\u2080 соответствует символам ₁₀
 WriteLine();
 
