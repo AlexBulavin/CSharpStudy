@@ -14,7 +14,7 @@ string osBase = Console.ReadLine();
 char[] os = new char[osBase.Length];
 for (int i = 0; i < os.Length; i++)
 {
-    os[i] = CharSelector((int)Char.GetNumericValue(osBase[i]));//Конвертировали основние системы счисления в int и вызвали метод из библиотеки для преобразования через Unicode в подстрочный индекс
+    os[i] = CharSelector((int)Char.GetNumericValue(osBase[i]), 0);//Конвертировали основние системы счисления в int и вызвали метод из библиотеки для преобразования через Unicode в подстрочный индекс
 }
 WriteLine();
 int N = Convert.ToInt32(osBase);
@@ -27,7 +27,7 @@ for (int i = 0; i < M; i++)
 {
     arr[i] = Random.Shared.Next(0, N);
     temp = (long)(arr[i] * Math.Pow(N, M - i));
-    Write($"{arr[i]}*{N}^{M - i}");
+    Write($"{arr[i]}*{N}{CharSelector(M - i, 1)}");
     Write(i < M - 1 ? " + " : "\n");
     res += temp;
 }

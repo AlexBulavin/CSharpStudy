@@ -468,40 +468,76 @@ public static class MyLibrary123
     }
 
     /// <summary>
-    /// Метод подбора преобразования основания системы счисления в подстрочный регистр. Например, 1302320341₅ = 15834855₁₀.
+    /// Метод преобразования входящего параметра в подстрочный или надстрочный регистр. Например, 1302320341₅ = 15834855₁₀.
     /// </summary>
     /// <param name="digit">Число, которое нужно перевести в подстрочный регистр</param>
-    /// <returns> Unicode символ типа char, соответствующий входящей цифре, в нижнем регистре </returns>
-    /// Пример вызова метода: MinInArray(5)
+        /// <param name="selector">Настройка режима 0 - нижний регистр, 1 - верхний регистр</param>
+    /// <returns> Unicode символ типа char, соответствующий входящей цифре, в нужном регистре </returns>
+    /// Пример вызова метода: MinInArray(5, 0)
     ///Output ₅
-    public static char CharSelector(int digit)
+    public static char CharSelector(int digit, int selector)
     {
-        switch (digit)
+        //selector = 0 - подстрочный индекс
+        //selector = 1 - надстрочный индекс
+        //Подробнее по кодам здесь: https://wiki5.ru/wiki/Unicode_subscripts_and_superscripts
+        if (selector == 0)
         {
-            case 0:
-                return '\u2080';
-            case 1:
-                return '\u2081';
-            case 2:
-                return '\u2082';
-            case 3:
-                return '\u2083';
-            case 4:
-                return '\u2084';
-            case 5:
-                return '\u2085';
-            case 6:
-                return '\u2086';
-            case 7:
-                return '\u2087';
-            case 8:
-                return '\u2088';
-            case 9:
-                return '\u2089';
+            switch (digit)
+            {
+                case 0:
+                    return '\u2080';
+                case 1:
+                    return '\u2081';
+                case 2:
+                    return '\u2082';
+                case 3:
+                    return '\u2083';
+                case 4:
+                    return '\u2084';
+                case 5:
+                    return '\u2085';
+                case 6:
+                    return '\u2086';
+                case 7:
+                    return '\u2087';
+                case 8:
+                    return '\u2088';
+                case 9:
+                    return '\u2089';
 
-            default:
-                return (char)('\x208' + digit);
+                default:
+                    return (char)('\x208' + digit);
+            }
         }
+        else if (selector == 1)
+        {
+            switch (digit)
+            {
+                case 0:
+                    return '\u2070';
+                case 1:
+                    return '\u2071';
+                case 2:
+                    return '\u00B2';
+                case 3:
+                    return '\u00B3';
+                case 4:
+                    return '\u2074';
+                case 5:
+                    return '\u2075';
+                case 6:
+                    return '\u2076';
+                case 7:
+                    return '\u2077';
+                case 8:
+                    return '\u2078';
+                case 9:
+                    return '\u2079';
 
+                default:
+                    return (char)('\x208' + digit);
+            }
+        }
+        else return '0';
     }
 }
