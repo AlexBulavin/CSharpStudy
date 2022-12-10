@@ -19,7 +19,7 @@ using System.Linq;
 /// <para> Счётчик вхождения в массиве int элементов из диапазона от minInt до maxInt - IntervalCounter </para>
 /// <para> Метод для ввода целочисленного значения Input</para>
 /// <para> Метод поиска минимального элемента в двумерном массиве - MinInArray</para>
-/// <para> Метод   </para>
+/// <para> Метод подбора преобразования основания системы счисления в подстрочный регистр. Например, 1302320341₅ = 15834855₁₀.</para>
 /// <para> Метод   </para>
 /// <para> Метод   </para>
 
@@ -467,6 +467,41 @@ public static class MyLibrary123
         };
     }
 
+    /// <summary>
+    /// Метод подбора преобразования основания системы счисления в подстрочный регистр. Например, 1302320341₅ = 15834855₁₀.
+    /// </summary>
+    /// <param name="digit">Число, которое нужно перевести в подстрочный регистр</param>
+    /// <returns> Unicode символ типа char, соответствующий входящей цифре, в нижнем регистре </returns>
+    /// Пример вызова метода: MinInArray(5)
+    ///Output ₅
+    public static char CharSelector(int digit)
+    {
+        switch (digit)
+        {
+            case 0:
+                return '\u2080';
+            case 1:
+                return '\u2081';
+            case 2:
+                return '\u2082';
+            case 3:
+                return '\u2083';
+            case 4:
+                return '\u2084';
+            case 5:
+                return '\u2085';
+            case 6:
+                return '\u2086';
+            case 7:
+                return '\u2087';
+            case 8:
+                return '\u2088';
+            case 9:
+                return '\u2089';
 
+            default:
+                return (char)('\x208' + digit);
+        }
 
+    }
 }

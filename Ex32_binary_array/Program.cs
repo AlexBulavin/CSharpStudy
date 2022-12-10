@@ -10,8 +10,14 @@ Write($"Введите размерность массива: ");
 int M = Convert.ToInt32(Console.ReadLine());
 WriteLine();
 Write($"Введите основание системы счисления: ");
-int N = Convert.ToInt32(Console.ReadLine());
+string osBase = Console.ReadLine();
+char[] os = new char[osBase.Length];
+for (int i = 0; i < os.Length; i++)
+{
+    os[i] = CharSelector((int)Char.GetNumericValue(osBase[i]));
+}
 WriteLine();
+int N = Convert.ToInt32(osBase);
 
 int[] arr = new int[M];
 long res = 0;
@@ -21,12 +27,11 @@ for (int i = 0; i < M; i++)
 {
     arr[i] = Random.Shared.Next(0, N);
     temp = (long)(arr[i] * Math.Pow(N, M - i));
-    Write($"{arr[i]}*{N}^{M-i}");
-    Write(i < M-1 ? " + " : "\n");
+    Write($"{arr[i]}*{N}^{M - i}");
+    Write(i < M - 1 ? " + " : "\n");
     res += temp;
 }
+
+WriteLine($"{String.Join("", arr)}{String.Join("", os)} = {res}\u2081\u2080\n");//в {CountSystem(N)} 
 WriteLine();
-WriteLine($"{String.Join("", arr)}\u2081\u2085 = {res}\u2081\u2080\n");//в {CountSystem(N)} 
-WriteLine();
-//Надстрочный регистр \u00B2
-//Подстрочные регистры: '\u208*' где * - любой символ,
+
