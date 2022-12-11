@@ -4,6 +4,7 @@ using System.Linq;
 /// <summary>
 /// Это библиотека для работы с массивами
 /// <para> Метод создания одномерного массива int - CreateArrayInt </para>
+/// <para> Метод создания одномерного массива char[] </para>
 /// <para> Метод создания двумерного массива int - CreateArrayIntTwo </para>
 /// <para> Метод создания массива bool - CreateArrayBool </para>
 /// <para> Метод создания массива double - CreateArrayDouble </para>
@@ -18,6 +19,7 @@ using System.Linq;
 /// <para> Метод печати двумерного массива !ПЛОХОЙ </para>
 /// <para> Счётчик вхождения в массиве int элементов из диапазона от minInt до maxInt - IntervalCounter </para>
 /// <para> Метод для ввода целочисленного значения Input</para>
+/// <para> Метод вычисления размерности числа через Log: для 0...9 ->1; 10...99 ->2 и так далее </para>
 /// <para> Метод поиска минимального элемента в двумерном массиве - MinInArray</para>
 /// <para> Метод подбора преобразования основания системы счисления в подстрочный регистр. Например, 1302320341₅ = 15834855₁₀.</para>
 /// <para> Метод   </para>
@@ -26,16 +28,31 @@ using System.Linq;
 /// </summary>
 public static class MyLibrary123
 {
+    // Метод создания одномерного массива int
     /// <summary>
     /// Метод создания одномерного массива int
     /// </summary>
     /// <param name="count">Количество элементов нового int массива</param>
     /// <returns>Созданный массив из count элементов типа int</returns>
+    /// <example>int[] arr = CreateArrayInt(size1_0);
     public static int[] CreateArrayInt(int count)
     {
         return new int[count]; // new int[count];
     }
 
+    // Метод создания одномерного массива char[]
+    /// <summary>
+    /// Метод создания одномерного массива char[]
+    /// </summary>
+    /// <param name="count">Количество элементов нового char массива</param>
+    /// <returns>Созданный массив из count элементов типа char</returns>
+    /// <example>char[] arr = CreateArrayChar(5);
+    public static char[] CreateArrayChar(int count)
+    {
+        return new char[count]; // new int[count];
+    }
+
+    // Метод создания двумерного массива int
     /// <summary>
     /// Метод создания двумерного массива int
     /// </summary>
@@ -47,6 +64,7 @@ public static class MyLibrary123
         return new int[N, M]; // new int[N, M];
     }
 
+    // Метод создания массива 3 dimention
     /// <summary>
     /// Метод создания массива 3 dimention
     /// </summary>
@@ -57,6 +75,7 @@ public static class MyLibrary123
         return new int[K, M, N];
     }
 
+    // Метод создания массива double
     /// <summary>
     /// Метод создания массива double
     /// </summary>
@@ -67,6 +86,7 @@ public static class MyLibrary123
         return new double[count]; // new double[count];
     }
 
+    // Метод создания массива bool
     /// <summary>
     /// Метод создания массива bool
     /// </summary>
@@ -77,6 +97,7 @@ public static class MyLibrary123
         return new bool[count]; // new bool[count];
     }
 
+    // Метод создания массива bool
     /// <summary>
     /// Метод заполнения одномерного массива случайными int элементами из диапазона от min до max
     /// </summary>
@@ -92,10 +113,10 @@ public static class MyLibrary123
         for (int i = 0; i < size; i++)
         {
             array[i] = Random.Shared.Next(minInclude ? min : min + 1, maxInclude ? max : max - 1);
-            //array[i] = new Random().Next(min, max);
         }
     }
 
+    // Метод заполнения трёхмерного массива двузначными целыми числами из диапазона от 10 до 99
     /// <summary>
     /// Метод заполнения трёхмерного массива двузначными целыми числами из диапазона от 10 до 99
     /// </summary>
@@ -120,6 +141,7 @@ public static class MyLibrary123
         }
     }
 
+    // Метод заполнения двумерного массива случайными int элементами из диапазона от min до max
     /// <summary>
     /// Метод заполнения двумерного массива случайными int элементами из диапазона от min до max
     /// </summary>
@@ -143,6 +165,8 @@ public static class MyLibrary123
 
         }
     }
+
+    // Метод заполнения одномерного массива случайными double элементами из диапазона от minInt.minFrac до maxInt.maxFrac
     /// <summary>
     /// Метод заполнения одномерного массива случайными double элементами из диапазона от minInt.minFrac до maxInt.maxFrac
     /// </summary>
@@ -155,7 +179,6 @@ public static class MyLibrary123
     /// <param name="numOfDigits">Разрядность дробной части для заполнения случайными элементами - показатель степени 10 - числа, на которое нужно делить рандомную часть 4 означает 10^4 = 10000</param> 
     /// <param name="maxInclude">Включает ли максиимальное граничное значение maxInt в диапазон выбора для рандомайзера False - не включает, True - включает</param>
     /// Пример вызова метода: FillRandDouble(arrName, 10, 0, false, 500, 100, 4, true)
-
     public static void FillRandDouble(double[] array, int minInt, int minFrac, bool minInclude, int maxInt, int maxFrac, int numOfDigits, bool maxInclude)
     {
         int size = array.Length;
@@ -166,6 +189,7 @@ public static class MyLibrary123
         }
     }
 
+    // Метод заполнения двумерного массива случайными double элементами из диапазона от minInt.minFrac до maxInt.maxFrac
     /// <summary>
     /// Метод заполнения двумерного массива случайными double элементами из диапазона от minInt.minFrac до maxInt.maxFrac
     /// </summary>
@@ -267,6 +291,7 @@ public static class MyLibrary123
         return output;
     }
 
+    // Счётчик вхождения в массиве int элементов из диапазона от minInt до maxInt
     /// <summary>
     /// Счётчик вхождения в массиве int элементов из диапазона от minInt до maxInt 
     /// <para>пример перевода строки</para>
@@ -292,6 +317,7 @@ public static class MyLibrary123
         return result;
     }
 
+    // Метод для ввода целочисленного значения
     /// <summary>
     /// Метод для ввода целочисленного значения 
     /// </summary>
@@ -303,6 +329,19 @@ public static class MyLibrary123
         return int.Parse(ReadLine());
     }
 
+    //Метод вычисления размерности числа через Log: для 0...9 ->1; 10...99 ->2 и так далее
+    /// <summary>
+    /// Метод вычисления размерности числа через Log: для 0...9 ->1; 10...99 ->2 и так далее 
+    /// </summary>
+    /// <param name="number">Входное число типа int</param>
+    /// <returns>Количество цифр во вкодном числе</returns>
+    /// <example> digitsInNumber(15) возвращает 2 </example>
+    public static int DigitsInNumber(int number)
+    {
+        return (int)Math.Log(number, 10) + 1;
+    }
+
+    // Метод удаления строки и столбца из двумерного массива
     /// <summary>
     /// Метод удаления строки и столбца из двумерного массива
     /// </summary>
@@ -350,6 +389,7 @@ public static class MyLibrary123
         return newArray;
     }
 
+    // Метод поиска минимального элемента в двумерном массиве
     /// <summary>
     /// Метод поиска минимального элемента в двумерном массиве
     /// </summary>
@@ -375,6 +415,7 @@ public static class MyLibrary123
         return rowCol;
     }
 
+    // Метод подбора правильного склонения для основания системы счисления. Например, 2 -> двоичной, 8 -> восьмеричной и т.д.
     /// <summary>
     /// Метод подбора правильного склонения для основания системы счисления. Например, 2 -> двоичной, 8 -> восьмеричной и т.д.
     /// </summary>
@@ -467,11 +508,12 @@ public static class MyLibrary123
         };
     }
 
+    // Метод преобразования входящего параметра в подстрочный или надстрочный регистр. Например, 1302320341₅ = 15834855₁₀.
     /// <summary>
     /// Метод преобразования входящего параметра в подстрочный или надстрочный регистр. Например, 1302320341₅ = 15834855₁₀.
     /// </summary>
     /// <param name="digit">Число, которое нужно перевести в подстрочный регистр</param>
-        /// <param name="selector">Настройка режима 0 - нижний регистр, 1 - верхний регистр</param>
+    /// <param name="selector">Настройка режима 0 - нижний регистр, 1 - верхний регистр</param>
     /// <returns> Unicode символ типа char, соответствующий входящей цифре, в нужном регистре </returns>
     /// Пример вызова метода: MinInArray(5, 0)
     ///Output ₅
@@ -540,4 +582,25 @@ public static class MyLibrary123
         }
         else return '0';
     }
+
+    // Метод заполнения входящего массива char подстрочными индексами. Например, ₁₀.
+    /// <summary>
+    /// Метод заполнения входящего массива char подстрочными индексами. Например, ₁₀.
+    /// </summary>
+    /// <param name="digit">Число, которое нужно перевести в подстрочный регистр</param>
+    /// <param name="selector">Настройка режима 0 - нижний регистр, 1 - верхний регистр</param>
+    /// <returns> Unicode символ типа char, соответствующий входящей цифре, в нужном регистре </returns>
+    /// Пример вызова метода: MinInArray(5, 0)
+    ///Output ₅
+    public static char[] FillArrWithDimension(char[] os, int osBase)
+    {
+        string osBaseLocal = osBase.ToString();
+        Array.Clear(os, 0, os.Length);
+        for (int i = 0; i < os.Length; i++)
+        {
+            os[i] = CharSelector((int)Char.GetNumericValue(osBaseLocal[i]), 0);//Конвертировали основние системы счисления через Unicode в подстрочный индекс
+        }
+        return os;
+    }
+
 }
