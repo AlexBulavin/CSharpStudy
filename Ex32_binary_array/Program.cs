@@ -23,8 +23,7 @@ for (int i = 0; i < os.Length; i++)
 int countingSys = Convert.ToInt32(osBase);
 //WriteLine($"arrayDimension = {arrayDimension}\nN = {countingSys}");
 int[] arr = new int[arrayDimension];
-long res = 0;
-long temp = 0;
+ulong res = 0, temp = 0;
 
 for (int i = 0; i < arrayDimension; i++)
 {
@@ -39,12 +38,12 @@ for (int i = 0; i < arrayDimension; i++)
     }
     //Заполняем массив рандомными значениями
     arr[i] = Random.Shared.Next(0, countingSys);
-    temp = (long)(arr[i] * Math.Pow(countingSys, arrayDimension - i - 1));//temp = (long)(arr[i] * Math.Pow(countingSys, arrayDimension - i - 1));
+    temp = (ulong)(arr[i] * Math.Pow(countingSys, arrayDimension - i - 1));//temp = (long)(arr[i] * Math.Pow(countingSys, arrayDimension - i - 1));
     Write($"{arr[i]}*{countingSys}{String.Join("", arrDim)}");//Выводим в консоль разложение числа по выбранному основанию
     Write(i < arrayDimension - 1 ? " + " : "\n");
     res += temp;
 }
 
-WriteLine($"{String.Join("", arr)}{String.Join("", os)} = {res}\u2081\u2080\n");//Выводим в консоль результат в виде 1012333₁₅ = 547473₁₀ Код \u2081\u2080 соответствует символам ₁₀
+WriteLine($"{Convert.ToInt64(String.Join("", arr))}{String.Join("", os)} = {res}\u2081\u2080\n");//Выводим в консоль результат в виде 1012333₁₅ = 547473₁₀ Код \u2081\u2080 соответствует символам ₁₀
 WriteLine();
 
