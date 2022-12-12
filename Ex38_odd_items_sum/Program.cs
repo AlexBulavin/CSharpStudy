@@ -1,17 +1,24 @@
 ﻿//Найти сумму чисел одномерного массива стоящих на нечетной позиции
-//git push https://ghp_bA2****************3vtX0M@github.com/AlexBulavin/CSharpStudy.git
+using static MyLibrary123;
+using static System.Console;
 
-int[] arr = new int[123];
-Random r = new Random();
-int sum = 0;
+bool DEBUG = false;
+// 0. Задать массив
+// 1. заполнить случайными числами -100 ... +100
+// 2. Подсчитать сумму нечетных элементов
+// 3. Вывести на экран массив и сумму нечётных элементов
 
-//Заполняем массив рандомными числами от 0 до 999
-for (int i = 0; i < arr.Length; i++)
-{
-    arr[i] = r.Next(0, 999);
-    if (i % 2 == 0) sum += arr[i];
-    Console.Write($"{arr[i]} \t");
-}
-Console.WriteLine();
+// 0. Задать массив
+int[] arr = CreateArrayInt(Input("\nЗадайте размерность массива: "));
+int[] count = CreateArrayInt(2);//Суммы чётных и нечётных чисел
+int interval = 1;
+bool evenOdd = false;//true - сумматор чётных элементов, false - нечётных
 
-Console.Write("Сумма нечётных элементов массива = " + sum + "\n");
+// 1. заполнить случайными числами и вывести массив на печать
+WriteLine(FillRandIntSum(arr, - 100, true, 100, true, count, DEBUG, interval));
+if (DEBUG) WriteLine($"Line 19 {count[0]} {count[1]}");
+WriteLine();
+
+// 2. Показать количество нечетных/четных чисел
+Write($"Сумма {(evenOdd ? "чётных": "нечётных")} элементов = {(evenOdd ? count[0] : count[1])}\n");
+WriteLine();
