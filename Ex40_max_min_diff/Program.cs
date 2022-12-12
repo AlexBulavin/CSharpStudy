@@ -1,20 +1,21 @@
 ﻿//В Указанном массиве вещественных чисел найдите разницу между максимальным и минимальным элементом
 //git push https://ghp_bA2****************3vtX0M@github.com/AlexBulavin/CSharpStudy.git
+using static MyLibrary123;
+using static System.Console;
 
-float[] arr = new float[30];
-Random r = new Random();
-float min = 0;
-float max = 0;
+bool DEBUG = false;
+// 0. Задать массив
+// 1. заполнить случайными числами -100 ... +100
+// 2. Подсчитать сумму нечетных элементов
+// 3. Вывести на экран массив и сумму нечётных элементов
+
+float[] arr = CreateArrayFloat(Input("\nЗадайте размер массива: "));
+float[] count = CreateArrayFloat(2);
+int interval = 1;
+
 
 //Заполняем массив рандомными числами от 0 до 99
-for (int i = 0; i < arr.Length; i++)
-{
-    arr[i] = (float)r.Next(0, 100000)/100000 + r.Next(0, 100);
-    if ( i == 0 ) min = max = arr[i];
-        else if (arr[i] > max) max = arr[i];
-        else if (arr[i] < min) min = arr[i];
-    Console.Write($"{arr[i]} \t");
-}
-Console.WriteLine("\nРазница между максимальным " + max + " и минимальным " + min + " значениями равна " + (max - min));
+WriteLine(FillRandFloatDiff(arr, 0, true, 1000, true, count, DEBUG, interval));
+WriteLine($"\nРазница между максимальным {count[1]} и минимальным {count[0]} значениями равна {count[1] - count[0]}");
 
 Console.Write("\n");
