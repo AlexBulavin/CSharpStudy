@@ -3,18 +3,19 @@ using System.Linq;
 
 /// <summary>
 /// Это библиотека для работы с массивами
-/// <para> Метод создания одномерного массива int - CreateArrayInt </para>
-/// <para> Метод создания одномерного массива char[] </para>
-/// <para> Метод создания двумерного массива int - CreateArrayIntTwo </para>
-/// <para> Метод создания массива bool - CreateArrayBool </para>
-/// <para> Метод создания массива double - CreateArrayDouble </para>
-/// <para> Метод заполнения одномерного массива случайными int элементами из диапазона от min до max - FillRandInt </para>
-/// <para> Метод создания массива, заполненного трёхзначными числами </para>
-/// <para> Метод заполнения трёхмерного массива двузначными целыми числами из диапазона от 10 до 99 - FillRandInt3D</para>
-/// <para> Метод Заполнения одномерного массива случайными числами double - FillRandDouble </para>
-/// <para> Метод заполнения двумерного массива случайными int элементами из диапазона от min до max - FillRandIntTwo </para>
-/// <para> Метод заполнения одномерного массива случайными double элементами из диапазона от minInt.minFrac до maxInt.maxFrac - FillRandDouble </para>
-/// <para> Метод Метод заполнения двумерного массива случайными double элементами из диапазона от minInt.minFrac до maxInt.maxFrac - FillRandDoubleTwo  </para>
+/// <para> Метод создания одномерного массива int[] array = CreateArrayInt(arrSize) </para>
+/// <para> Метод создания одномерного массива char[] array = CreateArrayChar(count) </para>
+/// <para> Метод создания двумерного массива int[,] array = CreateArrayIntTwo(arrSize1, arrSize2) </para>
+/// <para> Метод создания int массива 3 dimention int[,,] array = CreateArrayInt3D(arrSize1, arrSize2, arrSize3) </para>
+/// <para> Метод создания массива double[] array = CreateArrayDouble </para>
+/// <para> Метод создания одномерного массива bool[] array = CreateArrayBool(arrSize)</para>
+/// <para> Метод заполнения одномерного массива случайными int элементами из диапазона от min до max - FillRandInt(arrName, 10, false, 100, true)</para>
+/// <para> Метод заполнения массива трёхзначными числами и подсчёта чётных и нечётных FillRand3DigitIntCheckEvenOddCount(arrName, arrCount, true) </para>
+/// <para> Метод заполнения трёхмерного массива двузначными неповторяющимися целыми числами из диапазона от 10 до 99 - FillRandInt3D</para>
+/// <para> Метод заполнения двумерного массива случайными int элементами из диапазона от min до max - FillRandIntTwo(arrName, 10, false, 100, true) </para>
+/// <para> Метод Заполнения одномерного массива случайными числами double - FillRandDouble(arrName, 10, 0, false, 500, 100, 4, true) </para>
+/// <para> Метод заполнения двумерного массива случайными double элементами из диапазона от minInt.minFrac до maxInt.maxFrac - FillRandDoubleTwo(arrName, 10, 0, false, 500, 100, 4, true)   </para>
+
 /// <para> Метод печати массив ПЛОХОЙ </para>
 /// <para> Метод печати массив !ПЛОХОЙ   </para>
 /// <para> Метод печати двумерного массива !ПЛОХОЙ </para>
@@ -23,6 +24,10 @@ using System.Linq;
 /// <para> Метод вычисления размерности числа через Log: для 0...9 ->1; 10...99 ->2 и так далее </para>
 /// <para> Метод поиска минимального элемента в двумерном массиве - MinInArray</para>
 /// <para> Метод подбора преобразования основания системы счисления в подстрочный регистр. Например, 1302320341₅ = 15834855₁₀.</para>
+/// <para> Метод создания одномерного массива float - CreateArrayFloat(arrSize) </para>
+/// <para> Метод   </para>
+/// <para> Метод   </para>
+/// <para> Метод   </para>
 /// <para> Метод   </para>
 /// <para> Метод   </para>
 
@@ -53,7 +58,7 @@ public static class MyLibrary123
         return new char[count]; // new int[count];
     }
 
-    // Метод создания двумерного массива int
+    // Метод создания двумерного массива int[,]
     /// <summary>
     /// Метод создания двумерного массива int
     /// </summary>
@@ -65,49 +70,46 @@ public static class MyLibrary123
         return new int[N, M]; // new int[N, M];
     }
 
-    // Метод создания массива 3 dimention
+    // Метод создания int массива 3 dimention CreateArrayInt3D
     /// <summary>
-    /// Метод создания массива 3 dimention
+    /// Метод создания int массива 3 dimention CreateArrayInt3D
     /// </summary>
     /// <param name="K, M, N">Размерность нового массива</param>
     /// <returns>Созданный массив из [K, M, N] элементов типа int</returns>
+    /// <example> int[,,] arr = CreateArrayInt3D(K, M, N) <example>
     public static int[,,] CreateArrayInt3D(int K, int M, int N)
     {
         return new int[K, M, N];
     }
 
-    // Метод создания массива double
-    /// <summary>
-    /// Метод создания массива double
-    /// </summary>
+    // Метод создания одномерного массива double
+    /// <summary> Метод создания одномерного массива double </summary>
     /// <param name="count">Количество элементов нового double массива</param>
     /// <returns>Созданный массив из count элементов типа double</returns>
+    /// <example> double[] arr = CreateArrayDouble(count) </example>
     public static double[] CreateArrayDouble(int count)
     {
         return new double[count]; // new double[count];
     }
 
     // Метод создания массива bool
-    /// <summary>
-    /// Метод создания массива bool
-    /// </summary>
+    /// <summary> Метод создания массива bool </summary>
     /// <param name="count">Количество элементов нового bool массива</param>
     /// <returns>Созданный массив из count элементов типа bool</returns>
+    /// <example> bool[] array = CreateArrayBool(count)
     public static bool[] CreateArrayBool(int count)
     {
         return new bool[count]; // new bool[count];
     }
 
-    // Метод создания массива bool
-    /// <summary>
-    /// Метод заполнения одномерного массива случайными int элементами из диапазона от min до max
-    /// </summary>
+    // Метод заполнения одномерного массива случайными int элементами из диапазона от min до max
+    /// <summary> Метод заполнения одномерного массива случайными int элементами из диапазона от min до max </summary>
     /// <param name="array">Массив, который заполняем</param>
     /// <param name="min">Минимальное значение для заполнения случайными int элементами</param>
     /// <param name="minInclude">Включает ли минимальное граничное значение в диапазон выбора для рандомайзера False - не включает, True - включает</param>
     /// <param name="max">Максиимальное значение для заполнения случайными int элементами</param>
     /// <param name="maxInclude">Включает ли максиимальное граничное значение в диапазон выбора для рандомайзера False - не включает, True - включает</param> 
-    /// Пример вызова метода: FillRandInt(arrName, 10, false, 100, true)
+    /// <example> Пример вызова метода: FillRandInt(arrName, 10, false, 100, true) </example>
     public static void FillRandInt(int[] array, int min, bool minInclude, int max, bool maxInclude)
     {
         int size = array.Length;
@@ -117,13 +119,13 @@ public static class MyLibrary123
         }
     }
 
-    // Метод создания массива, заполненного трёхзначными числами
-    /// <summary>
-    /// Метод создания массива, заполненного трёхзначными случайными числами int из диапазона от 100 до 999
-    /// </summary>
+    // Метод заполнения массива трёхзначными числами и подсчёта чётных и нечётных FillRand3DigitIntCheckEvenOddCount(arrName, arrCount, true)
+    /// <summary> Метод заполнения массива трёхзначными числами и подсчёта чётных и нечётных FillRand3DigitIntCheckEvenOddCount(arrName, arrCount, true) </summary>
     /// <param name="array">Массив, который заполняем</param>
-    /// <example> Пример вызова метода: FillCheckPrintRandInt(arrName, even_count, odd_count) </example>
-    public static void FillCheckPrintRandInt(int[] array, int[] count, bool DEBUG)
+    /// <param name="count">Массив из двух индексов в который кладём количество чётных и нечётных значений исходного массива</param>
+    /// <param name="DEBUG">Флаг  вывода отладочной информации</param>
+    /// <example> Пример вызова метода: FillRand3DigitIntCheckEvenOddCount(arrName, arrCount, true) </example>
+    public static void FillRand3DigitIntCheckEvenOddCount(int[] array, int[] count, bool DEBUG)
     {
         for (int i = 0; i < array.Length; i++)
         {
@@ -133,13 +135,11 @@ public static class MyLibrary123
             else
             { count[1]++; };
         }
-        if (DEBUG) WriteLine($"MyLib Line 136 {count[0]} {count[1]}");
+        if (DEBUG) WriteLine($"MyLib Line 138 {count[0]} {count[1]}");
     }
 
-    // Метод заполнения трёхмерного массива двузначными целыми числами из диапазона от 10 до 99
-    /// <summary>
-    /// Метод заполнения трёхмерного массива двузначными целыми числами из диапазона от 10 до 99
-    /// </summary>
+    // Метод заполнения трёхмерного массива двузначными неповторяющимися целыми числами из диапазона от 10 до 99
+    /// <summary> Метод заполнения трёхмерного массива неповторяющимися двузначными целыми числами из диапазона от 10 до 99 </summary>
     /// <param name="array">Массив, который заполняем</param>
     /// Пример вызова метода: FillRandInt3D(arrName)
     public static void FillRandInt3D(int[,,] array)
@@ -162,15 +162,13 @@ public static class MyLibrary123
     }
 
     // Метод заполнения двумерного массива случайными int элементами из диапазона от min до max
-    /// <summary>
-    /// Метод заполнения двумерного массива случайными int элементами из диапазона от min до max
-    /// </summary>
+    /// <summary> Метод заполнения двумерного массива случайными int элементами из диапазона от min до max </summary>
     /// <param name="array">Массив, который заполняем</param>
     /// <param name="min">Минимальное значение для заполнения случайными int элементами</param>
     /// <param name="minInclude">Включает ли минимальное граничное значение в диапазон выбора для рандомайзера False - не включает, True - включает</param>
     /// <param name="max">Максиимальное значение для заполнения случайными int элементами</param>
     /// <param name="maxInclude">Включает ли максиимальное граничное значение в диапазон выбора для рандомайзера False - не включает, True - включает</param> 
-    /// Пример вызова метода: FillRandInt(arrName, 10, false, 100, true)
+    /// <example> Пример вызова метода: FillRandIntTwo(arrName, 10, false, 100, true) </example>
     public static void FillRandIntTwo(int[,] array, int min, bool minInclude, int max, bool maxInclude)
     {
         int size0 = array.GetLength(0);
@@ -187,9 +185,7 @@ public static class MyLibrary123
     }
 
     // Метод заполнения одномерного массива случайными double элементами из диапазона от minInt.minFrac до maxInt.maxFrac
-    /// <summary>
-    /// Метод заполнения одномерного массива случайными double элементами из диапазона от minInt.minFrac до maxInt.maxFrac
-    /// </summary>
+    /// <summary> Метод заполнения одномерного массива случайными double элементами из диапазона от minInt.minFrac до maxInt.maxFrac </summary>
     /// <param name="array">Массив, который заполняем</param>
     /// <param name="minInt">Минимальное значение целой части для заполнения случайными элементами</param>
     /// <param name="minFrac">Минимальное значение дробной части для заполнения случайными элементами</param>
@@ -198,21 +194,18 @@ public static class MyLibrary123
     /// <param name="maxFrac">Максимальное значение дробной части для заполнения случайными элементами</param>
     /// <param name="numOfDigits">Разрядность дробной части для заполнения случайными элементами - показатель степени 10 - числа, на которое нужно делить рандомную часть 4 означает 10^4 = 10000</param> 
     /// <param name="maxInclude">Включает ли максиимальное граничное значение maxInt в диапазон выбора для рандомайзера False - не включает, True - включает</param>
-    /// Пример вызова метода: FillRandDouble(arrName, 10, 0, false, 500, 100, 4, true)
+    /// <example> Пример вызова метода: FillRandDouble(arrName, 10, 0, false, 500, 100, 4, true) </example> 
     public static void FillRandDouble(double[] array, int minInt, int minFrac, bool minInclude, int maxInt, int maxFrac, int numOfDigits, bool maxInclude)
     {
         int size = array.Length;
         for (int i = 0; i < size; i++)
         {
             array[i] = Random.Shared.Next(minInclude ? minInt : minInt - 1, maxInclude ? maxInt : maxInt - 1) + (Random.Shared.Next(minFrac, maxFrac) / (Math.Pow(10, numOfDigits)));
-            //array[i] = new Random().Next(min, max);
         }
     }
 
     // Метод заполнения двумерного массива случайными double элементами из диапазона от minInt.minFrac до maxInt.maxFrac
-    /// <summary>
-    /// Метод заполнения двумерного массива случайными double элементами из диапазона от minInt.minFrac до maxInt.maxFrac
-    /// </summary>
+    /// <summary> Метод заполнения двумерного массива случайными double элементами из диапазона от minInt.minFrac до maxInt.maxFrac </summary>
     /// <param name="array">Массив, который заполняем</param>
     /// <param name="minInt">Минимальное значение целой части для заполнения случайными элементами</param>
     /// <param name="minFrac">Минимальное значение дробной части для заполнения случайными элементами</param>
@@ -221,7 +214,7 @@ public static class MyLibrary123
     /// <param name="maxFrac">Максимальное значение дробной части для заполнения случайными элементами</param>
     /// <param name="numOfDigits">Разрядность дробной части для заполнения случайными элементами - показатель степени 10 - числа, на которое нужно делить рандомную часть 4 означает 10^4 = 10000</param> 
     /// <param name="maxInclude">Включает ли максиимальное граничное значение maxInt в диапазон выбора для рандомайзера False - не включает, True - включает</param>
-    /// Пример вызова метода: FillRandDoubleTwo(arrName, 10, 0, false, 500, 100, 4, true)
+    /// <example> Пример вызова метода: FillRandDoubleTwo(arrName, 10, 0, false, 500, 100, 4, true) </example> 
     public static void FillRandDoubleTwo(double[,] array, int minInt, int minFrac, bool minInclude, int maxInt, int maxFrac, int numOfDigits, bool maxInclude)
     {
         int size0 = array.GetLength(0);
@@ -242,7 +235,7 @@ public static class MyLibrary123
         int size = array.Length;
         for (int i = 0; i < size; i++)
         {
-            WriteLine($"{array[i],3}");
+            WriteLine($"{array[i],3}");//Если придётся писать данные в файл или БД, то метод работать не будет
         }
         WriteLine();
     }
@@ -684,5 +677,4 @@ public static class MyLibrary123
     {
         return new float[count];
     }
-
 }
