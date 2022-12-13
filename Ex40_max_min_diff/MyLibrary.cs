@@ -15,16 +15,23 @@ using System.Linq;
 /// <para> Метод заполнения двумерного массива случайными int элементами из диапазона от min до max - FillRandIntTwo(arrName, 10, false, 100, true) </para>
 /// <para> Метод Заполнения одномерного массива случайными числами double - FillRandDouble(arrName, 10, 0, false, 500, 100, 4, true) </para>
 /// <para> Метод заполнения двумерного массива случайными double элементами из диапазона от minInt.minFrac до maxInt.maxFrac - FillRandDoubleTwo(arrName, 10, 0, false, 500, 100, 4, true)   </para>
-
-/// <para> Метод печати массив ПЛОХОЙ </para>
-/// <para> Метод печати массив !ПЛОХОЙ   </para>
-/// <para> Метод печати двумерного массива !ПЛОХОЙ </para>
-/// <para> Счётчик вхождения в массиве int элементов из диапазона от minInt до maxInt - IntervalCounter </para>
-/// <para> Метод для ввода целочисленного значения Input</para>
-/// <para> Метод вычисления размерности числа через Log: для 0...9 ->1; 10...99 ->2 и так далее </para>
-/// <para> Метод поиска минимального элемента в двумерном массиве - MinInArray</para>
-/// <para> Метод подбора преобразования основания системы счисления в подстрочный регистр. Например, 1302320341₅ = 15834855₁₀.</para>
-/// <para> Метод создания одномерного массива float - CreateArrayFloat(arrSize) </para>
+/// <para> Метод печати целочисленного массива ПЛОХОЙ PrintBad(int[] array)</para>
+/// <para> Метод подготовки для печати одномерного массива !ПЛОХОЙ WriteLine(PrintGood(arrName, 4)) </para>
+/// <para> Метод подготовки для печати двумерного массива !ПЛОХОЙ WriteLine(PrintGoodTwo(arrName, 4)) </para>
+/// <para> Метод подготовки для печати трёхмерного массива !ПЛОХОЙ WriteLine(PrintGoodTwo(arrName, interval)) <para>
+/// <para> Метод подготовки для печати трёхмерного массива !ПЛОХОЙ WriteLine(PrintGood3DInt(arrName, interval)) <para>
+/// <para> Счётчик вхождения в массиве int элементов из диапазона от minInt до maxInt counter = IntervalCounter(array, minInt, minInclude, maxInt, maxInclude) </para>
+/// <para> Метод для ввода целочисленного значения data = Input("Введите целое число")</para>
+/// <para> Метод вычисления размерности числа через Log: для 0...9 ->1; 10...99 ->2 и так далее digits = DigitsInNumber(15) возвращает 2 </para>
+/// <para> Метод удаления строки и столбца из двумерного массива MiusMinArray(array, newArray, rowCol, true)</para>
+/// <para> Метод поиска минимального и максимального элемента в двумерном массиве int [] a = MinMaxInArray(array, rowColArray)</para>
+/// <para> Метод подбора правильного склонения для основания системы счисления. Например, 2 -> двоичной, 8 -> восьмеричной и т.д. Например: string[] strToPrint = CountSystem(int M) </para>
+/// <para> Метод заполнения входящего массива char подстрочными/надстврочными индексами (ыудусещк 0/1)). Например, ₁₀. char[] arr = CharSelector(digit, selector) </para>
+/// <para> Метод преобразования входящего int параметра в подстрочный или надстрочный регистр. Например, 5 -> ₅ Write(CharSelector(digit, selector)) </para>
+/// <para> Метод заполнения входящего массива char подстрочными индексами. Например, ₁₀. </para>
+/// <para> Метод заполнения массива случайными целыми числами и подсчёта сумм чётных и нечётных элементов FillRandInt(arrName, 10, false, 100, true, count, DEBUG, intreval) </para>
+/// <para> // Метод заполнения массива случайными вещественными числами и подсчёта разницы max - min элементов WriteLine(FillRandInt(arrName, 10, false, 100, true, counе, DEBUG, intreval)) </para>
+/// <para> Метод создания одномерного массива float[] arr = CreateArrayFloat(size1_0); </para>
 /// <para> Метод   </para>
 /// <para> Метод   </para>
 /// <para> Метод   </para>
@@ -229,7 +236,10 @@ public static class MyLibrary123
         }
     }
 
-    // Метод печати массив ПЛОХОЙ
+    // Метод печати целочисленного массива ПЛОХОЙ PrintBad(int[] array)
+    /// <summary> Метод печати массив ПЛОХОЙ PrintBad(int[] array) </summary>
+    /// <param name="array">Массив, который нужно вывести на экран через консоль</param>
+    /// <example> Пример вызова метода: PrintBad(array) </example> 
     public static void PrintBad(int[] array)
     {
         int size = array.Length;
@@ -240,13 +250,11 @@ public static class MyLibrary123
         WriteLine();
     }
 
-    // Метод подготовки для печати одномерного массива !ПЛОХОЙ
-    /// <summary>
-    /// Метод подготовки переменной типа string для печати. Элементы имеют размерность interval пунктов.
-    /// </summary>
+    // Метод подготовки для печати одномерного массива !ПЛОХОЙ WriteLine(PrintGood(arrName, 4))
+    /// <summary> Метод подготовки переменной типа string для печати. Элементы имеют отслупы interval пунктов. </summary>
     /// <param name="array">Массив, элементы которого нужно вывести на печать</param>
     /// <returns>Строка, заполненная элементами массива с интервалом interval пунктов</returns>
-    /// Пример вызова метода: PrintGood(arrName, 4)
+    /// <example> Пример вызова метода: WriteLine(PrintGood(arrName, 4)) </example> 
     public static string PrintGood(int[] array, int interval)
     {
         string output = String.Empty; //Создали пустую строку
@@ -259,13 +267,11 @@ public static class MyLibrary123
         return output;
     }
 
-    // Метод подготовки для печати двумерного массива !ПЛОХОЙ
-    /// <summary>
-    /// Метод подготовки переменной типа string для печати. Элементы имеют размерность interval пунктов.
-    /// </summary>
+    // Метод подготовки для печати двумерного массива !ПЛОХОЙ WriteLine(PrintGoodTwo(arrName, 4))
+    /// <summary> Метод подготовки переменной типа string для печати. Элементы имеют размерность interval пунктов. </summary>
     /// <param name="array">Массив, элементы которого нужно вывести на печать</param>
     /// <returns>Строка, заполненная элементами массива с интервалом interval пунктов</returns>
-    /// Пример вызова метода: PrintGood(arrName, 4)
+    /// <example> Пример вызова метода: WriteLine(PrintGood(arrName, 4)) </example> 
     public static string PrintGoodTwo(int[,] array, int interval)
     {
         string output = String.Empty; //Создали пустую строку
@@ -280,13 +286,13 @@ public static class MyLibrary123
         return output;
     }
 
-    // Метод подготовки для печати трёхмерного массива !ПЛОХОЙ
+    // Метод подготовки для печати трёхмерного массива !ПЛОХОЙ WriteLine(PrintGood3DInt(arrName, interval))
     /// <summary>
     /// Метод подготовки переменной типа string для печати. Элементы имеют размерность \t * interval пунктов.
     /// </summary>
     /// <param name="array">Массив, элементы которого нужно вывести на печать</param>
     /// <returns>Строка, заполненная элементами массива с интервалом interval пунктов</returns>
-    /// Пример вызова метода: PrintGood(arrName, 4)
+    /// <example> Пример вызова метода: PrintGood3DInt(arrName, interval) </example>
     public static string PrintGood3DInt(int[,,] array, int interval)
     {
         string output = String.Empty; //Создали пустую строку
@@ -304,18 +310,15 @@ public static class MyLibrary123
         return output;
     }
 
-    // Счётчик вхождения в массиве int элементов из диапазона от minInt до maxInt
-    /// <summary>
-    /// Счётчик вхождения в массиве int элементов из диапазона от minInt до maxInt 
-    /// <para>пример перевода строки</para>
-    /// <para>пример перевода строки</para>
-    /// </summary>
+    // Счётчик вхождения в массиве int элементов из диапазона от minInt до maxInt counter = IntervalCounter(array, minInt, minInclude, maxInt, maxInclude)
+    /// <summary> Счётчик вхождения в массиве int элементов из диапазона от minInt до maxInt </para>
     /// <param name="array">Массив для проверки</param>
     /// <param name="minInt">Нижняя граница диапазона проверки</param>
     /// <param name="minInclude">Включается ли граничное значение в диапазон сравнения</param>
     /// <param name="maxInt">Верхняя граница диапазона проверки</param>
     /// <param name="maxInclude">Включается ли граничное значение в диапазон сравнения</param>
     /// <returns>Количество элементов в диапазоне от minInt до maxInt</returns>
+    /// <example> counter =  IntervalCounter(array, minInt, minInclude, maxInt, maxInclude) </example>
     public static int IntervalCounter(int[] array, int minInt, bool minInclude, int maxInt, bool maxInclude)
     {
         int result = 0;
@@ -330,10 +333,8 @@ public static class MyLibrary123
         return result;
     }
 
-    // Метод для ввода целочисленного значения
-    /// <summary>
-    /// Метод для ввода целочисленного значения 
-    /// </summary>
+    // Метод для ввода целочисленного значения data = Input("Введите целое число")
+    /// <summary> Метод для ввода целочисленного значения </summary>
     /// <param name="text">Текст пояснения для пользователя - что он должен ввести</param>
     /// <returns>Введенное пользователем значение</returns>
     public static int Input(string text)
@@ -342,19 +343,17 @@ public static class MyLibrary123
         return int.Parse(ReadLine());
     }
 
-    //Метод вычисления размерности числа через Log: для 0...9 ->1; 10...99 ->2 и так далее
-    /// <summary>
-    /// Метод вычисления размерности числа через Log: для 0...9 ->1; 10...99 ->2 и так далее 
-    /// </summary>
+    //Метод вычисления размерности числа через Log: для 0...9 ->1; 10...99 ->2 и так далее digits = DigitsInNumber(15) возвращает 2
+    /// <summary> Метод вычисления размерности числа через Log: для 0...9 ->1; 10...99 ->2 и так далее </summary>
     /// <param name="number">Входное число типа int</param>
     /// <returns>Количество цифр во вкодном числе</returns>
-    /// <example> digitsInNumber(15) возвращает 2 </example>
+    /// <example> digits = DigitsInNumber(15) возвращает 2 </example>
     public static int DigitsInNumber(int number)
     {
         return (int)Math.Log(number, 10) + 1;
     }
 
-    // Метод удаления строки и столбца из двумерного массива
+    // Метод удаления строки и столбца из двумерного массива MiusMinArray(array, newArray, rowCol, true)
     /// <summary>
     /// Метод удаления строки и столбца из двумерного массива
     /// </summary>
@@ -362,10 +361,10 @@ public static class MyLibrary123
     /// <param name="rowCol[0]">Номер исключаемой строки</param>
     /// <param name="rowCol[1]">Номер исключаемого столбца</param> 
     /// <param name="newArray">Новый массив с исключенными строкой и столбцом</param> 
-    /// <param name="newdebugArray">Определяем режим отладки или прода. Если значение debug = <see langword="true"/>, то выводим специнфомацию</param> 
+    /// <param name="DEBUG">Определяем режим отладки или прода. Если значение DEBUG = <see langword="true"/>, то выводим специнфомацию</param> 
     /// <returns>Возвращаем уменьшенный массив</returns>
-    /// Пример вызова метода: MiusMinArray(array, newArray, 5, 2)
-    public static int[,] MiusMinArray(int[,] array, int[,] newArray, int[] rowCol, bool debug)
+    /// Пример вызова метода: MiusMinArray(array, newArray, rowCol, true)
+    public static int[,] MiusMinArray(int[,] array, int[,] newArray, int[] rowCol, bool DEBUG)
     {
         int size0 = array.GetLength(0);
         int size1 = array.GetLength(1);
@@ -402,15 +401,13 @@ public static class MyLibrary123
         return newArray;
     }
 
-    // Метод поиска минимального элемента в двумерном массиве
-    /// <summary>
-    /// Метод поиска минимального элемента в двумерном массиве
-    /// </summary>
+    // Метод поиска минимального и максимального элемента в двумерном массиве int [] a = MinMaxInArray(array, rowColArray)
+    /// <summary> Метод поиска минимального и максимального элемента в двумерном массиве </summary>
     /// <param name="array">Массив, в котором ищем элемент</param>
     /// <param name="rowCol[0]">Номер исключаемой строки</param>
     /// <param name="rowCol[1]">Номер исключаемого столбца</param> 
-    /// Пример вызова метода: MinInArray(array, 5, 2)
-    public static int[] MinInArray(int[,] array, int[] rowCol)
+    /// Пример вызова метода: MinInArray(array, rowColArray, 2)
+    public static int[] MinMaxInArray(int[,] array, int[] rowCol)
     {
         int size0 = array.GetLength(0);
         int size1 = array.GetLength(1);
@@ -429,9 +426,7 @@ public static class MyLibrary123
     }
 
     // Метод подбора правильного склонения для основания системы счисления. Например, 2 -> двоичной, 8 -> восьмеричной и т.д.
-    /// <summary>
-    /// Метод подбора правильного склонения для основания системы счисления. Например, 2 -> двоичной, 8 -> восьмеричной и т.д.
-    /// </summary>
+    /// <summary> Метод подбора правильного склонения для основания системы счисления. Например, 2 -> двоичной, 8 -> восьмеричной и т.д. </summary>
     /// <param name="M">Основание системы счисления</param>
     /// <returns> Строка с правильным текстом </returns>
     /// Пример вызова метода: MinInArray(array, 5, 2)
@@ -521,14 +516,12 @@ public static class MyLibrary123
         };
     }
 
-    // Метод преобразования входящего параметра в подстрочный или надстрочный регистр. Например, 1302320341₅ = 15834855₁₀.
-    /// <summary>
-    /// Метод преобразования входящего параметра в подстрочный или надстрочный регистр. Например, 1302320341₅ = 15834855₁₀.
-    /// </summary>
+    // Метод преобразования входящего int параметра в подстрочный или надстрочный регистр. Например, 5 -> ₅ Write(CharSelector(digit, selector))
+    /// <summary> Метод преобразования входящего параметра в подстрочный или надстрочный регистр. Например, 5 -> ₅. </summary>
     /// <param name="digit">Число, которое нужно перевести в подстрочный регистр</param>
     /// <param name="selector">Настройка режима 0 - нижний регистр, 1 - верхний регистр</param>
     /// <returns> Unicode символ типа char, соответствующий входящей цифре, в нужном регистре </returns>
-    /// Пример вызова метода: MinInArray(5, 0)
+    /// <example> Пример вызова метода: Write(CharSelector(digit, selector)) <example>
     ///Output ₅
     public static char CharSelector(int digit, int selector)
     {
@@ -603,7 +596,7 @@ public static class MyLibrary123
     /// <param name="digit">Число, которое нужно перевести в подстрочный регистр</param>
     /// <param name="selector">Настройка режима 0 - нижний регистр, 1 - верхний регистр</param>
     /// <returns> Unicode символ типа char, соответствующий входящей цифре, в нужном регистре </returns>
-    /// Пример вызова метода: MinInArray(5, 0)
+    /// <example> Пример вызова метода: MinInArray(5, 0) </example> 
     ///Output ₅
     public static char[] FillArrWithDimension(char[] os, int osBase)
     {
@@ -615,17 +608,17 @@ public static class MyLibrary123
         }
         return os;
     }
-    // Метод заполнения массива случайными целыми числами и подсчёта сумм чётных и нечётных элементов
-    /// <summary>
-    /// Метод заполнения одномерного массива случайными int элементами из диапазона от min до max
-    /// </summary>
+
+    // Метод заполнения массива случайными целыми числами и подсчёта сумм чётных и нечётных элементов FillRandInt(arrName, 10, false, 100, true, count, DEBUG, intreval)
+    /// <summary> Метод заполнения одномерного массива случайными int элементами из диапазона от min до max </summary>
     /// <param name="array">Массив, который заполняем</param>
     /// <param name="min">Минимальное значение для заполнения случайными int элементами</param>
     /// <param name="minInclude">Включает ли минимальное граничное значение в диапазон выбора для рандомайзера False - не включает, True - включает</param>
     /// <param name="max">Максиимальное значение для заполнения случайными int элементами</param>
     /// <param name="maxInclude">Включает ли максиимальное граничное значение в диапазон выбора для рандомайзера False - не включает, True - включает</param> 
     /// <param name="count">Массив для вывода суммы чётных и нечётных элементов массива array</param> 
-    /// Пример вызова метода: FillRandInt(arrName, 10, false, 100, true, count, DEBUG, intreval)
+    /// <param name="DEBUG">Указатель режима отладки <see langword="false"/>  или рабочего <see langword="true"/> </param> 
+    /// <example> Пример вызова метода: FillRandInt(arrName, 10, false, 100, true, count, DEBUG, intreval) </example> 
     public static string FillRandIntSum(int[] array, int min, bool minInclude, int max, bool maxInclude, int[] count, bool DEBUG, int interval)
     {
         string output = string.Empty;
@@ -643,7 +636,7 @@ public static class MyLibrary123
         return output;
     }
 
-    // Метод заполнения массива случайными вещественными числами и подсчёта разницы max - min элементов
+    // Метод заполнения массива случайными вещественными числами и подсчёта разницы max - min элементов WriteLine(FillRandInt(arrName, 10, false, 100, true, counе, DEBUG, intreval))
     /// <summary> Метод заполнения массива случайными вещественными числами и подсчёта разницы max - min элементов </summary>
     /// <param name="array">Массив, который заполняем</param>
     /// <param name="min">Минимальное значение для заполнения случайными int элементами</param>
@@ -651,7 +644,7 @@ public static class MyLibrary123
     /// <param name="max">Максиимальное значение для заполнения случайными int элементами</param>
     /// <param name="maxInclude">Включает ли максиимальное граничное значение в диапазон выбора для рандомайзера False - не включает, True - включает</param> 
     /// <param name="count">Массив для вывода min max элементов массива array</param> 
-    /// Пример вызова метода: FillRandInt(arrName, 10, false, 100, true, counе, DEBUG, intreval)
+    /// <example> Пример вызова метода: FillRandInt(arrName, 10, false, 100, true, counе, DEBUG, intreval) </example> 
     public static string FillRandFloatDiff(float[] array, int min, bool minInclude, int max, bool maxInclude, float[] count, bool DEBUG, int interval)
     {
         string output = string.Empty;
@@ -668,7 +661,7 @@ public static class MyLibrary123
         return output;
     }
 
-    // Метод создания одномерного массива float
+    // Метод создания одномерного массива float float[] arr = CreateArrayFloat(size1_0);
     /// <summary> Метод создания одномерного массива float </summary>
     /// <param name="count">Количество элементов нового int массива</param>
     /// <returns>Созданный массив из count элементов типа int</returns>
