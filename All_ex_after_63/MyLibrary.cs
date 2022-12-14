@@ -732,10 +732,11 @@ public class MyLibrary123
         for (int i = 0; i < size0; i++)
         {
             array[i] = 0;
+            Write($"{array[i]} \t");
         }
-        
+        WriteLine("FillIntZero finished");
     }
-    
+
     //Сделать вывод символов в консоль как бегущая строка:
     /*Console.Write("Hello ");
     await Task.Delay(5000);

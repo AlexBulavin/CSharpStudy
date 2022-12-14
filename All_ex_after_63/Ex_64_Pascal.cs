@@ -12,9 +12,9 @@ public class Ex_64_Pascal
         //3. Выводим на печать
 
         //1. Создаём 2D int массив
-        Console.ForegroundColor = ConsoleColor.Blue;
-        WriteLine($"Создаём массив размерностью в ширину консоли = {Console.WindowWidth / 2 * 2 + 1}");
-        Console.ResetColor();
+        // Console.ForegroundColor = ConsoleColor.Blue;
+        // WriteLine($"Создаём массив размерностью в ширину консоли = {Console.WindowWidth / 2 * 2 + 1}");
+        // Console.ResetColor();
         uint[] array = CreateArrayUint(21);
         FillIntZero(array);
         array[9] = 1;
