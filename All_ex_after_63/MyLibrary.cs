@@ -713,7 +713,7 @@ public class MyLibrary123
         int size0 = array.Length, digInNumber;
 
         //Вычисляем сдвиг - количество элементов на которые нужно сдвинуть при выводе на печать от левого края консоли
-        int locOffset = size0 / 2 - curr_line_number;
+        int locOffset = size0 / 2 - curr_line_number + 2;//ПЕРЕПОЛНЕНИЕ!!! ***************************
 
         //Сдвигаем элементы массива вправо на один
         for (int i = size0 - 1; i <= 1; i--)
@@ -770,7 +770,6 @@ public class MyLibrary123
         }
         array[locOfset] = 1;
         if (DEBUG) WriteLine($"Отступ = locOfset * interval = {locOfset * interval}");
-        WriteLine($"{ConcatLocal(" ", locOfset * (interval+1)/2 + 2, DEBUG)}1");//Вывели 1 в консоль в позицию с отступом слева на locOffset * interval позиций
     }
 
     // Метод вычисления факториала

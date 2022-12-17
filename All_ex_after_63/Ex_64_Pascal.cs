@@ -16,17 +16,20 @@ public class Ex_64_Pascal
         // Console.ForegroundColor = ConsoleColor.Blue;
         // WriteLine($"Создаём массив размерностью в ширину консоли = {Console.WindowWidth / 2 * 2 + 1}");
         // Console.ResetColor();
-        int triangleSize = 30, interval, halfSize = triangleSize / 2;
+        int triangleSize = 40, interval, halfSize = triangleSize / 2;
         uint[] array = CreateArrayUint(triangleSize);
 
-        interval = 8;
+        interval = 12;
         PrefillArray(array, interval, DEBUG);
 
         //2. Заполняем его элементами и выводим в цикле triangleSize/2 количество раз (строк)
         for (int i = 0; i < array.Length / 2; i++)
         {
             WriteLine(FillPascalTriangle(array, interval, i + 2, DEBUG));
+            WriteLine();
         }
+        WriteLine("\n\n\n");
+
         /*
         string output = FillPascalTriangle(array, 1);
 
