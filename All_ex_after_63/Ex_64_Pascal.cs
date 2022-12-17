@@ -5,7 +5,7 @@ public class Ex_64_Pascal
 {
     public static void Task64()
     {
-        bool DEBUG = false; //true;//Включение/отключение дебаг режима
+        bool DEBUG = false;//true;//Включение/отключение дебаг режима
         Console.Clear();
         //Здесь пишем весь код по задаче
         //1. Создаём массив
@@ -16,7 +16,7 @@ public class Ex_64_Pascal
         // Console.ForegroundColor = ConsoleColor.Blue;
         // WriteLine($"Создаём массив размерностью в ширину консоли = {Console.WindowWidth / 2 * 2 + 1}");
         // Console.ResetColor();
-        int triangleSize = 20, interval, halfSize = triangleSize / 2;
+        int triangleSize = 30, interval, halfSize = triangleSize / 2;
         uint[] array = CreateArrayUint(triangleSize);
 
         interval = 8;

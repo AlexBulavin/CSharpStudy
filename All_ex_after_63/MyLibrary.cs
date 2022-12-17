@@ -725,7 +725,7 @@ public class MyLibrary123
         //Делаем разный первоначальный сдвиг в зависимости от того, чётная или нечётная строка. Потому, что их нужно сдвигать на пол элемента. Сохраняем сдвиг.
         string intervalOfsetString = ConcatLocal(" ", interval/2, DEBUG);//Задали шаг между элементами
         string even_ofset = ConcatLocal(intervalOfsetString, locOffset, DEBUG) + ConcatLocal(" ", interval / 2, DEBUG);
-        string odd_ofset = ConcatLocal(intervalOfsetString, locOffset+1, DEBUG);// + ConcatLocal(" ", interval * 3 / 2, DEBUG);
+        string odd_ofset = ConcatLocal(intervalOfsetString, locOffset + 1, DEBUG);// + ConcatLocal(" ", interval * 3 / 2, DEBUG);
         output = (curr_line_number % 2 == 0) ? even_ofset : odd_ofset;
 
         if (DEBUG) 
@@ -745,7 +745,7 @@ public class MyLibrary123
             //http://mech.math.msu.su/~shvetz/54/inf/perl-examples/PerlExamples_PascalTriangle_Ideas.xhtml
             array[i] += array[i + 1];
             digInNumber = array[i].ToString().Length;
-
+            if (DEBUG) WriteLine($"digInNumber = {digInNumber} ");// 
             //output += array[i] != 0 ? $"{ConcatLocal(" ", interval - digInNumber, DEBUG)}{array[i]}" : $"{intervalOfsetString}";//Если элемент массива не равен нолю, выводим его, если равен - выводим количество символов максимального элемента
             output += $"{ConcatLocal(" ", interval - digInNumber, DEBUG)}{array[i]}";// : $"{intervalOfsetString}";//Если элемент массива не равен нолю, выводим его, если равен - выводим количество символов максимального элемента
 
