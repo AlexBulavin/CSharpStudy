@@ -16,10 +16,48 @@ public class Ex_64_Pascal
         // Console.ForegroundColor = ConsoleColor.Blue;
         // WriteLine($"Создаём массив размерностью в ширину консоли = {Console.WindowWidth / 2 * 2 + 1}");
         // Console.ResetColor();
-        int triangleSize = 40, interval, halfSize = triangleSize / 2;
-        uint[] array = CreateArrayUint(triangleSize);
+        int  triangleHeight= Input("Ошибка, введено не целое число", "Введите высоту пирамиды в целых строках, например, 5: ", DEBUG), interval, triangleSize = triangleHeight * 2;
+        uint[] array = CreateArrayUint(triangleSize + 4);
 
-        interval = 12;
+        interval = ((triangleSize + 4)- 5)/3 + 1;
+        // switch (triangleHeight)
+        // {
+        //     case 0..4:
+        //         interval = 1;
+        //     case 5..9:
+        //         interval = 2;
+        //     case 10..13:
+        //         interval = 3;
+        //     case 14..16:
+        //         interval = 4;
+        //     case 17..20:
+        //         interval = 5;
+        //     case 21..24:
+        //         interval = 6;
+        //     case 25..28:
+        //         interval = 7;
+        //     case 29..32:
+        //         interval = 8;
+        //     case 8:
+        //         interval = 1;
+        //     case 9:
+        //         interval = 1;
+
+        //     default:
+        //         return (char)('\x208' + digit);
+        // }
+
+
+        //По размеру пирамиды
+        //Количество строк / максимальная размерность элементов 
+        // 1 до 5 = 1 знак
+        // + 3 5 до 9 2 знака
+        // +3 10 до 13 3 знака
+        // +3 14 до 16 4 знака
+        // +3 17 до 20 5 знаков
+        //+3 21 до 24 6 знаков
+        //+3 25 до 28 7 знаков
+        //...
         PrefillArray(array, interval, DEBUG);
 
         //2. Заполняем его элементами и выводим в цикле triangleSize/2 количество раз (строк)
