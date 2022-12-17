@@ -361,7 +361,7 @@ public class MyLibrary123
         return int.Parse(ReadLine());
     }
 
-    //Метод вычисления размерности числа через Log: для 0...9 ->1; 10...99 ->2 и так далее digits = DigitsInNumber(15) возвращает 2
+    //Метод вычисления размерности int числа через Log: для 0...9 ->1; 10...99 ->2 и так далее digits = DigitsInNumber(15) возвращает 2
     /// <summary> Метод вычисления размерности числа через Log: для 0...9 ->1; 10...99 ->2 и так далее </summary>
     /// <param name="number">Входное число типа int</param>
     /// <returns>Количество цифр во вкодном числе</returns>
@@ -370,6 +370,7 @@ public class MyLibrary123
     {
         return (int)Math.Log(number, 10) + 1;
     }
+
 
     // Метод удаления строки и столбца из двумерного массива MiusMinArray(array, newArray, rowCol, true)
     /// <summary>
@@ -703,38 +704,91 @@ public class MyLibrary123
     // Метод заполнения двумерного массива int элементами пирамиды Паскаля
     /// <summary> Метод заполнения двумерного массива размерности в ширину консоли int элементами пирамиды Паскаля </summary>
     /// <param name="array">Массив, который заполняем</param>
-    /// <param name="interval">Количество табуляторов между элементами при выводе</param>    
+    /// <param name="interval">Количество табуляторов между элементами при выводе</param>  
+    /// <param name="curr_line_number">Порядновый номер строки пирамиды Паскаля. Нумерация начинается с 1</param>  
     /// <example> Пример вызова метода: FillPascalTriangle(array, interval) </example>
-    public static string FillPascalTriangle(uint[] array, int interval)
+    public static string FillPascalTriangle(uint[] array, int interval, int curr_line_number, bool DEBUG)
     {
         string output = String.Empty;
-        int size0 = array.Length;
-        for (int i = 1; i < size0; i++)
-        {
-            array[i] += (i - 1) < 0 ? 0 : array[i - 1];//Чтобы найти следующую строку в треугольнике, нужно взять предыдущую, и прибавить к ней точно такую же, но сдвинутую на одну колонку вправо.
-                                                       //http://mech.math.msu.su/~shvetz/54/inf/perl-examples/PerlExamples_PascalTriangle_Ideas.xhtml
+        int size0 = array.Length, digInNumber;
 
-            output += array[i] != 0 ? $"{array[i]}{string.Concat(Enumerable.Repeat("\t", interval))}" : " ";
+        //Вычисляем сдвиг - количество элементов на которые нужно сдвинуть при выводе на печать от левого края консоли
+        int locOffset = size0 / 2 - curr_line_number;
+
+        //Сдвигаем элементы массива вправо на один
+        for (int i = size0 - 1; i <= 1; i--)
+        {
+            array[i] = array[i - 1];
         }
-        output += "\n";
+        array[0] = 0;//Добавили первым элементом ноль
+
+        //Делаем разный первоначальный сдвиг в зависимости от того, чётная или нечётная строка. Потому, что их нужно сдвигать на пол элемента. Сохраняем сдвиг.
+        string intervalOfsetString = ConcatLocal(" ", interval/2, DEBUG);//Задали шаг между элементами
+        string even_ofset = ConcatLocal(intervalOfsetString, locOffset, DEBUG) + ConcatLocal(" ", interval / 2, DEBUG);
+        string odd_ofset = ConcatLocal(intervalOfsetString, locOffset+1, DEBUG);// + ConcatLocal(" ", interval * 3 / 2, DEBUG);
+        output = (curr_line_number % 2 == 0) ? even_ofset : odd_ofset;
+
+        if (DEBUG) 
+            {
+                Write($"curr_line_number = {curr_line_number} ");
+                Write($"even_ofset = {even_ofset.Length} ");
+                Write($"odd_ofset = {odd_ofset.Length} ");
+                Write((curr_line_number % 2 == 0) ? "use even_ofset " : "use odd_ofset ");
+                Write($"locOffset {locOffset} ");
+                WriteLine($"output.Length {output.Length} ");
+            }
+        //Заполняем массив ненулевыми элементами
+
+        for (int i = locOffset + 1; i < size0 / 2 + 1; i++)
+        {
+            //Чтобы найти следующую строку в треугольнике, нужно взять предыдущую, и прибавить к ней точно такую же, но сдвинутую на одну колонку вправо.
+            //http://mech.math.msu.su/~shvetz/54/inf/perl-examples/PerlExamples_PascalTriangle_Ideas.xhtml
+            array[i] += array[i + 1];
+            digInNumber = array[i].ToString().Length;
+
+            //output += array[i] != 0 ? $"{ConcatLocal(" ", interval - digInNumber, DEBUG)}{array[i]}" : $"{intervalOfsetString}";//Если элемент массива не равен нолю, выводим его, если равен - выводим количество символов максимального элемента
+            output += $"{ConcatLocal(" ", interval - digInNumber, DEBUG)}{array[i]}";// : $"{intervalOfsetString}";//Если элемент массива не равен нолю, выводим его, если равен - выводим количество символов максимального элемента
+
+            //output += " ";//string.Concat(Enumerable.Repeat(" ", interval));
+        }
+        //output += "\n";
         return output;
     }
 
-
-    // Метод заполнения щдномерного массива int нолями
+    // Метод заполнения одномерного массива int нолями
     /// <summary> Метод заполнения одномерного массива int элементами = 0 </summary>
     /// <param name="array">Массив, который заполняем</param>
     /// <param name="interval">Количество табуляторов между элементами при выводе</param>    
-    /// <example> Пример вызова метода: FillPascalTriangle(array, interval) </example>
-    public static void FillIntZero(uint[] array)
+    /// <example> Пример вызова метода: PrefillArray(array, interval) </example>
+    public static void PrefillArray(uint[] array, int interval, bool DEBUG)
     {
-        int size0 = array.Length;
+        if (DEBUG) WriteLine("PrefillArray fill");
+        int size0 = array.Length, locOfset = size0 / 2;
         for (int i = 0; i < size0; i++)
         {
             array[i] = 0;
-            Write($"{array[i]} \t");
         }
-        WriteLine("FillIntZero finished");
+        array[locOfset] = 1;
+        if (DEBUG) WriteLine($"Отступ = locOfset * interval = {locOfset * interval}");
+        WriteLine($"{ConcatLocal(" ", locOfset * (interval+1)/2 + 2, DEBUG)}1");//Вывели 1 в консоль в позицию с отступом слева на locOffset * interval позиций
+    }
+
+    // Метод вычисления факториала
+    /// <summary> Метод вычисления факториала </summary>
+    /// <param name="argument">Массив, который заполняем</param>
+    /// <example> Пример вызова метода: FillPascalTriangle(array, interval) </example>
+    public static uint Factorial(int argument, bool DEBUG)
+    {
+        uint factorial = 1;
+        if (argument >= 1)
+        {
+            for (uint i = 1; i <= argument; i++)
+            {
+                factorial *= i;
+                if (DEBUG) WriteLine($"Факториал = {factorial}");
+            }
+        }
+        return factorial;
     }
 
     //Сделать вывод символов в консоль как бегущая строка:
@@ -742,5 +796,34 @@ public class MyLibrary123
     await Task.Delay(5000);
     Console.WriteLine("World!");*/
 
+    // Альтернативный Input
+    /// <summary> Метод ввода данных </summary>
+    /// <param name="err_msg">Текст сообщения, если пользователь ввёл не целое положительное число</param>
+    /// <param name="msg">Текст сообщения, что необходимо сделать пользователю</param>
+    /// <param name="DEBUG">Флаг режима компиляции 1 = отладка с выводом логов, 0 - без вывода логов</param>
+    /// <example> Пример вызова метода: Input (err_msg, msg, DEBUG) </example>
+    public static int Input(string err_msg, string msg, bool DEBUG)
+    {
+        return ConsoleHelper.ReadNumber(msg, x => x > 0, err_msg);//x>0 - условие
+    }
+
+    // Конкатенация строки
+    /// <summary> Метод ввода данных </summary>
+    /// <param name="msg">Строковый параметр, который нужно повторно вклеить в строку repeater раз </param>
+    /// <param name="repeater">Параметр количества повторов</param>
+    /// <param name="DEBUG">Флаг режима компиляции 1 = отладка с выводом логов, 0 - без вывода логов</param>
+    /// <example> Пример вызова метода: ConcatLocal ("Привет! ", 5, true) </example>
+    /// <example> Пример вызова метода: ConcatLocal (msg, repeater, DEBUG) </example>
+    public static string ConcatLocal(string msg, int repeater, bool DEBUG)
+    {   
+        if (repeater > 0)
+        {
+            return string.Concat(Enumerable.Repeat(msg, repeater));
+        }
+        else
+        {
+            return "repeater < 0 Alarm!\n";
+        }
+    }
 
 }
