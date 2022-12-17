@@ -361,6 +361,22 @@ public class MyLibrary123
         return int.Parse(ReadLine());
     }
 
+    // Метод для ввода целочисленного значения Select()
+    /// <summary> Метод для ввода целочисленного значения </summary>
+    /// <param name="text">Текст пояснения для пользователя - что он должен ввести</param>
+    /// <returns>Введенное пользователем значение</returns>
+    public static string Select(string text)
+    {
+        Console.ForegroundColor = ConsoleColor.Blue;
+        for (int i = 0; i < text.Length; i++)
+        {
+            Thread.Sleep(100);
+            Write(text[i]);
+        }
+        Console.ResetColor();
+        return ReadLine();
+    }
+
     //Метод вычисления размерности int числа через Log: для 0...9 ->1; 10...99 ->2 и так далее digits = DigitsInNumber(15) возвращает 2
     /// <summary> Метод вычисления размерности числа через Log: для 0...9 ->1; 10...99 ->2 и так далее </summary>
     /// <param name="number">Входное число типа int</param>
@@ -755,12 +771,31 @@ public class MyLibrary123
         return output;
     }
 
+
+
     // Метод заполнения одномерного массива int нолями
     /// <summary> Метод заполнения одномерного массива int элементами = 0 </summary>
     /// <param name="array">Массив, который заполняем</param>
     /// <param name="interval">Количество табуляторов между элементами при выводе</param>    
     /// <example> Пример вызова метода: PrefillArray(array, interval) </example>
     public static void PrefillArray(uint[] array, int interval, bool DEBUG)
+    {
+        if (DEBUG) WriteLine("PrefillArray fill");
+        int size0 = array.Length, locOfset = size0 / 2;
+        for (int i = 0; i < size0; i++)
+        {
+            array[i] = 0;
+        }
+        array[locOfset] = 1;
+        if (DEBUG) WriteLine($"Отступ = locOfset * interval = {locOfset * interval}");
+    }
+
+    // Метод заполнения одномерного массива int нолями
+    /// <summary> Метод заполнения одномерного массива int элементами = 0 </summary>
+    /// <param name="array">Массив, который заполняем</param>
+    /// <param name="interval">Количество табуляторов между элементами при выводе</param>    
+    /// <example> Пример вызова метода: PrefillArray(array, interval) </example>
+    public static void PrefillArray(int[] array, int interval, bool DEBUG)
     {
         if (DEBUG) WriteLine("PrefillArray fill");
         int size0 = array.Length, locOfset = size0 / 2;
