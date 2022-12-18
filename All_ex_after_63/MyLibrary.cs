@@ -28,7 +28,7 @@ using System;
 /// <para> Метод удаления строки и столбца из двумерного массива MinusMinArray(array, newArray, rowCol, true)</para>
 /// <para> Метод поиска минимального и максимального элемента в двумерном массиве int [] a = MinMaxInArray(array, rowColArray)</para>
 /// <para> Метод подбора правильного склонения для основания системы счисления. Например, 2 -> двоичной, 8 -> восьмеричной и т.д. Например: string[] strToPrint = CountSystem(int M) </para>
-/// <para> Метод заполнения входящего массива char подстрочными/надстврочными индексами (ыудусещк 0/1)). Например, ₁₀. char[] arr = CharSelector(digit, selector) </para>
+/// <para> Метод заполнения входящего массива char подстрочными/надстврочными индексами (selector 0/1)). Например, ₁₀. char[] arr = CharSelector(digit, selector) </para>
 /// <para> Метод преобразования входящего int параметра в подстрочный или надстрочный регистр. Например, 5 -> ₅ Write(CharSelector(digit, selector)) </para>
 /// <para> Метод заполнения входящего массива char подстрочными индексами. Например, ₁₀. </para>
 /// <para> Метод заполнения массива случайными целыми числами и подсчёта сумм чётных и нечётных элементов FillRandInt(arrName, 10, false, 100, true, count, DEBUG, intreval) </para>
@@ -314,7 +314,7 @@ public class MyLibrary
     }
 
     // Метод подготовки для печати одномерного массива !ПЛОХОЙ WriteLine(PrintGood(arrName, 4))
-    /// <summary> Метод подготовки переменной типа string для печати. Элементы имеют отслупы interval пунктов. </summary>
+    /// <summary> Метод подготовки переменной типа string для печати. Элементы имеют отступы interval пунктов. </summary>
     /// <param name="array">Массив, элементы которого нужно вывести на печать</param>
     /// <returns>Строка, заполненная элементами массива с интервалом interval пунктов</returns>
     /// <example> Пример вызова метода: WriteLine(PrintGood(arrName, 4)) </example> 
