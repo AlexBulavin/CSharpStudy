@@ -1,4 +1,4 @@
-using static MyLibrary123;
+using static MyLibrary;
 using static System.Console;
 
 public class Ex_64_Pascal

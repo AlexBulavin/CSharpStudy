@@ -1,4 +1,5 @@
 using System;
+using static System.Console;
 
 public class Example
 {
@@ -49,7 +50,7 @@ public class Example
 
          Console.WriteLine();
          Console.Write("Enter a message to display: ");
-         String textToDisplay = Console.ReadLine();
+         String textToDisplay = ReadLine();
          Console.WriteLine();
          Console.ForegroundColor = newForeColor;
          Console.BackgroundColor = newBackColor;

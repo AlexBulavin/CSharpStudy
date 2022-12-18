@@ -25,7 +25,7 @@ using System;
 /// <para> Счётчик вхождения в массиве int элементов из диапазона от minInt до maxInt counter = IntervalCounter(array, minInt, minInclude, maxInt, maxInclude) </para>
 /// <para> Метод для ввода целочисленного значения data = Input("Введите целое число")</para>
 /// <para> Метод вычисления размерности числа через Log: для 0...9 ->1; 10...99 ->2 и так далее digits = DigitsInNumber(15) возвращает 2 </para>
-/// <para> Метод удаления строки и столбца из двумерного массива MiusMinArray(array, newArray, rowCol, true)</para>
+/// <para> Метод удаления строки и столбца из двумерного массива MinusMinArray(array, newArray, rowCol, true)</para>
 /// <para> Метод поиска минимального и максимального элемента в двумерном массиве int [] a = MinMaxInArray(array, rowColArray)</para>
 /// <para> Метод подбора правильного склонения для основания системы счисления. Например, 2 -> двоичной, 8 -> восьмеричной и т.д. Например: string[] strToPrint = CountSystem(int M) </para>
 /// <para> Метод заполнения входящего массива char подстрочными/надстврочными индексами (ыудусещк 0/1)). Например, ₁₀. char[] arr = CharSelector(digit, selector) </para>
@@ -41,8 +41,59 @@ using System;
 /// <para> Метод   </para>
 
 /// </summary>
-public class MyLibrary123
+public class MyLibrary
 {
+
+    //Основная логика частотного словаря MainCode(int[] arr, bool DEBUG)
+    /// <summary> Основная логика частотного словаря MainCode(int[] arr, bool DEBUG)</summary>
+    /// <param name="arr">Входящий int массив</param>
+    /// <returns></returns>
+    /// <example>int[] arr = CreateArrayInt(size1_0);
+    public static void MainCodeFrequencyArr(int[] arr, bool DEBUG)
+    {
+        int[] frequencyArr = CreateArrayInt(arr.Length);//Создаём частотный массив для элементов основного массива
+
+        //Заполнение частотного массива нолями
+        PrefillOneArray(frequencyArr, DEBUG);
+
+        //Вывод исходного массива в консоль
+        WriteLine($"{PrintGood(arr, 1)}\n");
+
+        //Сортировка массива
+        for (int i = 0; i < arr.Length - 1; i++)
+            for (int j = i + 1; j < arr.Length; j++)
+                if (arr[i] > arr[j]) arr[i] = arr[i] + arr[j] - (arr[j] = arr[i]);
+
+        if (DEBUG) WriteLine($"\nОтсортированный массив:\n{PrintGood(arr, 1)}\n");// 
+        int temp = 0;
+
+        //Поиск частот
+        for (int i = 0; i < arr.Length - 1; i++)
+        {
+            if (arr[i] != 0)
+            {
+                for (int j = i + 1; j < arr.Length; j++)
+                    if (arr[i] == arr[j])
+                    {
+                        temp = arr[i];
+                        frequencyArr[i]++;
+                        arr[j] = 0;
+                    }
+            }
+            if (DEBUG) WriteLine($"arr[{i}] = {temp} frequencyArr[{i}] = {frequencyArr[i]}");
+        }
+        if (DEBUG) WriteLine($"frequencyArr массив:\n{PrintGood(frequencyArr, 1)}\n");
+
+        ///Вывод на печать
+        for (int i = 0; i < arr.Length; i++)
+            if (arr[i] != 0)
+            {
+                Write(value: $"{arr[i]} встречается {frequencyArr[i]}");
+                WriteLine(frequencyArr[i] % 10 == 1 | frequencyArr[i] % 10 == 5 | frequencyArr[i] % 10 == 6 | frequencyArr[i] % 10 == 7 | frequencyArr[i] % 10 == 8 % 10 | frequencyArr[i] % 10 == 9 | frequencyArr[i] % 10 == 0 ? " раз" : " раза");
+
+            }
+    }
+
     // Метод создания одномерного массива int
     /// <summary>
     /// Метод создания одномерного массива int
@@ -274,6 +325,7 @@ public class MyLibrary123
 
         for (int i = 0; i < size; i++)
         {
+            if (i % 10 == 0) output += $"\n";
             output += $"{array[i]}{string.Concat(Enumerable.Repeat("\t", interval))}";
         }
         return output;
@@ -351,29 +403,33 @@ public class MyLibrary123
     /// <returns>Введенное пользователем значение</returns>
     public static int Input(string text)
     {
+        OutputDynamicString(text);
+        return int.Parse(ReadLine());
+    }
+
+    // Метод для вывода бегущей строкой
+    /// <summary> Метод для вывода бегущей строкой </summary>
+    /// <param name="text">Текст который нужно вывести в консоль</param>
+    public static void OutputDynamicString(string text)
+    {
         Console.ForegroundColor = ConsoleColor.Blue;
         for (int i = 0; i < text.Length; i++)
         {
-            Thread.Sleep(100);
+            Thread.Sleep(50);
             Write(text[i]);
+            if (!OperatingSystem.IsMacOS()) Beep(Random.Shared.Next(37, 32767), 100);
         }
         Console.ResetColor();
-        return int.Parse(ReadLine());
     }
 
     // Метод для ввода целочисленного значения Select()
     /// <summary> Метод для ввода целочисленного значения </summary>
     /// <param name="text">Текст пояснения для пользователя - что он должен ввести</param>
     /// <returns>Введенное пользователем значение</returns>
-    public static string Select(string text)
+    public static string Select(string text, int saveCursorSize )
     {
-        Console.ForegroundColor = ConsoleColor.Blue;
-        for (int i = 0; i < text.Length; i++)
-        {
-            Thread.Sleep(100);
-            Write(text[i]);
-        }
-        Console.ResetColor();
+        OutputDynamicString(text);
+        if (!OperatingSystem.IsMacOS()) Console.CursorSize = 100;
         return ReadLine();
     }
 
@@ -388,7 +444,7 @@ public class MyLibrary123
     }
 
 
-    // Метод удаления строки и столбца из двумерного массива MiusMinArray(array, newArray, rowCol, true)
+    // Метод удаления строки и столбца из двумерного массива MinusMinArray(array, newArray, rowCol, true)
     /// <summary>
     /// Метод удаления строки и столбца из двумерного массива
     /// </summary>
@@ -398,8 +454,8 @@ public class MyLibrary123
     /// <param name="newArray">Новый массив с исключенными строкой и столбцом</param> 
     /// <param name="DEBUG">Определяем режим отладки или прода. Если значение DEBUG = <see langword="true"/>, то выводим специнфомацию</param> 
     /// <returns>Возвращаем уменьшенный массив</returns>
-    /// Пример вызова метода: MiusMinArray(array, newArray, rowCol, true)
-    public static int[,] MiusMinArray(int[,] array, int[,] newArray, int[] rowCol, bool DEBUG)
+    /// Пример вызова метода: MinusMinArray(array, newArray, rowCol, true)
+    public static int[,] MinusMinArray(int[,] array, int[,] newArray, int[] rowCol, bool DEBUG)
     {
         int size0 = array.GetLength(0);
         int size1 = array.GetLength(1);
@@ -739,20 +795,20 @@ public class MyLibrary123
         array[0] = 0;//Добавили первым элементом ноль
 
         //Делаем разный первоначальный сдвиг в зависимости от того, чётная или нечётная строка. Потому, что их нужно сдвигать на пол элемента. Сохраняем сдвиг.
-        string intervalOfsetString = ConcatLocal(" ", interval/2, DEBUG);//Задали шаг между элементами
+        string intervalOfsetString = ConcatLocal(" ", interval / 2, DEBUG);//Задали шаг между элементами
         string even_ofset = ConcatLocal(intervalOfsetString, locOffset, DEBUG) + ConcatLocal(" ", interval / 2, DEBUG);
         string odd_ofset = ConcatLocal(intervalOfsetString, locOffset + 1, DEBUG);// + ConcatLocal(" ", interval * 3 / 2, DEBUG);
         output = (curr_line_number % 2 == 0) ? even_ofset : odd_ofset;
 
-        if (DEBUG) 
-            {
-                Write($"curr_line_number = {curr_line_number} ");
-                Write($"even_ofset = {even_ofset.Length} ");
-                Write($"odd_ofset = {odd_ofset.Length} ");
-                Write((curr_line_number % 2 == 0) ? "use even_ofset " : "use odd_ofset ");
-                Write($"locOffset {locOffset} ");
-                WriteLine($"output.Length {output.Length} ");
-            }
+        if (DEBUG)
+        {
+            Write($"curr_line_number = {curr_line_number} ");
+            Write($"even_ofset = {even_ofset.Length} ");
+            Write($"odd_ofset = {odd_ofset.Length} ");
+            Write((curr_line_number % 2 == 0) ? "use even_ofset " : "use odd_ofset ");
+            Write($"locOffset {locOffset} ");
+            WriteLine($"output.Length {output.Length} ");
+        }
         //Заполняем массив ненулевыми элементами
 
         for (int i = locOffset + 1; i < size0 / 2 + 1; i++)
@@ -770,8 +826,6 @@ public class MyLibrary123
         //output += "\n";
         return output;
     }
-
-
 
     // Метод заполнения одномерного массива int нолями
     /// <summary> Метод заполнения одномерного массива int элементами = 0 </summary>
@@ -807,6 +861,37 @@ public class MyLibrary123
         if (DEBUG) WriteLine($"Отступ = locOfset * interval = {locOfset * interval}");
     }
 
+    // Метод заполнения одномерного массива int нолями
+    /// <summary> Метод заполнения одномерного массива int элементами = 0 </summary>
+    /// <param name="array">Массив, который заполняем</param>
+    /// <param name="interval">Количество табуляторов между элементами при выводе</param>    
+    /// <example> Пример вызова метода: PrefillArray(array, interval) </example>
+    public static void PrefillZeroArray(int[] array, bool DEBUG)
+    {
+        if (DEBUG) WriteLine("PrefillZeroArray filling start");
+        for (int i = 0; i < array.Length; i++)
+        {
+            array[i] = 0;
+            if (DEBUG) WriteLine($"array[{i}] = {array[i]}");
+        }
+        if (DEBUG) WriteLine($"PrefillZeroArray filling complete");
+    }
+
+    // Метод заполнения одномерного массива int единицами
+    /// <summary> Метод заполнения одномерного массива int элементами = 0 </summary>
+    /// <param name="array">Массив, который заполняем</param>
+    /// <example> Пример вызова метода: PrefillArray(array, interval) </example>
+    public static void PrefillOneArray(int[] array, bool DEBUG)
+    {
+        if (DEBUG) WriteLine("PrefillOneArray filling start");
+        for (int i = 0; i < array.Length; i++)
+        {
+            array[i] = 1;
+            if (DEBUG) WriteLine($"array[{i}] = {array[i]}");
+        }
+        if (DEBUG) WriteLine($"PrefillOneArray filling complete");
+    }
+
     // Метод вычисления факториала
     /// <summary> Метод вычисления факториала </summary>
     /// <param name="argument">Массив, который заполняем</param>
@@ -824,11 +909,6 @@ public class MyLibrary123
         }
         return factorial;
     }
-
-    //Сделать вывод символов в консоль как бегущая строка:
-    /*Console.Write("Hello ");
-    await Task.Delay(5000);
-    Console.WriteLine("World!");*/
 
     // Альтернативный Input
     /// <summary> Альтернативный метод ввода int данных с обработкой ошибки ввода </summary>
@@ -849,7 +929,7 @@ public class MyLibrary123
     /// <example> Пример вызова метода: ConcatLocal ("Привет! ", 5, true) </example>
     /// <example> Пример вызова метода: ConcatLocal (msg, repeater, DEBUG) </example>
     public static string ConcatLocal(string msg, int repeater, bool DEBUG)
-    {   
+    {
         if (repeater > 0)
         {
             return string.Concat(Enumerable.Repeat(msg, repeater));
