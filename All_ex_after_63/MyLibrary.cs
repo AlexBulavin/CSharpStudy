@@ -64,6 +64,7 @@ public class MyLibrary
             for (int j = i + 1; j < arr.Length; j++)
                 if (arr[i] > arr[j]) arr[i] = arr[i] + arr[j] - (arr[j] = arr[i]);
 
+
         if (DEBUG) WriteLine($"\nОтсортированный массив:\n{PrintGood(arr, 1)}\n");// 
         int temp = 0;
 
@@ -91,7 +92,13 @@ public class MyLibrary
                 ChangeForegroundColor(i % 10);
                 Thread.Sleep(50);
                 Write(value: $"{arr[i]} встречается {frequencyArr[i]}");
-                WriteLine(frequencyArr[i] % 10 == 1 | frequencyArr[i] % 10 == 5 | frequencyArr[i] % 10 == 6 | frequencyArr[i] % 10 == 7 | frequencyArr[i] % 10 == 8 % 10 | frequencyArr[i] % 10 == 9 | frequencyArr[i] % 10 == 0 ? " раз\t" : " раза\t");
+                WriteLine(frequencyArr[i] % 10 == 1 //Делаем правильное склонение
+                | frequencyArr[i] % 10 == 5
+                | frequencyArr[i] % 10 == 6
+                | frequencyArr[i] % 10 == 7
+                | frequencyArr[i] % 10 == 8
+                | frequencyArr[i] % 10 == 9
+                | frequencyArr[i] % 10 == 0 ? " раз\t" : " раза\t");
                 Console.ResetColor();
             }
 
@@ -146,8 +153,6 @@ public class MyLibrary
         }
 
     }
-
-
 
     // Метод создания одномерного массива int
     /// <summary>
@@ -470,11 +475,11 @@ public class MyLibrary
         ForegroundColor = ConsoleColor.Blue;
         for (int i = 0; i < text.Length; i++)
         {
-            Thread.Sleep(50);
+            Thread.Sleep(20);
             Write(text[i]);
             if (!OperatingSystem.IsMacOS()) Beep(Random.Shared.Next(37, 32767), 100);
         }
-        Console.ResetColor();
+        ResetColor();
     }
 
     // Метод для ввода целочисленного значения Select()
@@ -484,7 +489,7 @@ public class MyLibrary
     public static string Select(string text, int saveCursorSize)
     {
         OutputDynamicString(text);
-        if (!OperatingSystem.IsMacOS()) Console.CursorSize = 100;
+        if (!OperatingSystem.IsMacOS()) CursorSize = saveCursorSize;//Задаём размер курсора. Необязательный параметр. Можно отключить, если не хочется с ним иметь дело. Для iOS не работает.
         return ReadLine();
     }
 
@@ -582,83 +587,63 @@ public class MyLibrary
         {
             case 2:
                 return "двоичной";
-                break;
+
             case 3:
                 return "троичной";
-                break;
 
             case 4:
-                return "четверичной";
-                break;
 
             case 5:
                 return "пятеричной";
-                break;
 
             case 6:
                 return "шестиричной";
-                break;
 
             case 7:
                 return "семиричной";
-                break;
 
             case 8:
                 return "восьмеричной";
-                break;
 
             case 9:
                 return "девятиричной";
-                break;
 
             case 10:
                 return "десятичной";
-                break;
 
             case 11:
                 return "одиннадцатириричной";
-                break;
 
             case 12:
                 return "двеннадцатиричной";
-                break;
 
             case 13:
                 return "триннадцатиричной";
-                break;
 
             case 14:
                 return "четырнадцатиричной";
-                break;
-
+ 
             case 15:
                 return "пятнадцатиричной";
-                break;
 
             case 16:
                 return "шестнадцатиричной";
-                break;
 
             case 17:
                 return "семнадцатиричной";
-                break;
 
             case 18:
                 return "восемнадцатиричной";
-                break;
 
             case 19:
                 return "девятнадцатиричной";
-                break;
 
             case 20:
                 return "двадцатиричной";
-                break;
 
             default:
                 return M.ToString();
 
-                break;
         };
     }
 
@@ -750,7 +735,7 @@ public class MyLibrary
         Array.Clear(os, 0, os.Length);
         for (int i = 0; i < os.Length; i++)
         {
-            os[i] = CharSelector((int)Char.GetNumericValue(osBaseLocal[i]), 0);//Конвертировали основние системы счисления через Unicode в подстрочный индекс
+            os[i] = CharSelector((int)Char.GetNumericValue(osBaseLocal[i]), 0);//Конвертировали основание системы счисления через Unicode в подстрочный индекс
         }
         return os;
     }
@@ -832,7 +817,7 @@ public class MyLibrary
     /// <summary> Метод заполнения двумерного массива размерности в ширину консоли int элементами пирамиды Паскаля </summary>
     /// <param name="array">Массив, который заполняем</param>
     /// <param name="interval">Количество табуляторов между элементами при выводе</param>  
-    /// <param name="curr_line_number">Порядновый номер строки пирамиды Паскаля. Нумерация начинается с 1</param>  
+    /// <param name="curr_line_number">Порядковый номер строки пирамиды Паскаля. Нумерация начинается с 1</param>  
     /// <example> Пример вызова метода: FillPascalTriangle(array, interval) </example>
     public static string FillPascalTriangle(uint[] array, int interval, int curr_line_number, bool DEBUG)
     {
@@ -965,6 +950,20 @@ public class MyLibrary
             }
         }
         return factorial;
+    }
+
+    // Метод вычисления факториала / перегрузка через рекурсию
+    /// <summary> Метод вычисления факториала / перегрузка через рекурсию </summary>
+    /// <param name="argument">Массив, который заполняем</param>
+    /// <example> Пример вызова метода: Factorial(argument, DEBUG) </example>
+    public static uint Factorial(uint argument, bool DEBUG)
+    {
+        if (argument >= 1)
+        {
+            if (argument == 1) return 1;
+            else return argument * Factorial(argument - 1, DEBUG);
+        }
+        return 1;
     }
 
     // Альтернативный Input

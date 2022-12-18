@@ -14,7 +14,13 @@ public class Seminar_17_12_2022
 
         int arrSize;
         if (DEBUG) WriteLine($"Выбрано значение {selectInput}");
-        if (String.Equals(selectInput, "Y") | String.Equals(selectInput, "D") | String.Equals(selectInput, "Д") | String.Equals(selectInput, "1") | String.Equals(selectInput, "Н") | String.Equals(selectInput, "у") | String.Equals(selectInput, "У"))
+        if (String.Equals(selectInput, "Y")
+                | String.Equals(selectInput, "D")
+                | String.Equals(selectInput, "Д")
+                | String.Equals(selectInput, "1")
+                | String.Equals(selectInput, "Н")
+                | String.Equals(selectInput, "у")
+                | String.Equals(selectInput, "У"))
         {
             arrSize = Input("Введите размер массива arrSize ");
             int[] arr = CreateArrayInt(arrSize);
