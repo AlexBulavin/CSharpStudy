@@ -31,12 +31,11 @@ public class Seminar_17_12_2022
 
             //Заполняем массив случайными числами.
             FillRandInt(arr, 950, true, 1000, false);
-            
+
             //Основная логика - подсчёт частоты элементов массива
             MainCodeFrequencyArr(arr, DEBUG);
         }
-
+        Console.ForegroundColor = ConsoleColor.White;
     }
-
 
 }

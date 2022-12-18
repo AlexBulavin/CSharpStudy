@@ -20,33 +20,7 @@ public class Ex_64_Pascal
         uint[] array = CreateArrayUint(triangleSize + 4);
 
         interval = ((triangleSize + 4)- 5)/3 + 1;
-        // switch (triangleHeight)
-        // {
-        //     case 0..4:
-        //         interval = 1;
-        //     case 5..9:
-        //         interval = 2;
-        //     case 10..13:
-        //         interval = 3;
-        //     case 14..16:
-        //         interval = 4;
-        //     case 17..20:
-        //         interval = 5;
-        //     case 21..24:
-        //         interval = 6;
-        //     case 25..28:
-        //         interval = 7;
-        //     case 29..32:
-        //         interval = 8;
-        //     case 8:
-        //         interval = 1;
-        //     case 9:
-        //         interval = 1;
-
-        //     default:
-        //         return (char)('\x208' + digit);
-        // }
-
+        
 
         //По размеру пирамиды
         //Количество строк / максимальная размерность элементов 
@@ -63,37 +37,12 @@ public class Ex_64_Pascal
         //2. Заполняем его элементами и выводим в цикле triangleSize/2 количество раз (строк)
         for (int i = 0; i < array.Length / 2; i++)
         {
-            WriteLine(FillPascalTriangle(array, interval, i + 2, DEBUG));
+            //WriteLine(FillPascalTriangle(array, interval, i + 2, DEBUG));
+            string output = FillPascalTriangle(array, interval, i + 2, DEBUG);
             WriteLine();
         }
         WriteLine("\n\n\n");
 
-        /*
-        string output = FillPascalTriangle(array, 1);
-
-        //3. Выводим на печать c цветом
-        for (int i = 0; i < output.Length; i++)
-        {
-            //(int)Char.GetNumericValue(osBaseLocal[i])
-            if (String.Equals(output[i], "0"))
-            {
-                Console.ForegroundColor = ConsoleColor.Black;
-            }
-            else
-            {
-                Console.ForegroundColor = ConsoleColor.Blue;
-            }
-            if ((int)Char.GetNumericValue(output[i]) % 2 == 0 & String.Equals(output[i], "0"))
-            {
-                Console.ForegroundColor = ConsoleColor.Black;
-            }
-            else
-            {
-                Console.ForegroundColor = ConsoleColor.Blue;
-            }
-            Write(output[i]);
-            Console.ResetColor();
-        }*/
     }
 }
 internal static class ConsoleHelper

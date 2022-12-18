@@ -88,11 +88,66 @@ public class MyLibrary
         for (int i = 0; i < arr.Length; i++)
             if (arr[i] != 0)
             {
+                ChangeForegroundColor(i % 10);
+                Thread.Sleep(50);
                 Write(value: $"{arr[i]} встречается {frequencyArr[i]}");
-                WriteLine(frequencyArr[i] % 10 == 1 | frequencyArr[i] % 10 == 5 | frequencyArr[i] % 10 == 6 | frequencyArr[i] % 10 == 7 | frequencyArr[i] % 10 == 8 % 10 | frequencyArr[i] % 10 == 9 | frequencyArr[i] % 10 == 0 ? " раз" : " раза");
-
+                WriteLine(frequencyArr[i] % 10 == 1 | frequencyArr[i] % 10 == 5 | frequencyArr[i] % 10 == 6 | frequencyArr[i] % 10 == 7 | frequencyArr[i] % 10 == 8 % 10 | frequencyArr[i] % 10 == 9 | frequencyArr[i] % 10 == 0 ? " раз\t" : " раза\t");
+                Console.ResetColor();
             }
+
+        ForegroundColor = ConsoleColor.White;
     }
+
+    // Метод изменения цвета консольного текста
+    /// <summary>Метод изменения цвета консольного текста</summary>
+    /// <param name=number">0-9 условный номер цвета массива</param>
+    /// <example>ChangeForegroundColor(colorNumber);</example>
+    public static void ChangeForegroundColor(int colorNumber)
+    {
+        switch (colorNumber)
+        {
+            case 0:
+                ForegroundColor = ConsoleColor.Blue;
+                break;
+            case 1:
+                ForegroundColor = ConsoleColor.Gray;
+                break;
+            case 2:
+                ForegroundColor = ConsoleColor.Green;
+                break;
+            case 3:
+                ForegroundColor = ConsoleColor.Cyan;
+                break;
+
+            case 4:
+                ForegroundColor = ConsoleColor.Red;
+                break;
+
+            case 5:
+                ForegroundColor = ConsoleColor.DarkCyan;
+                break;
+
+            case 6:
+                ForegroundColor = ConsoleColor.DarkGray;
+                break;
+
+            case 7:
+                ForegroundColor = ConsoleColor.Magenta;
+                break;
+
+            case 8:
+                ForegroundColor = ConsoleColor.DarkYellow;
+                break;
+
+            case 9:
+                ForegroundColor = ConsoleColor.White;
+                break;
+
+        }
+
+    }
+
+
 
     // Метод создания одномерного массива int
     /// <summary>
@@ -412,7 +467,7 @@ public class MyLibrary
     /// <param name="text">Текст который нужно вывести в консоль</param>
     public static void OutputDynamicString(string text)
     {
-        Console.ForegroundColor = ConsoleColor.Blue;
+        ForegroundColor = ConsoleColor.Blue;
         for (int i = 0; i < text.Length; i++)
         {
             Thread.Sleep(50);
@@ -426,7 +481,7 @@ public class MyLibrary
     /// <summary> Метод для ввода целочисленного значения </summary>
     /// <param name="text">Текст пояснения для пользователя - что он должен ввести</param>
     /// <returns>Введенное пользователем значение</returns>
-    public static string Select(string text, int saveCursorSize )
+    public static string Select(string text, int saveCursorSize)
     {
         OutputDynamicString(text);
         if (!OperatingSystem.IsMacOS()) Console.CursorSize = 100;
@@ -799,7 +854,7 @@ public class MyLibrary
         string even_ofset = ConcatLocal(intervalOfsetString, locOffset, DEBUG) + ConcatLocal(" ", interval / 2, DEBUG);
         string odd_ofset = ConcatLocal(intervalOfsetString, locOffset + 1, DEBUG);// + ConcatLocal(" ", interval * 3 / 2, DEBUG);
         output = (curr_line_number % 2 == 0) ? even_ofset : odd_ofset;
-
+        Write(output);
         if (DEBUG)
         {
             Write($"curr_line_number = {curr_line_number} ");
@@ -818,9 +873,11 @@ public class MyLibrary
             array[i] += array[i + 1];
             digInNumber = array[i].ToString().Length;
             if (DEBUG) WriteLine($"digInNumber = {digInNumber} ");// 
-            //output += array[i] != 0 ? $"{ConcatLocal(" ", interval - digInNumber, DEBUG)}{array[i]}" : $"{intervalOfsetString}";//Если элемент массива не равен нолю, выводим его, если равен - выводим количество символов максимального элемента
-            output += $"{ConcatLocal(" ", interval - digInNumber, DEBUG)}{array[i]}";// : $"{intervalOfsetString}";//Если элемент массива не равен нолю, выводим его, если равен - выводим количество символов максимального элемента
 
+            ChangeForegroundColor((int)array[i] % 10);
+            Write($"{ConcatLocal(" ", interval - digInNumber, DEBUG)}{array[i]}");
+            //output += $"{ConcatLocal(" ", interval - digInNumber, DEBUG)}{array[i]}";// : $"{intervalOfsetString}";//Если элемент массива не равен нолю, выводим его, если равен - выводим количество символов максимального элемента
+            Console.ResetColor();
             //output += " ";//string.Concat(Enumerable.Repeat(" ", interval));
         }
         //output += "\n";
