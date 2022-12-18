@@ -1,21 +1,13 @@
 ﻿//Показать двумерный массив размером m×n заполненный вещественными числами
-Console.Write("Введите размер массива MxN\n");
-int m = Convert.ToInt32(Console.ReadLine());
-int n = Convert.ToInt32(Console.ReadLine());
+using static MyLibrary;
+using static System.Console;
+Console.Clear();
 
-Console.Write("Создаём массив " + m + " x " + n + "\n");
+int m = Input("Введите количество строк двумерного массива: ");
+int n = Input("Введите количество столбцов двумерного массива: ");
+double[,] arr = CreateArrayDouble(m, n);
 
-double[,] arr = new double[m, n];
-Random r = new Random();
+//Заполняем массив рандомными вещественными числами от 0 до 99
+FillRandDoubleTwo(arr, 0,  0, true, 100000, 100, 6, true);
+Write($"{PrintGoodTwo(arr, 1)}\n");
 
-//Заполняем массив рандомными числами от 0 до 99
-for (int i = 0; i < m; i++)
-{
-    for (int j = 0; j < n; j++)
-    {
-        arr[i, j] = (float)r.Next(0, 100000)/100000 + r.Next(0, 100);
-        Console.Write($"{arr[i, j]} \t");
-    }
-    Console.WriteLine();
-    
-}
