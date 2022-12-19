@@ -1,32 +1,31 @@
 ﻿//Дан целочисленный массив. Найти среднее арифметическое каждого из столбцов.
-Console.Write("Введите размер массива mxn\n");
-int m = Convert.ToInt32(Console.ReadLine());
-int n = Convert.ToInt32(Console.ReadLine());
-Random r = new Random();
+using static MyLibrary;
+using static System.Console;
+Console.Clear();
+bool DEBUG = false;//true;//
+int n = Input("Введите количество строк двумерного массива: ");
+int m = Input("Введите количество столбцов двумерного массива: ");
 
-Console.Write("Создаём массив " + m + " x " + n + "\n");
-
-int[,] arr = new int[m, n];
-int[] average = new int[n];
+int[,] arr = CreateArrayIntTwo(n, m);
+float[] average = CreateArrayFloat(m);
 
 //Заполняем массив случайными числами.
-for (int i = 0; i < m; i++)
-{
-    for (int j = 0; j < n; j++)
-    {
-        arr[i, j] = r.Next(5, 20);
-        average[j] = (average[j] + arr[i, j])/2;
-        Console.Write($"{arr[i, j]} \t");
-    }
-    Console.WriteLine();
-};
+FillRandIntTwo(arr, 0, true, 100, true);
+Write(PrintGoodTwo(arr, 1));
 
-Console.WriteLine("Средние значения по столбцам:");
+WriteLine("Средние значения по столбцам:");
 
-for (int i = 0; i < n; i++)
+for (int i = 0; i < m; i++)//Идём по столбцам
 {
-    Console.Write($"{average[i]} \t");
+    for (int j = 0; j < n; j++)//Идём по строкам
+        {
+        if (DEBUG) WriteLine($" n (кол-во строк) = {n}, m (кол-во столбцов) = {m}, i = {i}, j = {j}, arr[i,j] = {arr[i,j]}, average[i] = {average[i]}");
+        average[i] += arr[j, i];
+        }
+    average[i] = average[i]/n;
+    
 }
-Console.WriteLine();
+Write(PrintGood(average, 1));
+WriteLine();
 
 
