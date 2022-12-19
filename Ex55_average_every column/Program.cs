@@ -13,7 +13,7 @@ float[] average = CreateArrayFloat(m);
 FillRandIntTwo(arr, 0, true, 100, true);
 
 //Выводим полученный массив на печать
-Write(PrintGoodTwo(arr, 1));
+WriteLine(PrintGoodTwo(arr, 1));
 WriteLine("Средние значения по столбцам:");
 
 for (int i = 0; i < m; i++)//Идём по столбцам
