@@ -52,10 +52,10 @@ internal static class ConsoleHelper
         int result;
         while (true)
         {
-            Console.Write(prompt);
-            if (int.TryParse(Console.ReadLine(), out result) && condition(result))
+            Write(prompt);
+            if (int.TryParse(ReadLine(), out result) && condition(result))
                 break;
-            Console.WriteLine(errorMessage);
+            WriteLine(errorMessage);
         }
         return result;
     }

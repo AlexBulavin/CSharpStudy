@@ -2,4 +2,5 @@
 //Example.Main();
 
 //Seminar_17_12_2022.Task1();
-Spyral.Matrix1();
+//Spyral.Matrix1();
+StringArrayParser.Parser1();

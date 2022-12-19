@@ -190,6 +190,16 @@ public class MyLibrary
         return new int[N, M]; // new int[N, M];
     }
 
+    // Метод создания двумерного массива string[,]
+    /// <summary> Метод создания двумерного массива string /// </summary>
+    /// <param name="N">Количество строк нового int массива</param>
+    /// <param name="М">Количество столбцов нового int массива</param>
+    /// <returns>Созданный массив из [N, M] элементов типа string</returns>
+    public static string[,] CreateArrayStringTwo(int N, int M)
+    {
+        return new string[N, M]; // new int[N, M];
+    }
+
     // Метод создания двумерного массива uint[]
     /// <summary> Метод создания двумерного массива uint </summary>
     /// <param name="N">Количество строк нового int массива</param>
@@ -220,28 +230,6 @@ public class MyLibrary
     public static double[] CreateArrayDouble(int count)
     {
         return new double[count]; // new double[count];
-    }
-
-
-    // Метод создания двумерного массива string
-    /// <summary> Метод создания одномерного массива double </summary>
-    /// <param name="count">Количество элементов нового double массива</param>
-    /// <returns>Созданный массив из count элементов типа double</returns>
-    /// <example> double[] arr = CreateArrayDouble(count) </example>
-    public static string[,] CreateArrayStringTwo(int m, int n)
-    {
-        return new string[m, n]; // new double[count];
-    }
-
-    // Метод создания двумерного массива double
-    /// <summary> Метод создания одномерного массива double </summary>
-    /// <param name="columns">Количество столбцов нового double массива</param>
-    /// <param name="rows">Количество строк нового double массива</param>    
-    /// <returns>Созданный массив из count элементов типа double</returns>
-    /// <example> double[,] arr = CreateArrayDouble(rows, columns) </example>
-    public static double[,] CreateArrayDouble(int rows, int columns)
-    {
-        return new double[rows, columns]; // new double[count];
     }
 
     // Метод создания массива bool
@@ -331,6 +319,52 @@ public class MyLibrary
             {
                 array[i, j] = Random.Shared.Next(minInclude ? min : min + 1, maxInclude ? max : max - 1);
                 //array[i] = new Random().Next(min, max);
+            }
+
+        }
+    }
+
+    // Метод заполнения двумерного массива случайными int элементами из диапазона от min до max
+    /// <summary> Метод заполнения двумерного массива случайными int элементами из диапазона от min до max </summary>
+    /// <param name="array">Массив, который заполняем</param>
+    /// <param name="min">Минимальное значение для заполнения случайными int элементами</param>
+    /// <param name="minInclude">Включает ли минимальное граничное значение в диапазон выбора для рандомайзера False - не включает, True - включает</param>
+    /// <param name="max">Максиимальное значение для заполнения случайными int элементами</param>
+    /// <param name="maxInclude">Включает ли максиимальное граничное значение в диапазон выбора для рандомайзера False - не включает, True - включает</param> 
+    /// <example> Пример вызова метода: FillRandIntTwo(arrName, 10, false, 100, true) </example>
+    public static void FillRandStringTwo(string[,] array)
+    {
+        int size0 = array.GetLength(0);
+        int size1 = array.GetLength(1);
+        // Создаем массив букв, которые мы будем использовать.
+        int[] letters = new int[175-128 + 224-241 + 1];//128 - 175, 224-241, 33 - диапазон кириллических букв (в десятичном представлении) и восклицательный знак
+        int k = 0;
+        
+        for (int i = 128; i <=175; i++)
+        {
+            letters[k] = i;
+        }
+
+        for (int i = 0; i < size0; i++)
+        {
+            for (int j = 0; j < size1; j++)
+            {
+                string word;
+                for (int m = 3; m < 15; m++ )
+                {
+                    word += (char)Random.Shared.Next(0, letters.Length));
+
+                }
+                float value = 1034769.47f;
+System.Text.StringBuilder sb = new System.Text.StringBuilder();
+sb.Append('*', 5).Append(value).Append('*', 5);
+Console.WriteLine(sb);
+// The example displays the following output:
+//       *****1034769.47*****
+
+                 
+                //array[i] = new Random().Next(min, max);
+                array[i, j]
             }
 
         }
@@ -432,44 +466,6 @@ public class MyLibrary
         return output;
     }
 
-    // Метод подготовки для печати двумерного double массива !ПЛОХОЙ WriteLine(PrintGoodTwo(arrName, 4))
-    /// <summary> Метод подготовки переменной типа string для печати. Элементы имеют размерность interval пунктов. </summary>
-    /// <param name="array">Массив, элементы которого нужно вывести на печать</param>
-    /// <returns>Строка, заполненная элементами массива с интервалом interval пунктов</returns>
-    /// <example> Пример вызова метода: WriteLine(PrintGood(arrName, 4)) </example> 
-    public static string PrintGoodTwo(double[,] array, int interval)
-    {
-        string output = String.Empty; //Создали пустую строку
-        int size0 = array.GetLength(0);
-        int size1 = array.GetLength(1);
-        for (int i = 0; i < size0; i++)
-        {
-            for (int j = 0; j < size1; j++)
-                output += $"{array[i, j]}{string.Concat(Enumerable.Repeat("\t", interval))}";
-            output += "\n";
-        }
-        return output;
-    }
-
-    // Метод подготовки для печати двумерного double массива !ПЛОХОЙ WriteLine(PrintGoodTwo(arrName, 4))
-    /// <summary> Метод подготовки переменной типа string для печати. Элементы имеют размерность interval пунктов. </summary>
-    /// <param name="array">Массив, элементы которого нужно вывести на печать</param>
-    /// <returns>Строка, заполненная элементами массива с интервалом interval пунктов</returns>
-    /// <example> Пример вызова метода: WriteLine(PrintGood(arrName, 4)) </example> 
-    public static string PrintGoodTwo(string[,] array, int interval)
-    {
-        string output = String.Empty; //Создали пустую строку
-        int size0 = array.GetLength(0);
-        int size1 = array.GetLength(1);
-        for (int i = 0; i < size0; i++)
-        {
-            for (int j = 0; j < size1; j++)
-                output += $"{array[i, j]}{string.Concat(Enumerable.Repeat("\t", interval))}";
-            output += "\n";
-        }
-        return output;
-    }
-
     // Метод подготовки для печати трёхмерного массива !ПЛОХОЙ WriteLine(PrintGood3DInt(arrName, interval))
     /// <summary>
     /// Метод подготовки переменной типа string для печати. Элементы имеют размерность \t * interval пунктов.
@@ -525,21 +521,6 @@ public class MyLibrary
     {
         OutputDynamicString(text);
         return int.Parse(ReadLine());
-    }
-
-    // Метод для ввода double значения data = Input("Введите целое число", true)
-    /// <summary> Метод для ввода double значения </summary>
-    /// <param name="text">Текст пояснения для пользователя - что он должен ввести</param>
-    /// <param name="dob">Параметр подтверждает, что вводимое число должно быть double</param>
-    /// <returns>Введенное пользователем значение или 0.0, если dob = false</returns>
-    public static double Input(string text, bool dob)
-    {
-        if (dob)
-        {
-            OutputDynamicString(text);
-            return double.Parse(ReadLine());
-        }
-        return 0.0;
     }
 
     // Метод для вывода бегущей строкой
@@ -1070,53 +1051,5 @@ public class MyLibrary
             return "repeater < 0 Alarm!\n";
         }
     }
-    public static int FillRandStringTwo(string[,] array, bool DEBUG)
-    {
-        int size0 = array.GetLength(0);
-        int size1 = array.GetLength(1);
-        // Создаем массив букв, которые мы будем использовать.
-        //int[] letters = new int[175-128 + 224-241 + 1];//128 - 175, 224-241, 33 - диапазон кириллических букв (в десятичном представлении) и восклицательный знак
-        string alphabet = "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЬЫЭЮЯабвгдеёжзийклмнопрстуфхцчшщьыъэюя!";
-        bool trigger = false;
-        int counter = 0;
-        char sign = '!';
 
-        for (int i = 0; i < size0; i++)
-        {
-            for (int j = 0; j < size1; j++)
-            {
-                string word = String.Empty;
-                for (int m = 0; m < Random.Shared.Next(2, 6); m++)
-                {
-                    char symbol = alphabet[Random.Shared.Next(0, alphabet.Length)];
-                    word += symbol;
-                    if (symbol == '!') trigger = true;// .Equals(sign.ToString())) //String.Equals(symbol, (char)"!")) 
-                }
-                if (trigger)
-                {
-                    counter++;
-                    trigger = false;
-                }
-                if (DEBUG) WriteLine(word);
-                array[i, j] = word;
-
-            }
-        }
-        return counter;
-    }
 }
-/*internal static class ConsoleHelper
-{
-    public static int ReadNumber(string prompt, Predicate<int> condition, string errorMessage)
-    {
-        int result;
-        while (true)
-        {
-            Write(prompt);
-            if (int.TryParse(ReadLine(), out result) && condition(result))
-                break;
-            WriteLine(errorMessage);
-        }
-        return result;
-    }
-}*/
