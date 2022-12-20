@@ -5,4 +5,6 @@
 //Spyral.Matrix1();
 //StringArrayParser.Parser1();
 //Recursion.Natural1NPrint();
-RecursionNM.NaturalNMPrint();
+//RecursionNM.NaturalNMPrint();
+//RecursionSum.NaturalNMPrint();
+RecursionSum1N.Sum1ToNPrint();

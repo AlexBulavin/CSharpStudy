@@ -1,4 +1,4 @@
-/*Показать натуральные числа от 1 до N, N задано */
+/*Показать натуральные числа от N до M. N, M заданы */
 using static MyLibrary;
 using static System.Console;
 public class RecursionNM

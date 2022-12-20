@@ -1,4 +1,8 @@
-/*Показать натуральные числа от 1 до N, N задано */
+/*
+66. Показать натуральные числа от 1 до N, N задано
+67. Показать натуральные числа от N до 1, N задано
+*/
+
 using static MyLibrary;
 using static System.Console;
 public class Recursion
