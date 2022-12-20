@@ -4,4 +4,5 @@
 //Seminar_17_12_2022.Task1();
 //Spyral.Matrix1();
 //StringArrayParser.Parser1();
-Recursion.Natural1NPrint();
+//Recursion.Natural1NPrint();
+RecursionNM.NaturalNMPrint();
