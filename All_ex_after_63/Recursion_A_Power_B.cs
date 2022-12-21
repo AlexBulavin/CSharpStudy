@@ -12,7 +12,7 @@ public class APowerB
         //Фиксируем время
         DateTime startTime = DateTime.Now;
 
-        // Вводим числа N и M
+        // Вводим числа а и в
         float a;
         int b;
         a = InputFloat("Введите число A: ", DEBUG);
