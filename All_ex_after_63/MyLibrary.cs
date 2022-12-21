@@ -526,6 +526,15 @@ public class MyLibrary
         OutputDynamicString(text);
         return int.Parse(ReadLine());
     }
+    // Перегрузка метода Input для ввода целочисленного значения data = Input("Введите целое число")
+    /// <summary> Метод для ввода целочисленного значения </summary>
+    /// <param name="text">Текст пояснения для пользователя - что он должен ввести</param>
+    /// <returns>Введенное пользователем значение</returns>
+    public static uint InputUint(string text, bool  DEBUG)
+    {
+        OutputDynamicString(text);
+        return uint.Parse(ReadLine());
+    }
 
     // Метод для ввода double значения data = Input("Введите целое число", true)
     /// <summary> Метод для ввода double значения </summary>
@@ -542,6 +551,20 @@ public class MyLibrary
         return 0.0;
     }
 
+    // Метод для ввода float значения data = Input("Введите целое число", true)
+    /// <summary> Метод для ввода float значения </summary>
+    /// <param name="text">Текст пояснения для пользователя - что он должен ввести</param>
+    /// <param name="fl">Параметр подтверждает, что вводимое число должно быть float</param>
+    /// <returns>Введенное пользователем значение или 0.0, если dob = false</returns>
+    public static float InputFloat(string text, bool fl)
+    {
+        if (fl)
+        {
+            OutputDynamicString(text);
+            return float.Parse(ReadLine());
+        }
+        return 0;
+    }
     // Метод для вывода бегущей строкой
     /// <summary> Метод для вывода бегущей строкой </summary>
     /// <param name="text">Текст который нужно вывести в консоль</param>
@@ -577,7 +600,6 @@ public class MyLibrary
     {
         return (int)Math.Log(number, 10) + 1;
     }
-
 
     // Метод удаления строки и столбца из двумерного массива MinusMinArray(array, newArray, rowCol, true)
     /// <summary>
