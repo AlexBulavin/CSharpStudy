@@ -8,7 +8,7 @@ public class APowerB
     public static void APowerBMain()
     {
         Console.Clear();//Очищаем консоль
-        bool DEBUG = true;//false;// Задаём режим работы - дебаг или прод 
+        bool DEBUG = false;//true;// Задаём режим работы - дебаг или прод 
         //Фиксируем время
         DateTime startTime = DateTime.Now;
 
@@ -22,15 +22,20 @@ public class APowerB
 
         //Выводим A^B через рекурсию.
         //TODO: Построить надстрочный показатель степени
+        int powArraySize = b > 0 ? DigitsInNumber(b) : DigitsInNumber(Math.Abs(b)) + 1;//Вычисляем количество символов в показателе степени и создаём массив с такой размерностью для хранения Юникодов
+        //надстрочных или подстрочных символов
 
-        char[] arrDim = CreateArrayChar(b > 0 ? DigitsInNumber(b) : DigitsInNumber(b) + 1);
-        if (b < 0) arrDim[0] = '-';
+        char[] arrDim = CreateArrayChar(powArraySize);
+        if (b < 0) arrDim[0] = '\u207B';//Надстрочный минус ¯ 
         int singlePowerDigit = DigitsInNumber(arrDim.Length);//Количество цифр в показателе степени
-        int dimDigit;                                                     //Формируем показатель степени
-        for (int j = b > 0 ? 0 : 1; j < singlePowerDigit; j++)
+        if (DEBUG) WriteLine($"powArraySize = {powArraySize} singlePowerDigit = {singlePowerDigit}");
+        int dimDigit;                                                     
+        //Формируем показатель степени и записываем его в массив arrDim[j]
+        for (int j = b > 0 ? 0 : 1; j < powArraySize; j++)
         {
-            dimDigit = (b - 1) % (int)Math.Pow(10, singlePowerDigit - j) / (int)Math.Pow(10, singlePowerDigit - j - 1);//Извлекаем значение цифры из показателя степени текущего слагаемого (элемента массива)
-            arrDim[j] = CharSelector(dimDigit, 1);//Вызвали метод из библиотеки для преобразования через Unicode в надстрочный индекс
+            dimDigit = (Math.Abs(b)) % (int)Math.Pow(10, powArraySize - j) / (int)Math.Pow(10, powArraySize - j - 1);//Извлекаем значение цифры из показателя степени текущего слагаемого (элемента массива)
+            arrDim[j] = CharSelector(dimDigit, 1, DEBUG);//Вызвали метод из библиотеки для преобразования через Unicode в надстрочный индекс
+            if (DEBUG) WriteLine($"j = {j}\tdimDigit = {dimDigit}/tarrDim[j] = {arrDim[j]}");
         }
 
         WriteLine($"\nФункция {a}{String.Join("", arrDim)} = {APowerBRecursion(a, b, b > 0 ? 1 : -1, startTime, DEBUG)}\n");

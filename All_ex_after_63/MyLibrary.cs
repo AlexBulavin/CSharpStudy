@@ -530,7 +530,7 @@ public class MyLibrary
     /// <summary> Метод для ввода целочисленного значения </summary>
     /// <param name="text">Текст пояснения для пользователя - что он должен ввести</param>
     /// <returns>Введенное пользователем значение</returns>
-    public static uint InputUint(string text, bool  DEBUG)
+    public static uint InputUint(string text, bool DEBUG)
     {
         OutputDynamicString(text);
         return uint.Parse(ReadLine());
@@ -559,10 +559,10 @@ public class MyLibrary
     public static float InputFloat(string text, bool fl)
     {
         if (fl)
-        {
+        {}
             OutputDynamicString(text);
             return float.Parse(ReadLine());
-        }
+        
         return 0;
     }
     // Метод для вывода бегущей строкой
@@ -751,11 +751,15 @@ public class MyLibrary
     /// <returns> Unicode символ типа char, соответствующий входящей цифре, в нужном регистре </returns>
     /// <example> Пример вызова метода: Write(CharSelector(digit, selector)) <example>
     ///Output ₅
-    public static char CharSelector(int digit, int selector)
+    public static char CharSelector(int digit, int selector, bool DEBUG)
     {
         //selector = 0 - подстрочный индекс
         //selector = 1 - надстрочный индекс
         //Подробнее по кодам здесь: https://wiki5.ru/wiki/Unicode_subscripts_and_superscripts
+        if (DEBUG)
+        {
+            Write($"0{'\u2070'}\n1{'\u2071'}\n2{'\u00B2'}\n3{'\u00B3'}\n4{'\u2074'}\n5{'\u2075'}\n6{'\u2076'}\n7{'\u2077'}\n8{'\u2078'}\n9{'\u2079'}");
+        }
         if (selector == 0)
         {
             switch (digit)
@@ -792,7 +796,7 @@ public class MyLibrary
                 case 0:
                     return '\u2070';
                 case 1:
-                    return '\u2071';
+                    return '\u00B9';
                 case 2:
                     return '\u00B2';
                 case 3:
@@ -826,13 +830,13 @@ public class MyLibrary
     /// <returns> Unicode символ типа char, соответствующий входящей цифре, в нужном регистре </returns>
     /// <example> Пример вызова метода: MinInArray(5, 0) </example> 
     ///Output ₅
-    public static char[] FillArrWithDimension(char[] os, int osBase)
+    public static char[] FillArrWithDimension(char[] os, int osBase, bool DEBUG)
     {
         string osBaseLocal = osBase.ToString();
         Array.Clear(os, 0, os.Length);
         for (int i = 0; i < os.Length; i++)
         {
-            os[i] = CharSelector((int)Char.GetNumericValue(osBaseLocal[i]), 0);//Конвертировали основание системы счисления через Unicode в подстрочный индекс
+            os[i] = CharSelector((int)Char.GetNumericValue(osBaseLocal[i]), 0, DEBUG);//Конвертировали основание системы счисления через Unicode в подстрочный индекс
         }
         return os;
     }
