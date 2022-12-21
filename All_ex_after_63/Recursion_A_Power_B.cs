@@ -21,6 +21,34 @@ public class APowerB
         ChangeForegroundColor(4);
 
         //Выводим A^B через рекурсию.
+        //TODO: Построить надстрочный показатель степени
+
+char[] arrDim = CreateArrayChar(b > 0 ? DigitsInNumber(b) : DigitsInNumber(b)+1);
+ulong res = 0, temp = 0;
+/*
+for (int i = 0; i < arrayDimension; i++)
+{
+    //Очистить массив
+    Array.Clear(arrDim, 0, arrDim.Length);
+    singlePowerDigit = DigitsInNumber(arrayDimension - i);//Количество цифр в показателе степени
+    //Формируем показатель степени
+    for (int j = 0; j < singlePowerDigit; j++)
+    {
+        dimDigit = (arrayDimension-i-1)%(int)Math.Pow(10, singlePowerDigit - j)/(int)Math.Pow(10, singlePowerDigit - j - 1);//Извлекаем значение цифры из показателя степени текущего слагаемого (элемента массива)
+        arrDim[j] = CharSelector(dimDigit, 1);//Вызвали метод из библиотеки для преобразования через Unicode в подстрочный индекс
+    }
+    //Заполняем массив рандомными значениями и сразу выводим на печать в консоль
+    arr[i] = Random.Shared.Next(0, osBase);
+    temp = (ulong)(arr[i] * Math.Pow(osBase, arrayDimension - i - 1));//temp = (long)(arr[i] * Math.Pow(osBase, arrayDimension - i - 1));
+    Write($"{arr[i]}*{osBase}{String.Join("", arrDim)}");//Выводим в консоль разложение числа по выбранному основанию
+    Write(i < arrayDimension - 1 ? " + " : "\n");
+    res += temp;
+}
+
+
+
+
+*/
 
         WriteLine($"\nФункция {a}{CharSelector(b, 1)} = {APowerBRecursion(a, b, b > 0 ? 1 : -1, startTime, DEBUG)}\n");
         ChangeForegroundColor(6);
