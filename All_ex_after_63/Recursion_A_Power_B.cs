@@ -16,14 +16,12 @@ public class APowerB
         float a;
         int b;
         a = InputFloat("Введите число A: ", DEBUG);
-        b = Input("Введите целочисленную степень числа А{}: ");
-        WriteLine();
+        b = Input("Введите целочисленную степень числа А: ");
         ChangeForegroundColor(4);
-
         //Выводим A^B через рекурсию.
-   
         WriteLine($"\nФункция {a}{FillOneDimArrayBySubscriptSuperscript(b, 1, DEBUG)} = {APowerBRecursion(a, b, b > 0 ? 1 : -1, startTime, DEBUG)}\n");
-        ProgramMonitoring(startTime);
+        ResetColor();
+        ProgramMonitoring(startTime, DEBUG);
     }
 
     public static float APowerBRecursion(float number, int power, int count, DateTime requestTime, bool DEBUG)

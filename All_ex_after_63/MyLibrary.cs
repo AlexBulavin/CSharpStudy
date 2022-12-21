@@ -32,7 +32,7 @@ using System;
 /// <para> Метод преобразования входящего int параметра в подстрочный или надстрочный регистр. Например, 5 -> ₅ Write(CharSelector(digit, selector)) </para>
 /// <para> Метод заполнения входящего массива char подстрочными индексами. Например, ₁₀. </para>
 /// <para> Метод заполнения массива случайными целыми числами и подсчёта сумм чётных и нечётных элементов FillRandInt(arrName, 10, false, 100, true, count, DEBUG, intreval) </para>
-/// <para> // Метод заполнения массива случайными вещественными числами и подсчёта разницы max - min элементов WriteLine(FillRandInt(arrName, 10, false, 100, true, counе, DEBUG, intreval)) </para>
+/// <para> Метод заполнения массива случайными вещественными числами и подсчёта разницы max - min элементов WriteLine(FillRandInt(arrName, 10, false, 100, true, counе, DEBUG, intreval)) </para>
 /// <para> Метод создания одномерного массива float[] arr = CreateArrayFloat(size1_0); </para>
 /// <para> Метод   </para>
 /// <para> Метод   </para>
@@ -76,13 +76,16 @@ public class MyLibrary
     /// </summary>
     /// <param name="startTime">Системное время начала работы программы</param>
     /// <example>ProgramMonitoring(startTime);</example>
-    public static void ProgramMonitoring(DateTime startTime)
-    {
+    public static void ProgramMonitoring(DateTime startTime, bool DEBUG)
+    {   
+        if (DEBUG)
+        {
         ChangeForegroundColor(6);
         WriteLine($"Начало вычислений {startTime.ToString()}");
         WriteLine($"Окончание вычислений {DateTime.Now.ToString()}");
         WriteLine($"Продолжительность вычислений {((DateTime.Now - startTime)).TotalMilliseconds} миллисекунд\n");
         ResetColor();
+        }
     }
 
     //Основная логика частотного словаря MainCode(int[] arr, bool DEBUG)
