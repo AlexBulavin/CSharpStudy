@@ -594,7 +594,7 @@ public class MyLibrary
     //Метод вычисления размерности int числа через Log: для 0...9 ->1; 10...99 ->2 и так далее digits = DigitsInNumber(15) возвращает 2
     /// <summary> Метод вычисления размерности числа через Log: для 0...9 ->1; 10...99 ->2 и так далее </summary>
     /// <param name="number">Входное число типа int</param>
-    /// <returns>Количество цифр во вкодном числе</returns>
+    /// <returns>Количество цифр во входном числе</returns>
     /// <example> digits = DigitsInNumber(15) возвращает 2 </example>
     public static int DigitsInNumber(int number)
     {

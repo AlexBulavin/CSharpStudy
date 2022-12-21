@@ -23,40 +23,24 @@ public class APowerB
         //Выводим A^B через рекурсию.
         //TODO: Построить надстрочный показатель степени
 
-char[] arrDim = CreateArrayChar(b > 0 ? DigitsInNumber(b) : DigitsInNumber(b)+1);
-ulong res = 0, temp = 0;
-/*
-for (int i = 0; i < arrayDimension; i++)
-{
-    //Очистить массив
-    Array.Clear(arrDim, 0, arrDim.Length);
-    singlePowerDigit = DigitsInNumber(arrayDimension - i);//Количество цифр в показателе степени
-    //Формируем показатель степени
-    for (int j = 0; j < singlePowerDigit; j++)
-    {
-        dimDigit = (arrayDimension-i-1)%(int)Math.Pow(10, singlePowerDigit - j)/(int)Math.Pow(10, singlePowerDigit - j - 1);//Извлекаем значение цифры из показателя степени текущего слагаемого (элемента массива)
-        arrDim[j] = CharSelector(dimDigit, 1);//Вызвали метод из библиотеки для преобразования через Unicode в подстрочный индекс
-    }
-    //Заполняем массив рандомными значениями и сразу выводим на печать в консоль
-    arr[i] = Random.Shared.Next(0, osBase);
-    temp = (ulong)(arr[i] * Math.Pow(osBase, arrayDimension - i - 1));//temp = (long)(arr[i] * Math.Pow(osBase, arrayDimension - i - 1));
-    Write($"{arr[i]}*{osBase}{String.Join("", arrDim)}");//Выводим в консоль разложение числа по выбранному основанию
-    Write(i < arrayDimension - 1 ? " + " : "\n");
-    res += temp;
-}
+        char[] arrDim = CreateArrayChar(b > 0 ? DigitsInNumber(b) : DigitsInNumber(b) + 1);
+        if (b < 0) arrDim[0] = '-';
+        int singlePowerDigit = DigitsInNumber(arrDim.Length);//Количество цифр в показателе степени
+        int dimDigit;                                                     //Формируем показатель степени
+        for (int j = b > 0 ? 0 : 1; j < singlePowerDigit; j++)
+        {
+            dimDigit = (b - 1) % (int)Math.Pow(10, singlePowerDigit - j) / (int)Math.Pow(10, singlePowerDigit - j - 1);//Извлекаем значение цифры из показателя степени текущего слагаемого (элемента массива)
+            arrDim[j] = CharSelector(dimDigit, 1);//Вызвали метод из библиотеки для преобразования через Unicode в надстрочный индекс
+        }
 
-
-
-
-*/
-
-        WriteLine($"\nФункция {a}{CharSelector(b, 1)} = {APowerBRecursion(a, b, b > 0 ? 1 : -1, startTime, DEBUG)}\n");
+        WriteLine($"\nФункция {a}{String.Join("", arrDim)} = {APowerBRecursion(a, b, b > 0 ? 1 : -1, startTime, DEBUG)}\n");
         ChangeForegroundColor(6);
         WriteLine($"Начало вычислений {startTime.ToString()}");
         WriteLine($"Окончание вычислений {DateTime.Now.ToString()}");
         WriteLine($"Продолжительность вычислений {((DateTime.Now - startTime)).TotalMilliseconds} миллисекунд\n");
         ResetColor();
     }
+
     public static float APowerBRecursion(float number, int power, int count, DateTime requestTime, bool DEBUG)
     {
         DateTime APowerBRecursionTime = DateTime.Now;
@@ -71,7 +55,7 @@ for (int i = 0; i < arrayDimension; i++)
         if (power == 0) return 1;
         if (power < 0)
         {
-            output = 1/number;
+            output = 1 / number;
             if (count > power) output *= APowerBRecursion(number, power, count - 1, requestTime, DEBUG);
         }
         else
