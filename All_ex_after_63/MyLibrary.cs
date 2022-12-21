@@ -43,6 +43,47 @@ using System;
 /// </summary>
 public class MyLibrary
 {
+    // Метод формирования массива char из надстрочных или подстрочных символов Unicode
+    /// <summary>
+    /// Метод формирования массива char из надстрочных или подстрочных символов Unicode
+    /// </summary>
+    /// <param name="b">Показатель степени или основания</param>
+    /// <param name="selector">Переключатель типов символов. 0 - подстрочный индекс, 1 - надстрочный индекс</param>
+    /// <param name="DEBUG">Параметр определяет режим работы программы. 0 - прод, 1 - дебаг</param>
+    /// <example>FillOneDimArrayBySubscriptSuperscript(b, selector, DEBUG);</example>
+    public static string FillOneDimArrayBySubscriptSuperscript(int b, int selector, bool DEBUG)
+    {
+        int dimDigit;
+        int powArraySize = b > 0 ? DigitsInNumber(b) : DigitsInNumber(Math.Abs(b)) + 1;//Вычисляем количество символов в показателе степени и создаём массив с такой размерностью для хранения Юникодов
+        char[] arrDim = CreateArrayChar(powArraySize);
+        if (b < 0) arrDim[0] = '\u207B';//Надстрочный минус ¯ 
+        int singlePowerDigit = DigitsInNumber(arrDim.Length);//Количество цифр в показателе степени
+        if (DEBUG) WriteLine($"powArraySize = {powArraySize} singlePowerDigit = {singlePowerDigit}");
+
+        //Формируем показатель степени и записываем его в массив arrDim[j]
+        for (int j = b > 0 ? 0 : 1; j < powArraySize; j++)
+        {
+            dimDigit = (Math.Abs(b)) % (int)Math.Pow(10, powArraySize - j) / (int)Math.Pow(10, powArraySize - j - 1);//Извлекаем значение цифры из показателя степени текущего слагаемого (элемента массива)
+            arrDim[j] = CharSelector(dimDigit, selector, DEBUG);//Вызвали метод из библиотеки для преобразования через Unicode в надстрочный индекс
+            if (DEBUG) WriteLine($"j = {j}\tdimDigit = {dimDigit}/tarrDim[j] = {arrDim[j]}");
+        }
+        return String.Join("", arrDim);
+    }
+
+    // Метод мониторинга времени работы программы
+    /// <summary>
+    /// Метод мониторинга времени работы кода
+    /// </summary>
+    /// <param name="startTime">Системное время начала работы программы</param>
+    /// <example>ProgramMonitoring(startTime);</example>
+    public static void ProgramMonitoring(DateTime startTime)
+    {
+        ChangeForegroundColor(6);
+        WriteLine($"Начало вычислений {startTime.ToString()}");
+        WriteLine($"Окончание вычислений {DateTime.Now.ToString()}");
+        WriteLine($"Продолжительность вычислений {((DateTime.Now - startTime)).TotalMilliseconds} миллисекунд\n");
+        ResetColor();
+    }
 
     //Основная логика частотного словаря MainCode(int[] arr, bool DEBUG)
     /// <summary> Основная логика частотного словаря MainCode(int[] arr, bool DEBUG)</summary>
@@ -559,12 +600,13 @@ public class MyLibrary
     public static float InputFloat(string text, bool fl)
     {
         if (fl)
-        {}
-            OutputDynamicString(text);
-            return float.Parse(ReadLine());
-        
+        { }
+        OutputDynamicString(text);
+        return float.Parse(ReadLine());
+
         return 0;
     }
+    
     // Метод для вывода бегущей строкой
     /// <summary> Метод для вывода бегущей строкой </summary>
     /// <param name="text">Текст который нужно вывести в консоль</param>
@@ -1096,6 +1138,13 @@ public class MyLibrary
             return "repeater < 0 Alarm!\n";
         }
     }
+
+    /// Заполняем двумерный массив случайными "словами" в которых может быть включен символ "!"
+    /// <summary> Метод ввода данных - рандомные "слова" длиной от 2 до 6 символов </summary>
+    /// <param name="array">Двумерный массив строк </param>
+    /// <param name="DEBUG">Флаг режима компиляции 1 = отладка с выводом логов, 0 - без вывода логов</param>
+    /// <example> Пример вызова метода: FillRandStringTwo(array, DEBUG)</example>
+
     public static int FillRandStringTwo(string[,] array, bool DEBUG)
     {
         int size0 = array.GetLength(0);
