@@ -9,4 +9,5 @@
 //RecursionSum1N.Sum1ToNPrint();
 //Ackerman.FuncMain();
 //APowerB.APowerBMain();
-RecursionFibonacci.RecFibonacciMain();
+//RecursionFibonacci.RecFibonacciMain();
+WordsPermutation.RecursionPermutationMain();
