@@ -954,7 +954,7 @@ public class MyLibrary
     /// <param name="interval">Количество табуляторов между элементами при выводе</param>
     /// <returns>Строка с нужной разметкой</returns>
     /// <example>Write(OutputArrByJoin(array, 1));
-    public static string OutputArrByJoin(int array, int interval)
+    public static string OutputArrByJoin(int[] array, int interval)
     {
         return string.Join(string.Concat(Enumerable.Repeat("\t", interval)), array);
     }
