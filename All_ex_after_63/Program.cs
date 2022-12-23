@@ -10,4 +10,5 @@
 //Ackerman.FuncMain();
 //APowerB.APowerBMain();
 //RecursionFibonacci.RecFibonacciMain();
-WordsPermutation.RecursionPermutationMain();
+//WordsPermutation.RecursionPermutationMain();
+DataInfoArr.DataInfoArrMain();

@@ -451,7 +451,7 @@ public class MyLibrary
 
         for (int i = 0; i < size; i++)
         {
-            if (i % 10 == 0) output += $"\n";
+            output += (i % 10 == 0 & i > 0) ? "\n" : "";
             output += $"{array[i]}{string.Concat(Enumerable.Repeat("\t", interval))}";
         }
         return output;
