@@ -18,28 +18,84 @@ public class DataInfoArr
         DateTime startTime = DateTime.Now;
         Console.Clear();//Очищаем консоль
         bool DEBUG = false;//true;// Задаём режим работы - дебаг или прод 
-
-        ChangeForegroundColor(4);
-        //Создаём массивы хардкодом
-        //TODO Нужно будет сделать методы для создания их автоматическим методом
-        int[] data = { 0, 1, 1, 1, 1, 0, 0, 0, 1 };
-        int[] info = { 2, 3, 3, 1 };
-        //TODO сделать методы для создания их автоматическим методом
-        //1. Запросить пользователя способ создания массива: 1 - предустановленный; 2 - автоматическим рандомным от 3 до 20; 3 - вручную;
-        //2. Создать метод автогенерации массива с двоичными данными на основании массива с десятичными данными;
-        //3. Создать метод ручного ввода.
-
         int shift = 0;
         int result = 0;
         int exponent = 0;
+        //Нужно переписать это на preset data или делать динамическим массивом
+        int[] data;
+        int[] info;
 
+        ChangeForegroundColor(4);
+        //TODO сделать методы для создания их автоматическим методом
+        //2. Создать метод автогенерации массива с двоичными данными на основании массива с десятичными данными;
+        //3. Создать метод ручного ввода.
+
+        int selectDataGenerate = 0;
+        //1. Запросить пользователя способ создания массива: 1 - предустановленный; 2 - автоматическим рандомным от 3 до 20; 3 - вручную;
+        while (selectDataGenerate < 1 | selectDataGenerate > 3)
+            selectDataGenerate = Input($"Выберите способ создания массива данных: 1 - предустановленный; 2 - автоматическим рандомным от 3 до 20; 3 - вручную;");
+
+        if (selectDataGenerate == 1)
+        {
+            //Создаём массивы хардкодом
+            //Они уже созданы
+            if (DEBUG) WriteLine($"Используем предустановленные данные");
+            data = new int[] { 0, 1, 1, 1, 1, 0, 0, 0, 1 };
+            info = new int[] { 2, 3, 3, 1 };
+
+        }
+        else if (selectDataGenerate == 2)
+        {
+            //Создаём массивы автоматическим рандомным от 3 до 20
+            int[] sourceData = CreateArrayInt(Random.Shared.Next(3, 21));
+            FillRandInt(sourceData, 0, true, 100, true);
+            string sourceDataBin = String.Empty;
+            string infoString = String.Empty;
+            int binCounter;
+            int restOfDeviding, leftPartOfDeviding;
+            //Конвертируем значения массива в двоичный код и узнаём количество символов в двоичном представлении
+            for (int i = 0; i < sourceData.Length; i++)
+            {
+                restOfDeviding = sourceData[i] / 2;
+                leftPartOfDeviding = sourceData[i] % 2;
+                binCounter = 1;//Показатель степени для числа в двоичном представлении, то есть элемент массива info
+                while (restOfDeviding >= 2)
+                {
+                    sourceDataBin += leftPartOfDeviding;
+                    binCounter++;
+                }
+                infoString += binCounter;//Строка с данными по всем длинам двоичных элементов
+            }
+            int sourceDataBinLength = sourceDataBin.Length;
+            int infoStringLength = infoString.Length;
+            //Заполняем массивы data и info
+            data = new int[sourceDataBinLength];
+            info = new int[infoStringLength];
+            for (int i = sourceDataBin.Length - 1; i >= 0; i--)
+            {
+                data[sourceDataBinLength - i + 1] = sourceDataBin[i];
+            }
+            for(int i = infoStringLength; i >= 0; i--)
+            {
+                info[infoStringLength - i + 1] = infoString[i];
+            }
+        }
+        else if (selectDataGenerate == 3)
+        {
+            int[] sourceData = new int[Input("Укажите размер массива данных")];
+            for (int i = 0; i < sourceData.Length; i++) sourceData[i] = Input($"sourceData[{i}] = ");
+
+        }
+        //Конвертируем значения массива в двоичный код и узнаём количество символов в двоичном представлении
+
+        //Заполняем массивы data и info
         //Печатаем исходные массивы
         Write($"data array:");
-        SetCursorPosition(15,0);
+        SetCursorPosition(15, 0);
         WriteLine(PrintGood(data, 1));
 
         Write($"info array:");
-        SetCursorPosition(15,1);
+        SetCursorPosition(15, 1);
         WriteLine(PrintGood(info, 1));
         WriteLine();
 
@@ -74,6 +130,11 @@ public class DataInfoArr
     выходные данные:
     1, 7, 0, 1*/
 
+    public static void DataInfoArrFill()
+    {
+        //Заполняем массивы data и info в соответствии с массивом sourceData
+
+    }
     // public static void RecursionPermutationWords(string baseArr, string w, int n, bool DEBUG)
     // {
     //     if (DEBUG)
