@@ -618,7 +618,7 @@ public class MyLibrary
         ForegroundColor = ConsoleColor.Blue;
         for (int i = 0; i < text.Length; i++)
         {
-            Thread.Sleep(20);
+            Thread.Sleep(1500/text.Length);
             Write(text[i]);
             if (!OperatingSystem.IsMacOS()) Beep(Random.Shared.Next(37, 32767), 100);
         }
@@ -1168,7 +1168,7 @@ public class MyLibrary
                 {
                     char symbol = alphabet[Random.Shared.Next(0, alphabet.Length)];
                     word += symbol;
-                    if (symbol == '!') trigger = true;// .Equals(sign.ToString())) //String.Equals(symbol, (char)"!")) 
+                    if (symbol == sign) trigger = true;// .Equals(sign.ToString())) //String.Equals(symbol, (char)"!")) 
                 }
                 if (trigger)
                 {
@@ -1183,6 +1183,11 @@ public class MyLibrary
         return counter;
     }
 }
+
+
+
+
+
 /*internal static class ConsoleHelper
 {
     public static int ReadNumber(string prompt, Predicate<int> condition, string errorMessage)

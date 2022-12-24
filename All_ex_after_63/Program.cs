@@ -11,4 +11,6 @@
 //APowerB.APowerBMain();
 //RecursionFibonacci.RecFibonacciMain();
 //WordsPermutation.RecursionPermutationMain();
-DataInfoArr.DataInfoArrMain();
+//DataInfoArr.DataInfoArrMain();
+TetrisConsole.TetrisMain();
+

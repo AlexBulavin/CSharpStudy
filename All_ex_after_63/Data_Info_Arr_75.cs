@@ -6,6 +6,7 @@
 
 Составить массив десятичных представлений чисел массива data с учётом информации из массива info. 
 */
+//<GenerateDocumentationFile>True</GenerateDocumentationFile>
 
 using static MyLibrary;
 using static System.Console;
@@ -17,7 +18,7 @@ public class DataInfoArr
         //Фиксируем время начала работы программы
         DateTime startTime = DateTime.Now;
         Console.Clear();//Очищаем консоль
-        bool DEBUG = false;//true;// Задаём режим работы - дебаг или прод 
+        bool DEBUG = true;//false;// Задаём режим работы - дебаг или прод 
 
         //Нужно переписать это на preset data или делать динамическим массивом
         int[] data;
@@ -31,7 +32,8 @@ public class DataInfoArr
         int selectDataGenerate = 0;
         //1. Запросить пользователя способ создания массива: 1 - предустановленный; 2 - автоматическим рандомным от 3 до 20; 3 - вручную;
         while (selectDataGenerate < 1 | selectDataGenerate > 3)
-            selectDataGenerate = Input($"Выберите способ создания массива данных: 1 - предустановленный; 2 - автоматическим рандомным от 3 до 20; 3 - вручную;");
+            selectDataGenerate = Input($"Выберите способ создания массива данных:\n1 - предустановленный;\n2 - автоматическим рандомным от 3 до 20;\n3 - вручную;\n");
+        if (DEBUG) WriteLine($"selectDataGenerate = {selectDataGenerate}");
 
         if (selectDataGenerate == 1)
         {
@@ -40,19 +42,21 @@ public class DataInfoArr
             if (DEBUG) WriteLine($"Используем предустановленные данные");
             data = new int[] { 0, 1, 1, 1, 1, 0, 0, 0, 1 };
             info = new int[] { 2, 3, 3, 1 };
-            PrintOutResult(DEBUG, data, info);
+            printDataAndInfoArr(data, info);
         }
         else if (selectDataGenerate == 2)
         {
             //2. Создаём массивы автоматическим рандомным от 3 до 20
             int[] sourceData = CreateArrayInt(Random.Shared.Next(3, 21));
             FillRandInt(sourceData, 0, true, 100, true);
+            WriteLine($"Создаём рандомный массив из десятичных цифр:\n{PrintGood(sourceData, 1)}");
             autoDataAndInfoArrFilling(DEBUG, out data, out info, sourceData);
         }
         else if (selectDataGenerate == 3)
         {
             //3. Создать метод ручного ввода.
-            int[] sourceData = new int[Input("Укажите размер массива данных")];
+            int[] sourceData = new int[Input("Укажите размер массива данных:")];
+            WriteLine();
             for (int i = 0; i < sourceData.Length; i++) sourceData[i] = Input($"sourceData[{i}] = ");
             autoDataAndInfoArrFilling(DEBUG, out data, out info, sourceData);
         }
@@ -92,26 +96,27 @@ public class DataInfoArr
         }
     }
 
-    private static void dataAndInfoArrFilling(bool DEBUG, out int[] data, out int[] info, string sourceDataBin, string infoString, int sourceDataBinLength, int infoStringLength)
+    private static void dataAndInfoArrFilling(bool DEBUG, out int[] data, out int[] info, string sourceDataBin, string infoString)
     {
         //Заполняем массивы data и info
-        data = new int[sourceDataBinLength];
-        info = new int[infoStringLength];
+        data = new int[sourceDataBin.Length];
+        info = new int[infoString.Length];
         for (int i = sourceDataBin.Length - 1; i >= 0; i--)
         {
-            data[sourceDataBinLength - i + 1] = sourceDataBin[i];
+            data[sourceDataBin.Length - i + 1] = sourceDataBin[i];
         }
-        for (int i = infoStringLength; i >= 0; i--)
+        for (int i = infoString.Length; i >= 0; i--)
         {
-            info[infoStringLength - i + 1] = infoString[i];
+            info[infoString.Length - i + 1] = infoString[i];
         }
-        PrintOutResult(DEBUG, data, info);
+        //Выводим на печать 
         printDataAndInfoArr(data, info);
+        PrintOutResult(DEBUG, data, info);
     }
     private static void printDataAndInfoArr(int[] data, int[] info)
     {
-        //Заполняем массивы data и info
-        //Печатаем исходные массивы
+
+        //Печатаем исходные массивы 
         Write($"data array:");
         SetCursorPosition(15, 0);
         WriteLine(PrintGood(data, 1));
@@ -128,22 +133,24 @@ public class DataInfoArr
         string infoString = String.Empty;
         int binCounter;
         int restOfDeviding, leftPartOfDeviding;
-        //Конвертируем значения массива в двоичный код и узнаём количество символов в двоичном представлении
+        if (DEBUG) WriteLine($"Inside of autoDataAndInfoArrFilling(),\nsourceData:\n{PrintGood(sourceData, 1)}");
+        //Конвертируем значения массива в двоичный код и узнаём количество символов в двоичном представлении для каждого десятичного числа
         for (int i = 0; i < sourceData.Length; i++)
         {
             restOfDeviding = sourceData[i] / 2;
-            leftPartOfDeviding = sourceData[i] % 2;
+            leftPartOfDeviding = sourceData[i] % 2 == 0 ? 0 : 1;
             binCounter = 1;//Показатель степени для числа в двоичном представлении, то есть элемент массива info
             while (restOfDeviding >= 2)
             {
-                sourceDataBin += leftPartOfDeviding;
+                sourceDataBin += leftPartOfDeviding;//Создаем строку (массив) из бинарных элементов 
                 binCounter++;
+                restOfDeviding /=2;
             }
             infoString += binCounter;//Строка с данными по всем длинам двоичных элементов
         }
-        int sourceDataBinLength = sourceDataBin.Length;
-        int infoStringLength = infoString.Length;
-        dataAndInfoArrFilling(DEBUG, out data, out info, sourceDataBin, infoString, sourceDataBinLength, infoStringLength);
+        if (DEBUG) WriteLine($"sourceDataBin = {sourceDataBin},\n infoString = {infoString}");
+        //
+        dataAndInfoArrFilling(DEBUG, out data, out info, sourceDataBin, infoString);
     }
 
 
