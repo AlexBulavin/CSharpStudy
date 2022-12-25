@@ -618,7 +618,7 @@ public class MyLibrary
         ForegroundColor = ConsoleColor.Blue;
         for (int i = 0; i < text.Length; i++)
         {
-            Thread.Sleep(1500/text.Length);
+            Thread.Sleep(1000/text.Length);
             Write(text[i]);
             if (!OperatingSystem.IsMacOS()) Beep(Random.Shared.Next(37, 32767), 100);
         }

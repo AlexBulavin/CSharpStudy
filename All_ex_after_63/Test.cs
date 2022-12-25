@@ -12,20 +12,20 @@ public class TestConsole
         bool DEBUG = true;//false;// Задаём режим работы - дебаг или прод 
         int count = 1;
         //SETTINGS
-        int x = Input($"Input x");
-        MainAlgorithm(x, ref count);
-        Write($"Количество путей {count} \n");
+        int x = Input($"Введите начальное значение x: ");
+        int max = Input($"Ввести максимальное значение max: ");
+        MainAlgorithm(x, max, ref count);
+        Write($"Количество путей {count}\n");
 
     }
 
-    static void MainAlgorithm(int x, ref int count)
+    static void MainAlgorithm(int x, int max, ref int count)
     {
-        if (x + 1 <= 4)
-            if (x * 2 <= 4)
+        if (x + 1 <= 13 & x * 2 <= 13)
             {
                 count++;
-                MainAlgorithm(x + 1, ref count);
-                MainAlgorithm(x * 2, ref count);
+                MainAlgorithm(x + 1, max, ref count);
+                MainAlgorithm(x * 2, max, ref count);
             }
     }
 }
