@@ -7,11 +7,11 @@
 //RecursionNM.NaturalNMPrint();
 //RecursionSum.NaturalNMPrint();
 //RecursionSum1N.Sum1ToNPrint();
-//Ackerman.FuncMain();
+Ackerman.FuncMain();
 //APowerB.APowerBMain();
 //RecursionFibonacci.RecFibonacciMain();
 //WordsPermutation.RecursionPermutationMain();
 //DataInfoArr.DataInfoArrMain();
 //TetrisConsole.TetrisMain();
-TestConsole.TstMain();
+//TestConsole.TstMain();
 

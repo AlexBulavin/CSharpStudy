@@ -7,7 +7,7 @@ public class Ackerman
     public static void FuncMain()
     {
         Console.Clear();//Очищаем консоль
-        bool DEBUG = true;//false;// Задаём режим работы - дебаг или прод 
+        bool DEBUG = false;//true;// Задаём режим работы - дебаг или прод 
         //Фиксируем время
         DateTime startTime = DateTime.Now;
         
@@ -24,11 +24,11 @@ public class Ackerman
         ChangeForegroundColor(4);
         //Выводим через рекурсию.
 
-        WriteLine($"Функция Акермана({n}, {m}) = {FuncAckerman(n, m, startTime, DEBUG)}, Depth = {Depth}");
-        Console.ResetColor();
-        WriteLine($"Начало вычислений {startTime.ToString()}");
+        WriteLine($"\nФункция Акермана({n}, {m}) = {FuncAckerman(n, m, startTime, DEBUG)}, Глубина рекурсии = {Depth}");
+        ResetColor();
+        WriteLine($"\nНачало вычислений {startTime.ToString()}");
         WriteLine($"Окончание вычислений {DateTime.Now.ToString()}");
-        WriteLine($"Продолжительность вычислений {((DateTime.Now - startTime)).TotalMilliseconds}миллисекунд");
+        WriteLine($"Продолжительность вычислений {((DateTime.Now - startTime)).TotalMilliseconds} миллисекунд\n");
     }
     public static uint FuncAckerman(uint number, uint argument, DateTime requestTime, bool DEBUG)
     {
@@ -40,7 +40,5 @@ public class Ackerman
         if (argument == 0) return FuncAckerman(number - 1, 1, funcAkermanTime, DEBUG);
 
         return FuncAckerman(number - 1, (FuncAckerman(number, argument - 1, funcAkermanTime, DEBUG)), funcAkermanTime, DEBUG);
-
-        //return FuncAckerman(number, argument, DEBUG);//result;
     }
 }

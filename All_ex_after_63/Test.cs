@@ -21,7 +21,7 @@ public class TestConsole
 
     static void MainAlgorithm(int x, int max, ref int count)
     {
-        if (x + 1 <= 13 & x * 2 <= 13)
+        if (x + 1 <= max & x * 2 <= max)
             {
                 count++;
                 MainAlgorithm(x + 1, max, ref count);
