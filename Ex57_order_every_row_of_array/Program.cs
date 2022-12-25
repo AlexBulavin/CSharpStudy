@@ -1,45 +1,58 @@
 ﻿//Написать программу, упорядочивания по убыванию элементы каждой строки двумерной массива.
-Console.Write("Введите размер массива mxn\n");
-int m = Convert.ToInt32(Console.ReadLine());
-int n = Convert.ToInt32(Console.ReadLine());
-Random r = new Random();
+using static System.Console;
+using System.Linq;
+using System;
+using static MyLibrary;
 
-Console.Write("Создаём массив " + m + " x " + n + "\n");
-
-int[,] arr = new int[m, n];
-int max;
-int exchange;
-
-//Заполняем массив случайными числами.
-for (int i = 0; i < m; i++)
+public class SortArrTwoInt
 {
-    for (int j = 0; j < n; j++)
+    public static void Main()
     {
-        arr[i, j] = r.Next(0, 100);
-        Console.Write($"{arr[i, j]} \t");
+        //Фиксируем время начала работы программы
+        DateTime startTime = DateTime.Now;
+        Clear();//Очищаем консоль
+        bool DEBUG = true;//false;// Задаём режим работы - дебаг или прод 
+
+        int m = Input($"Введите количество столбцов массива: ");
+        int n = Input($"Введите количество строк массива: ");
+
+        int[,] arr = CreateArrayIntTwo(m, n);
+        int max;
+        int exchange;
+
+        //Заполняем массив случайными числами.
+        FillRandIntTwo(arr, 0, true, 100, true);
+        WriteLine($"Исходный массив: ");
+        WriteLine(PrintGoodTwo(arr, 1));
+        WriteLine();
+        //Сортируем элементы каждой строки массива
+        max = arr[0, 0];
+        exchange = max;
+        SortMethod(m, n, arr, max, exchange);
+        WriteLine($"Отсортированный массив:");
+        WriteLine(PrintGoodTwo(arr, 1));
+        WriteLine();
     }
-    Console.WriteLine();
-};
-
-Console.WriteLine("Сортируем элементы каждой строки массива:");
-
-for (int i = 0; i < m; i++)
-{
-    for (int j = 0; j < n; j++)
-    {   
-        max = arr[i, j];
-        for (int k = j+1; k < n; k++)
+    static void SortMethod(int m, int n, int[,] arr, int max, int exchange)
+    {
+        for (int i = 0; i < m; i++)
         {
-            if (arr[i, k] > max) 
+            for (int j = 0; j < n; j++)
             {
-                exchange = max; 
-                max = arr[i, k];
-                arr[i, k] = exchange;
-            }
-        }
-        arr[i, j] = max; 
-        Console.Write($"{arr[i, j]} \t");
-    };
-    Console.WriteLine();
-};
-Console.WriteLine();
+                max = arr[i, j];
+                for (int k = j + 1; k < n; k++)
+                {
+                    if (arr[i, k] > max)
+                    {
+                        exchange = max;
+                        max = arr[i, k];
+                        arr[i, k] = exchange;
+                    }
+                }
+                arr[i, j] = max;
+
+            };
+        };
+    }
+}
+
