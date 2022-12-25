@@ -6,44 +6,44 @@ using static MyLibrary;
 
 public class TetrisSourceLibrary
 {
-    int colorNumber = 4;//задали цвет падающих фигур
-    public static void FigureExtractor(int digit, int x, int y, char filler, int colorNumber)
+    int figureColorNumber = 2; //задали цвет падающих фигур
+    public static void FigureExtractor(int digit, int x, int y, char filler, int figureOrientation, ref bool DEBUG)
     {
         switch (digit)
         {
             case 0:
-                FigureRectangleVertical(x, y, filler, colorNumber);
+                FigureRectangle(x, y, filler, digit, figureOrientation);
                 break;
             case 1:
-                FigureRectangleHorizontal(x, y, filler, colorNumber);
+                FigureStick(x, y, filler, digit, figureOrientation);
                 break;
             case 2:
-                FigureStickHorizontal(x, y, filler, colorNumber);
+                FigureL(x, y, filler, digit, figureOrientation, ref DEBUG);
                 break;
-            case 3:
-                FigureStickVertical(x, y, filler, colorNumber);
-                break;
-            case 4:
-                FigureStickVertical(x, y, filler, colorNumber);
-                break;
-            case 5:
-                FigureStickVertical(x, y, filler, colorNumber);
-                break;
-            case 6:
-                FigureStickVertical(x, y, filler, colorNumber);
-                break;
-            case 7:
-                FigureStickVertical(x, y, filler, colorNumber);
-                break;
-            case 8:
-                FigureStickVertical(x, y, filler, colorNumber);
-                break;
-            case 9:
-                FigureStickVertical(x, y, filler, colorNumber);
-                break;
-            default:
-                FigureStickVertical(x, y, filler, colorNumber);
-                break;
+                /*case 3:
+                    FigureStickVertical(x, y, filler, digit);
+                    break;
+                case 4:
+                    FigureStickVertical(x, y, filler, digit);
+                    break;
+                case 5:
+                    FigureStickVertical(x, y, filler, digit);
+                    break;
+                case 6:
+                    FigureStickVertical(x, y, filler, digit);
+                    break;
+                case 7:
+                    FigureStickVertical(x, y, filler, digit);
+                    break;
+                case 8:
+                    FigureStickVertical(x, y, filler, digit);
+                    break;
+                case 9:
+                    FigureStickVertical(x, y, filler, digit);
+                    break;
+                default:
+                    FigureStickVertical(x, y, filler, digit);
+                    break;*/
         }
     }
 
@@ -64,55 +64,145 @@ public class TetrisSourceLibrary
 
         return figure;
     }
-    public static void FigureRectangleVertical(int x, int y, char filler, int colorNumber)
+    public static void FigureRectangle(int x, int y, char filler, int colorNumber, int figureOrientation)
     {
-        Clear();
+        // Clear();
         ChangeForegroundColor(colorNumber);
-        for (int i = x - 2; i <= x + 2; i++)
+        //Горизонтальная ориентация
+        if (figureOrientation % 2 == 0)
         {
-            for (int j = y - 1; j <= y + 5; j++)
+            for (int i = x - 4; i <= x + 4; i++)
             {
-                SetCursorPosition(i, j);
-                Write(filler);
+                for (int j = y - 1; j <= y + 1; j++)
+                {
+                    SetCursorPosition(i, j);
+                    Write(filler);
+                }
+            }
+        }
+        else
+        {
+            //Вертикальная ориентация
+            for (int i = x - 2; i <= x + 2; i++)
+            {
+                for (int j = y - 1; j <= y + 2; j++)
+                {
+                    SetCursorPosition(i, j);
+                    Write(filler);
+                }
             }
         }
     }
-
-    public static void FigureRectangleHorizontal(int x, int y, char filler, int colorNumber)
+    public static void FigureStick(int x, int y, char filler, int colorNumber, int figureOrientation)
     {
-        Clear();
         ChangeForegroundColor(colorNumber);
-        for (int i = x - 5; i <= x + 5; i++)
+        if (figureOrientation % 2 == 0)
         {
-            for (int j = y - 1; j <= y + 2; j++)
+            //Горизонтальная ориентация
+            for (int i = x - 5; i <= x + 5; i++)
             {
-                SetCursorPosition(i, j);
+                SetCursorPosition(i, y);
                 Write(filler);
             }
         }
-    }
-
-    public static void FigureStickHorizontal(int x, int y, char filler, int colorNumber)
-    {
-        Clear();
-        ChangeForegroundColor(colorNumber);
-
-        for (int i = x - 5; i <= x + 5; i++)
+        else
         {
-            SetCursorPosition(i, y);
-            Write(filler);
+            //Вертикальная ориентация
+            for (int i = x - 1; i <= x + 1; i++)
+            {
+                for (int j = y - 1; j <= y + 3; j++)
+                {
+                    SetCursorPosition(i, j);
+                    Write(filler);
+                }
+            }
+        }
+
+    }
+    public static void FigureL(int x, int y, char filler, int colorNumber, int figureOrientation, ref bool DEBUG)
+    {
+        ChangeForegroundColor(colorNumber);
+        switch (figureOrientation)
+        {
+            case 1:
+                // ^ ориентация
+
+                for (int i = x - 1; i <= x + 3; i++)
+                {
+                    for (int j = y - 1; j < y; j++)
+                    {
+                        SetCursorPosition(i, j);
+                        Write(filler);
+                    }
+                }
+                for (int i = x - 1; i <= x + 1; i++)
+                {
+                    for (int j = y; j <= y + 4; j++)
+                    {
+                        SetCursorPosition(i, j);
+                        Write(filler);
+                    }
+                }
+                break;
+            case 2:
+                // < ориентация
+                for (int i = x - 1; i <= x + 1; i++)
+                {
+                    for (int j = y - 1; j <= y + 2; j++)
+                    {
+                        SetCursorPosition(i, j);
+                        Write(filler);
+                    }
+                }
+                for (int i = x - 1; i <= x + 3; i++)
+                {
+                    for (int j = y + 3; j < y + 4; j++)
+                    {
+                        SetCursorPosition(i, j);
+                        Write(filler);
+                    }
+                }
+                break;
+
+            case 3:
+                // v ориентация
+                for (int i = x - 1; i <= x + 1; i++)
+                {
+                    for (int j = y - 1; j <= y + 3; j++)
+                    {
+                        SetCursorPosition(i, j);
+                        Write(filler);
+                    }
+                }
+                for (int i = x - 3; i <= x + 1; i++)
+                {
+                    for (int j = y + 3; j < y + 4; j++)
+                    {
+                        SetCursorPosition(i, j);
+                        Write(filler);
+                    }
+                }
+                break;
+
+            case 4:
+                // > ориентация
+                for (int i = x - 3 ; i <= x + 1; i++)
+                {
+                    for (int j = y - 1; j < y; j++)
+                    {
+                        SetCursorPosition(i, j);
+                        Write(filler);
+                    }
+                }
+                for (int i = x - 1; i <= x + 1; i++)
+                {
+                    for (int j = y; j <= y + 4; j++)
+                    {
+                        SetCursorPosition(i, j);
+                        Write(filler);
+                    }
+                }
+                break;
         }
     }
-
-    public static void FigureStickVertical(int x, int y, char filler, int colorNumber)
-    {
-        Clear();
-        ChangeForegroundColor(colorNumber);
-        for (int i = y - 1; i <= y + 10; i++)
-        {
-            SetCursorPosition(x, i);
-            Write(filler);
-        }
-    }
-
 }

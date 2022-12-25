@@ -5,7 +5,7 @@ using static TetrisSourceLibrary;
 public class TetrisConsole
 {
 
-    public static bool TetrisMain()
+    public static void TetrisMain()
     {
         //Фиксируем время начала работы программы
         DateTime startTime = DateTime.Now;
@@ -16,22 +16,29 @@ public class TetrisConsole
         int xPosition = Random.Shared.Next(10, Console.WindowWidth - 10);
         int yPosition = 2;
         char filler = '█';
-        bool motionFreezer = true;//Значение false останавливает движение
-        int figuresMax = 3;
-        int currentFigure = Random.Shared.Next(0, figuresMax);
-        int colorNumber = 4;
+        int figureOrientation = 1;
+        bool motionFreezer = false; //true останавливает движение
+        int figuresMax = 3;//Количество фигур
+        int currentFigure = Random.Shared.Next(0, figuresMax);//Рандомайзер по фигурам
 
         CursorVisible = false;
 
         // Логика отрисовки всего
         new Thread(() =>
         {
-            while (motionFreezer)
+            while (true)
             {
-                //Поставить рандомайзер сюда
-                FigureExtractor(currentFigure, xPosition, yPosition, filler, colorNumber);
-                Thread.Sleep(50);
-                yPosition++;
+                //Поставить рандомайзер фигур сюда
+                Clear();
+                if (DEBUG)
+                {
+                    SetCursorPosition(0, Console.WindowHeight - 1);
+                    Write(figureOrientation);
+                }
+                FigureExtractor(currentFigure, xPosition, yPosition, filler, figureOrientation, ref DEBUG);
+
+                Thread.Sleep(100);
+                yPosition = !motionFreezer ? yPosition + 1 : yPosition;
                 if (yPosition > Console.WindowHeight - 10)
                 {
                     yPosition = 1;
@@ -41,28 +48,41 @@ public class TetrisConsole
             }
         }).Start();
 
-        // Логика проверки нажатия кнопок
+        KeyListener(xPosition, yPosition, ref currentFigure, filler, ref figureOrientation, ref motionFreezer, ref DEBUG);
+    }
+    public static void KeyListener(int xPosition, int yPosition, ref int currentFigure, char filler, ref int figureOrientation, ref bool motionFreezer, ref bool DEBUG)
+    {
+        // Логика обработки нажатия кнопок
         while (true)
         {
             var key = Console.ReadKey(true).Key;
 
-            if (key == ConsoleKey.LeftArrow)
+            switch (key)
             {
-                xPosition--;
-                FigureExtractor(currentFigure, xPosition, yPosition, filler, colorNumber);
-            }
-            if (key == ConsoleKey.RightArrow)
-            {
-                xPosition++;
-                FigureExtractor(currentFigure, xPosition, yPosition, filler, colorNumber);
+                case ConsoleKey.LeftArrow:
+                    xPosition--;
+                    FigureExtractor(currentFigure, xPosition, yPosition, filler, figureOrientation, ref DEBUG);
+                    break;
 
-            }
+                case ConsoleKey.RightArrow:
+                    xPosition++;
+                    FigureExtractor(currentFigure, xPosition, yPosition, filler, figureOrientation, ref DEBUG);
+                    break;
 
-            if (key == ConsoleKey.Spacebar)
-            {
-                motionFreezer = !motionFreezer;
-            }
+                case ConsoleKey.UpArrow:
+                    yPosition--;
+                    FigureExtractor(currentFigure, xPosition, yPosition, filler, figureOrientation, ref DEBUG);
+                    break;
 
+                case ConsoleKey.D5:
+                    motionFreezer = !motionFreezer;
+                    break;
+
+                case ConsoleKey.Spacebar:
+                    figureOrientation = figureOrientation > 3 ? 1 : figureOrientation + 1;
+                    FigureExtractor(currentFigure, xPosition, yPosition, filler, figureOrientation, ref DEBUG);
+                    break;
+            }
         }
     }
 }
