@@ -1,45 +1,58 @@
 ﻿//В прямоугольной матрице найти строку с наименьшей суммой элементов.
-Console.Write("Введите размер массива mxn\n");
-int m = Convert.ToInt32(Console.ReadLine());
-int n = Convert.ToInt32(Console.ReadLine());
-Random r = new Random();
+using static System.Console;
+using System.Linq;
+using System;
+using static MyLibrary;
 
-Console.Write("Создаём массив " + m + " x " + n + "\n");
-
-int[,] arr = new int[m, n];
-int[] sumArr = new int[m];
-int min = 0;
-int minIndex = 0;
-
-//Заполняем массив случайными числами.
-for (int i = 0; i < m; i++)
+public class MinRowSumTwoInt
 {
-    for (int j = 0; j < n; j++)
+    public static void Main()
     {
-        arr[i, j] = r.Next(0, 100);
-        Console.Write($"{arr[i, j]} \t");
-        sumArr[i] += arr[i, j];
+        //Фиксируем время начала работы программы
+        DateTime startTime = DateTime.Now;
+        Clear();//Очищаем консоль
+        bool DEBUG = true;//false;// Задаём режим работы - дебаг или прод 
+
+        int m = Input($"Введите количество столбцов массива: ");
+        int n = Input($"Введите количество строк массива: ");
+
+        int[,] arr = CreateArrayIntTwo(m, n);
+        int[] sumArr = CreateArrayInt(n);
+
+        //Заполняем массив случайными числами.
+        FillRandIntTwo(arr, 0, true, 100, true);
+        int min = arr[0, 0];
+        int minIndex = 0;
+        WriteLine(PrintGoodTwo(arr, 1));
+        //Вычисляем строку с наименьшей суммой элементов
+        CountMinStringSum(n, m, arr, sumArr, ref min, ref minIndex);
+
+        WriteLine($"Выводим {minIndex} строку массива с минимальной суммой элементов {min}:");
+        WriteLine(PrintGood(arr, minIndex, 1));
+        WriteLine();
     }
-    if (i == 0)
+    static void CountMinStringSum(int m, int n, int[,] arr, int[] sumArr, ref int min, ref int minIndex)
     {
-        min = sumArr[i];
-        minIndex = 0;
-    }
-    else
-    {
-        if (min < sumArr[i])
+        for (int i = 0; i < n; i++)
         {
-            min = sumArr[i];
-            minIndex = i;
+            for (int j = 0; j < m; j++)
+            {
+                sumArr[i] += arr[i, j];
+            }
+            if (i == 0)
+            {
+                min = sumArr[i];
+                minIndex = 0;
+            }
+            else
+            {
+                if (min < sumArr[i])
+                {
+                    min = sumArr[i];
+                    minIndex = i;
+                }
+            }
         }
     }
-    Console.WriteLine();
-};
 
-Console.WriteLine($"Выводим {minIndex} строку массива с минимальной суммой элементов {min}:");
-
-for (int i = 0; i < n; i++)
-{
-    Console.Write($"{arr[minIndex, i]} \t");
-};
-Console.WriteLine();
+}
