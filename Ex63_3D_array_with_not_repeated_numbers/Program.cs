@@ -13,23 +13,24 @@ public static class Seminar62
     public static void Main()
     {
         bool debug = false;
-        int size1_1 = 89;
-        int size1_2 = 89;
-
+        int columnsInArray = 89;
+        int listsInArray = 89;
+        Clear();
         // 0. Метод ввода размерности двумерного массива от пользователя
-        int size1_0 = Input("Введите количество строк массива (общая размерность массива arr[K, M, N] K+M+N не должне превышать 89)): ");
-        while (88/(size1_0 * size1_1) < 1)
+        int rowsInArray = Input("Введите количество строк массива (общая размерность массива arr[K, M, N] KxMxN не должен превышать 90)): ");
+        while (89 / (rowsInArray * columnsInArray) < 1)
         {
-            size1_1 = Input($"Введите количество столбцов массива (число должно быть не больше {88/size1_0}): ");
+            columnsInArray = Input($"Введите количество столбцов массива (число должно быть не больше {88 / rowsInArray}): ");
         }
-        while (88/(size1_0 * size1_1 * size1_2) < 1)
+        while (88 / (rowsInArray * columnsInArray * listsInArray) < 1)
         {
-            size1_2 = Input($"Введите количество слоёв массива (число должно быть не больше {88/(size1_0 * size1_1)}): ");
+            listsInArray = Input($"Введите количество слоёв массива (число должно быть не больше {88 / (rowsInArray * columnsInArray)}): ");
         }
-        int[,,] arr3D = CreateArrayInt3D(size1_0, size1_1, size1_2);
+        int[,,] arr3D = CreateArrayInt3D(listsInArray, rowsInArray, columnsInArray);
 
         // 1. Метод заполняет и выводит построчно исходный массив неповторяющимися целыми числами (от 10 до 99)
         FillRandInt3D(arr3D);
+        WriteLine();
         WriteLine(PrintGood3DInt(arr3D, 1));
     }
 }
