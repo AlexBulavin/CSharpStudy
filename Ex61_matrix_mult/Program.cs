@@ -18,18 +18,19 @@ public static class Seminar61
 {
     public static void Main()
     {
-    // 0. Метод считывания размерности матриц от пользователя
+        Clear();
+        // 0. Метод считывания размерности матриц от пользователя
         int size1_0 = Input("Введите количество строк первой матрицы:");
         int size1_1 = Input("Введите количество столбцов первой матрицы:");
         //int size2_0 = Input("Введите количество строк второй матрицы:");
         int size2_1 = Input("Введите количество столбцов второй матрицы:");
 
-    // 1. Метод создания двух исходных и результирующей матриц
+        // 1. Метод создания двух исходных и результирующей матриц
         int[,] array1 = CreateArrayIntTwo(size1_0, size1_1); //Создали первый массив
         int[,] array2 = CreateArrayIntTwo(size1_1, size2_1); //Создали второй массив
         int[,] resArray = CreateArrayIntTwo(size1_1, size2_1); //Создали второй массив
 
-    // 2. Метод заполняет исходные матрицы 
+        // 2. Метод заполняет исходные матрицы 
         //Задаём границы для рандомайзера и параметр включения граничного значения
         int min = 0;
         bool minInclude = true;
@@ -39,8 +40,13 @@ public static class Seminar61
         FillRandIntTwo(array1, min, minInclude, max, maxInclude);
         FillRandIntTwo(array2, min, minInclude, max, maxInclude);
 
+        // 4. Метод заполняет результирующую матрицу
+        NewMethod(size1_1, size2_1, array1, array2, resArray);
+        WriteLine();
 
-    // 4. Метод заполняет результирующую матрицу
+    }
+    static void NewMethod(int size1_1, int size2_1, int[,] array1, int[,] array2, int[,] resArray)
+    {
         for (int i = 0; i < size1_1; i++)
         {
             for (int j = 0; j < size2_1; j++)
