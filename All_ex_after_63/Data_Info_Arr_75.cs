@@ -42,6 +42,8 @@ public class DataInfoArr
             if (DEBUG) WriteLine($"Используем предустановленные данные");
             data = new int[] { 0, 1, 1, 1, 1, 0, 0, 0, 1 };
             info = new int[] { 2, 3, 3, 1 };
+            /*выходные данные:
+            1, 7, 0, 1*/
             printDataAndInfoArr(data, info);
             PrintOutResult(DEBUG, data, info);
         }
@@ -50,8 +52,8 @@ public class DataInfoArr
             //2. Создаём массивы автоматическим рандомным от 3 до 20
             int[] sourceData = CreateArrayInt(Random.Shared.Next(3, 21));
             FillRandInt(sourceData, 0, true, 100, true);//sourceData - массив исходных десятичных данных
-            WriteLine($"Создаём рандомный массив из десятичных цифр:\n{PrintGood(sourceData, 1)}");
-            autoDataAndInfoArrFilling(DEBUG, out data, out info, sourceData);
+            WriteLine($"Создаём рандомный массив из десятичных цифр:\n{PrintGood(sourceData, 1)}\n");
+            autoDataAndInfoArrFilling(DEBUG, out data, out info, sourceData);//Заполняем массивы data и info
             PrintOutResult(DEBUG, data, info);
         }
         else if (selectDataGenerate == 3)
@@ -85,18 +87,18 @@ public class DataInfoArr
             for (int j = shift; j < info[i] + shift; j++)
             {
                 exponent = info[i] - 1 - (j - shift);//Ищем показатель степени в двоичной системе счисления
-                    if (DEBUG)
+                if (DEBUG)
                 {
                     WriteLine($"Before result incremented\ti = {i}, info[i] = {info[i]}, shift = {shift}, result = {result}, j = {j}, exponent = {exponent}");
                 }
                 result += data[j] * (int)Math.Pow(2, exponent);//Строим очередной элемент массива уже в десятичной системе счисления
-                    if (DEBUG)
-                    {
-                        WriteLine($"After result incremented\ti = {i}, info[i] = {info[i]}, shift = {shift}, result = {result}, j = {j}, data[j] = {data[j]}, info[i] - j - shift - 1 = {info[i] - j - shift - 1}\n");
-                    }
+                if (DEBUG)
+                {
+                    WriteLine($"After result incremented\ti = {i}, info[i] = {info[i]}, shift = {shift}, result = {result}, j = {j}, data[j] = {data[j]}, info[i] - j - shift - 1 = {info[i] - j - shift - 1}\n");
+                }
                 output += $"{data[j]}*2{CharSelector(exponent < 10 ? exponent : 9, 1, false)}{(exponent > 0 ? (" + ") : (" = "))}{(exponent > 0 ? ("") : ($"{result}\t\t"))}";
             };
-            outputArray[info.Length-1-i] = output;
+            outputArray[i] = output;
             output = String.Empty;
             shift += info[i];
             result = 0;
@@ -107,20 +109,33 @@ public class DataInfoArr
     private static void dataAndInfoArrFilling(bool DEBUG, out int[] data, out int[] info, string sourceDataBin, string infoString)
     {
         //Заполняем массивы data и info
-        if (DEBUG) WriteLine($"line 105 sourceDataBin = {sourceDataBin}");
+        if (DEBUG) WriteLine($"line 110 sourceDataBin = {sourceDataBin}");
         data = new int[sourceDataBin.Length];
         info = new int[infoString.Length];
-        int localCounter = 0, infoStringN = 0;
+        sourceDataBin = Reverse(sourceDataBin);
+        /*
         for (int n = 0; n < sourceDataBin.Length; n++)
         {
-            data[n] = (int)Char.GetNumericValue(sourceDataBin[sourceDataBin.Length - n - 1]);
+            data[n] = (int)Char.GetNumericValue(sourceDataBin[n]);//[sourceDataBin.Length - n - 1]);
             // Write($"sourceDataBin[localCounter + infoStringN - i] = {sourceDataBin[localCounter + infoStringN - i]}\tdata[{i}] = {data[i]}\t");
         }
         for (int i = 0; i < infoString.Length; i++)
         {
-            info[i] = (int)Char.GetNumericValue(infoString[infoString.Length - i - 1]);
+            info[i] = (int)Char.GetNumericValue(infoString[i]);//[infoString.Length - i - 1]);
         }
-
+        */
+        int position = 0, m = 0;
+        for (int i = 0; i < infoString.Length; i++)
+        {
+            info[i] = (int)Char.GetNumericValue(infoString[i]);
+            for (int n = info[i] - 1; n >= 0; n--)
+            {
+                data[position + info[i] - n - 1] = (int)Char.GetNumericValue(sourceDataBin[sourceDataBin.Length - position - info[i] + m]); //sourceDataBin.Length - n - 1]);
+                m++;
+            }
+            position += info[i];
+            m = 0;
+        }
         //Выводим на печать 
         printDataAndInfoArr(data, info);
         //PrintOutResult(DEBUG, data, info);
@@ -172,7 +187,7 @@ public class DataInfoArr
             sourceDataBinLocal = String.Empty;
         }
 
-        WriteLine($"173 line sourceDataBin = {sourceDataBin}\ninfoString = {infoString}");//if (DEBUG)if (DEBUG) 
+        if (DEBUG) WriteLine($"173 line sourceDataBin = {sourceDataBin}\ninfoString = {infoString}");//if (DEBUG)if (DEBUG) 
         dataAndInfoArrFilling(DEBUG, out data, out info, sourceDataBin, infoString);
     }
 
