@@ -18,7 +18,7 @@ public class DataInfoArr
         //Фиксируем время начала работы программы
         DateTime startTime = DateTime.Now;
         Console.Clear();//Очищаем консоль
-        bool DEBUG = true;//false;// Задаём режим работы - дебаг или прод 
+        bool DEBUG = false;//true;// Задаём режим работы - дебаг или прод 
 
         //Нужно переписать это на preset data или делать динамическим массивом
         int[] data;
@@ -43,14 +43,16 @@ public class DataInfoArr
             data = new int[] { 0, 1, 1, 1, 1, 0, 0, 0, 1 };
             info = new int[] { 2, 3, 3, 1 };
             printDataAndInfoArr(data, info);
+            PrintOutResult(DEBUG, data, info);
         }
         else if (selectDataGenerate == 2)
         {
             //2. Создаём массивы автоматическим рандомным от 3 до 20
             int[] sourceData = CreateArrayInt(Random.Shared.Next(3, 21));
-            FillRandInt(sourceData, 0, true, 100, true);
+            FillRandInt(sourceData, 0, true, 100, true);//sourceData - массив исходных десятичных данных
             WriteLine($"Создаём рандомный массив из десятичных цифр:\n{PrintGood(sourceData, 1)}");
             autoDataAndInfoArrFilling(DEBUG, out data, out info, sourceData);
+            PrintOutResult(DEBUG, data, info);
         }
         else if (selectDataGenerate == 3)
         {
@@ -59,10 +61,12 @@ public class DataInfoArr
             WriteLine();
             for (int i = 0; i < sourceData.Length; i++) sourceData[i] = Input($"sourceData[{i}] = ");
             autoDataAndInfoArrFilling(DEBUG, out data, out info, sourceData);
+            PrintOutResult(DEBUG, data, info);
         }
 
         //Выводим получившиеся данные через цикл //рекурсию.
-        // PrintOutResult(DEBUG, ref shift, ref result, ref exponent, out data, out info);
+        //PrintOutResult(DEBUG, ref shift, ref result, ref exponent, out data, out info);
+
         WriteLine("\n");
         ResetColor();
         ProgramMonitoring(startTime, DEBUG);
@@ -74,85 +78,110 @@ public class DataInfoArr
         int shift = 0;
         int exponent = 0;
         int result = 0;
+        string output = String.Empty;
+        string[] outputArray = new string[info.Length];
         for (int i = 0; i < info.Length; i++)
         {
             for (int j = shift; j < info[i] + shift; j++)
             {
-                exponent = info[i] - 1 - (j - shift);
-                if (DEBUG)
+                exponent = info[i] - 1 - (j - shift);//Ищем показатель степени в двоичной системе счисления
+                    if (DEBUG)
                 {
-                    WriteLine($"Before result incremented\ti = {i}, info[i] = {info[i]}, shift = {shift}, result = {result}, j = {j},");
-                    WriteLine($"\nexponent = {exponent}");
+                    WriteLine($"Before result incremented\ti = {i}, info[i] = {info[i]}, shift = {shift}, result = {result}, j = {j}, exponent = {exponent}");
                 }
-                result += data[j] * (int)Math.Pow(2, exponent);
-                if (DEBUG)
-                {
-                    WriteLine($"After result incremented\ti = {i}, info[i] = {info[i]}, shift = {shift}, result = {result}, j = {j}, data[j] = {data[j]}, info[i] - j - shift - 1 = {info[i] - j - shift - 1}\n");
-                }
-                Write($"{data[j]}*2{CharSelector(exponent < 10 ? exponent : 9, 1, false)}{(exponent > 0 ? (" + ") : (" = "))}{(exponent > 0 ? ("") : ($"{result}\t\t"))}");
+                result += data[j] * (int)Math.Pow(2, exponent);//Строим очередной элемент массива уже в десятичной системе счисления
+                    if (DEBUG)
+                    {
+                        WriteLine($"After result incremented\ti = {i}, info[i] = {info[i]}, shift = {shift}, result = {result}, j = {j}, data[j] = {data[j]}, info[i] - j - shift - 1 = {info[i] - j - shift - 1}\n");
+                    }
+                output += $"{data[j]}*2{CharSelector(exponent < 10 ? exponent : 9, 1, false)}{(exponent > 0 ? (" + ") : (" = "))}{(exponent > 0 ? ("") : ($"{result}\t\t"))}";
             };
+            outputArray[info.Length-1-i] = output;
+            output = String.Empty;
             shift += info[i];
             result = 0;
         }
+        WriteLine(string.Join(string.Concat(Enumerable.Repeat("\t", 1)), outputArray));
     }
 
     private static void dataAndInfoArrFilling(bool DEBUG, out int[] data, out int[] info, string sourceDataBin, string infoString)
     {
         //Заполняем массивы data и info
+        if (DEBUG) WriteLine($"line 105 sourceDataBin = {sourceDataBin}");
         data = new int[sourceDataBin.Length];
         info = new int[infoString.Length];
-        for (int i = sourceDataBin.Length - 1; i >= 0; i--)
+        int localCounter = 0, infoStringN = 0;
+        for (int n = 0; n < sourceDataBin.Length; n++)
         {
-            data[sourceDataBin.Length - i + 1] = sourceDataBin[i];
+            data[n] = (int)Char.GetNumericValue(sourceDataBin[sourceDataBin.Length - n - 1]);
+            // Write($"sourceDataBin[localCounter + infoStringN - i] = {sourceDataBin[localCounter + infoStringN - i]}\tdata[{i}] = {data[i]}\t");
         }
-        for (int i = infoString.Length; i >= 0; i--)
+        for (int i = 0; i < infoString.Length; i++)
         {
-            info[infoString.Length - i + 1] = infoString[i];
+            info[i] = (int)Char.GetNumericValue(infoString[infoString.Length - i - 1]);
         }
+
         //Выводим на печать 
         printDataAndInfoArr(data, info);
-        PrintOutResult(DEBUG, data, info);
+        //PrintOutResult(DEBUG, data, info);
     }
     private static void printDataAndInfoArr(int[] data, int[] info)
     {
 
         //Печатаем исходные массивы 
-        Write($"data array:");
-        SetCursorPosition(15, 0);
+        WriteLine($"data array: ");
+        //SetCursorPosition(15, 8);
         WriteLine(PrintGood(data, 1));
 
-        Write($"info array:");
-        SetCursorPosition(15, 1);
+        WriteLine($"info array: ");
+        //SetCursorPosition(15, 9);
         WriteLine(PrintGood(info, 1));
         WriteLine();
     }
 
-    private static void autoDataAndInfoArrFilling(bool DEBUG, out int[] data, out int[] info, int[] sourceData)
+    private static void autoDataAndInfoArrFilling(bool DEBUG, out int[] data, out int[] info, int[] sourceData) //sourceData - массив исходных данных в десятичном представлении
     {
         string sourceDataBin = String.Empty;
         string infoString = String.Empty;
+        string sourceDataBinLocal = String.Empty;
         int binCounter;
-        int restOfDeviding, leftPartOfDeviding;
+        int restOfDividing, leftPartOfDividing;//restOfDividing - остаток от деления числа нацело на 2; leftPartOfDividing - целая часть от % деления числа на 2 
         if (DEBUG) WriteLine($"Inside of autoDataAndInfoArrFilling(),\nsourceData:\n{PrintGood(sourceData, 1)}");
         //Конвертируем значения массива в двоичный код и узнаём количество символов в двоичном представлении для каждого десятичного числа
         for (int i = 0; i < sourceData.Length; i++)
         {
-            restOfDeviding = sourceData[i] / 2;
-            leftPartOfDeviding = sourceData[i] % 2 == 0 ? 0 : 1;
+            if (DEBUG) WriteLine($"sourceData[{i}] = {sourceData[i]} ");//
+            restOfDividing = sourceData[i] / 2; //Идём по исходному массиву, извлекаем из него элементы
+            leftPartOfDividing = sourceData[i] % 2;// == 0 ? 0 : 1;
             binCounter = 1;//Показатель степени для числа в двоичном представлении, то есть элемент массива info
-            while (restOfDeviding >= 2)
+            if (DEBUG) WriteLine($"restOfDividing = {restOfDividing}\tleftPartOfDividing = {leftPartOfDividing}\tbinCounter = {binCounter}");// if(DEBUG)
+            while (restOfDividing >= 2)
             {
-                sourceDataBin += leftPartOfDeviding;//Создаем строку (массив) из бинарных элементов 
+                sourceDataBinLocal += leftPartOfDividing.ToString();//Создаем строку (массив) из бинарных элементов
                 binCounter++;
-                restOfDeviding /=2;
+                leftPartOfDividing = restOfDividing % 2;
+                restOfDividing /= 2;
+
             }
-            infoString += binCounter;//Строка с данными по всем длинам двоичных элементов
+            sourceDataBinLocal += leftPartOfDividing;
+            sourceDataBinLocal += restOfDividing;
+            if (DEBUG) WriteLine($"163 line sourceDataBinLocal = {sourceDataBinLocal}");
+            sourceDataBin += sourceDataBinLocal;
+            infoString += binCounter + 1;//Строка с данными по всем длинам двоичных элементов
+
+            sourceDataBinLocal = String.Empty;
         }
-        if (DEBUG) WriteLine($"sourceDataBin = {sourceDataBin},\n infoString = {infoString}");
-        //
+
+        WriteLine($"173 line sourceDataBin = {sourceDataBin}\ninfoString = {infoString}");//if (DEBUG)if (DEBUG) 
         dataAndInfoArrFilling(DEBUG, out data, out info, sourceDataBin, infoString);
     }
 
+    private static string Reverse(string str)
+    {
+        char[] chars = str.ToCharArray();
+        Array.Reverse(chars);
+        return new string(chars);
+    }
 
 
     /*data = {0, 1, 1, 1, 1, 0, 0, 0, 1 }

@@ -12,7 +12,9 @@ public class LSClass
         int count = 1;
         //SETTINGS
         string directoryPath = "/Users/alex/CSharpCourse/Seminar01/Ex01/CSharpStudy/All_ex_after_63";
-        CatalogInfo(directoryPath);
+        CatalogInfo(directoryPath);//Вызываем метод обхода всех каталогов
+
+        Towers();//Вызываем игру Towers
     }
     static void CatalogInfo(string path, string indent = "")
     {
@@ -33,4 +35,11 @@ public class LSClass
         }
         ResetColor();
     }
+    static void Towers(string with = "1", string on = "3", string middle = "2", int count = 4)
+    {
+        if (count > 1) Towers(with, middle, on, count - 1);
+        WriteLine($"{with} >> {on}");
+        if (count > 1) Towers(middle, on, with, count - 1);
+    }
+
 }
