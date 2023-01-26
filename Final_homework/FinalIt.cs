@@ -16,7 +16,7 @@ public class FinalIt
         bool DEBUG = false;//true;// Задаём режим работы - дебаг или прод 
 
         ChangeForegroundColor(4);
-
+///Users/alex/CSharpCourse/Seminar01/Ex01/CSharpStudy/Final_homework/FinalIt.cs
         int N = 0;
         //1. Запросить у пользователя размер массива N
         while (N <= 0)
