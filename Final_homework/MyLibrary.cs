@@ -277,6 +277,16 @@ public class MyLibrary
         return new string[m, n]; // new double[count];
     }
 
+    // Метод создания одномерного массива string
+    /// <summary> Метод создания одномерного массива double </summary>
+    /// <param name="count">Количество элементов нового double массива</param>
+    /// <returns>Созданный массив из count элементов типа double</returns>
+    /// <example> double[] arr = CreateArrayDouble(count) </example>
+    public static string[] CreateArrayString(int n)
+    {
+        return new string[n]; // new double[count];
+    }
+
     // Метод создания двумерного массива double
     /// <summary> Метод создания одномерного массива double </summary>
     /// <param name="columns">Количество столбцов нового double массива</param>
@@ -998,6 +1008,17 @@ public class MyLibrary
         return string.Join(string.Concat(Enumerable.Repeat("\t", interval)), array);
     }
 
+    // Перегрузка метода подготовки для вывода на печать массива Write(OutputArrByJoin(array, 1));
+    /// <summary> Метод создания одномерного массива </summary>
+    /// <param name="array">Исходный массив данных, которые нужно вывести</param>
+    /// <param name="interval">Количество табуляторов между элементами при выводе</param>
+    /// <returns>Строка с нужной разметкой</returns>
+    /// <example>Write(OutputArrByJoin(array, 1));
+    public static string OutputArrByJoin(string[] array, int interval)
+    {
+        return string.Join(string.Concat(Enumerable.Repeat("\t", interval)), array);
+    }    
+
     // Метод заполнения двумерного массива int элементами пирамиды Паскаля
     /// <summary> Метод заполнения двумерного массива размерности в ширину консоли int элементами пирамиды Паскаля </summary>
     /// <param name="array">Массив, который заполняем</param>
@@ -1221,13 +1242,42 @@ public class MyLibrary
         }
         return counter;
     }
+
+
+ /// Заполняем одномерный массив случайными "словами"
+    /// <summary> Метод ввода данных - рандомные "слова" длиной от 0 до 6 символов </summary>
+    /// <param name="array">Одномерный массив строк </param>
+    /// <param name="DEBUG">Флаг режима компиляции 1 = отладка с выводом логов, 0 - без вывода логов</param>
+    /// <example> Пример вызова метода: FillRandString(array, DEBUG)</example>
+
+    public static void FillRandString(string[] array, bool DEBUG)
+    {
+        int size0 = array.Length;
+        // Создаем массив символов, которые мы будем использовать для генерации случайных "слов".
+        string alphabet = "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЬЫЭЮЯабвгдеёжзийклмнопрстуфхцчшщьыъэюя!)(*&^%$#@;:_-/\\|,\"'}{][+±~`§0123456789qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM";
+        //Заполняем входящий массив случайными "словами"
+        for (int i = 0; i < size0; i++)
+        {
+                string word = String.Empty;
+                for (int m = 0; m < Random.Shared.Next(1, 6); m++)
+                {
+                    int rand_char = Random.Shared.Next(0, alphabet.Length);
+                    char symbol = alphabet[rand_char];
+                    if (DEBUG)
+                    {
+                        WriteLine($"i = {i}, symbol = {symbol}, rand_char = {rand_char}");
+                    }
+                    word += symbol;
+                }
+                if (DEBUG) WriteLine(word);
+                array[i] = word;
+        }
+    }
 }
 
 
 
-
-
-/*internal static class ConsoleHelper
+internal static class ConsoleHelper
 {
     public static int ReadNumber(string prompt, Predicate<int> condition, string errorMessage)
     {
@@ -1241,4 +1291,4 @@ public class MyLibrary
         }
         return result;
     }
-}*/
+}
