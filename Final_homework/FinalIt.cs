@@ -22,9 +22,8 @@ public class FinalIt
         while (N <= 0)
             N = Input($"Задайте размер массива 0 < N: ");
         if (DEBUG) WriteLine($"selectDataGenerate = {N}");
-        string[] source_arr = CreateArrayString(N);
-
         //2. Создать стартовый массив строк с рандомным заполнением символами
+        string[] source_arr = CreateArrayString(N);
         FillRandString(source_arr, DEBUG);
         // Вывести его на экран
         WriteLine("Исходный массив:");
