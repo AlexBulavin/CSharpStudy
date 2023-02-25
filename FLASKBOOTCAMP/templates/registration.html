@@ -1,0 +1,27 @@
+{% extends 'base_login.html' %}
+
+{% block content %}
+<form action="" method="post">
+
+    {{ form.csrf_token }} <!--Предотвращение CSRF атак-->
+
+    {{ form.name.label}} <!-- Добавили Label с текстом Имя -->
+    {{ form.name()}} <!-- Добавили поле ввода name -->
+    <br>
+    {{ form.email.label}} <!-- Добавили Label с текстом email -->
+    {{ form.email()}} <!-- Добавили поле ввода email -->
+    <br>
+    {{ form.password.label}} <!-- Добавили с текстом Пароль -->
+    {{ form.password()}} <!-- Добавили поле ввода password -->
+    <br>
+    {{ form.pass_again.label}} <!-- Добавили Label с текстом Повторный пароль -->
+    {{ form.pass_again()}} <!-- Добавили поле ввода pass_again -->
+    <br>
+    {{ form.rememeber_me.label}} <!-- Добавили чекбокс Label с текстом Запомнить меня -->
+    {{ form.rememeber_me()}} <!-- Добавили чекбокс -->
+    <br>
+    {{ form.submit() }}
+
+</form>
+
+{% endblock %}
