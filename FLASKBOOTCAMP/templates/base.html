@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+    {% block content %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Главная страница</title>
+</head>
+<body>
+    <h1> Главная страница </h1>
+    <h3>{{ name }}</h3>
+    <h5>{{ game }}</h5>
+    {% if game %}
+        <p>Ты выиграл</p>
+    {% else %}
+        <p>Ты проиграл</p>
+    {% endif %}
+</body>
+    {% endblock %}
+</html>
