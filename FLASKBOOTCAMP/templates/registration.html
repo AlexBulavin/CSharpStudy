@@ -1,8 +1,9 @@
 {% extends 'base_login.html' %}
 
 {% block content %}
+{% if form %}
 <form action="" method="post">
-
+    
     {{ form.csrf_token }} <!--Предотвращение CSRF атак-->
 
     {{ form.name.label}} <!-- Добавили Label с текстом Имя -->
@@ -21,7 +22,15 @@
     {{ form.rememeber_me()}} <!-- Добавили чекбокс -->
     <br>
     {{ form.submit() }}
-
+{% endif %}
+    <!-- <h5 style="color: rgb(3, 144, 92);"> {{ message }}</h5> -->
+    {% if message == 'Пароли не совпадают, повторите ввод пароля' %}
+        <br>
+        <h5 style="color: crimson;"> {{ message }}</h5>
+    {% else %}
+        <h5 style="color: rgb(3, 144, 92);"> {{ message }}</h5>
+        <a href="/log">Авторизация</a>
+    {% endif %}
 </form>
 
 {% endblock %}

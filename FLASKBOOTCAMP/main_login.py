@@ -14,7 +14,13 @@ def main_login():
 def registration():
     form = Lf()
     if form.validate_on_submit():
-        pass
+        if form.pass_again.data != form.password.data:
+            return render_template('registration.html', title='Регистрация', form=form,
+                                    message='Пароли не совпадают, повторите ввод пароля')
+                                    
+        with open('file.txt', 'a', encoding='utf-8') as file:
+            file.write(f'{form.name.data};{form.email.data};{form.password.data}\n') #Записываем данные из формы авторизации в файл с пользователями
+        return render_template('registration.html', title='Регистрация', form=form, message='Регистрация прошла успешно')
 
     return render_template('registration.html', title='Регистрация', form=form)
 
